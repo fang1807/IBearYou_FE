@@ -1,0 +1,19 @@
+{
+"QuestionType": [
+
+    {
+       "quesTypeId": "1",
+       "name": "ตัวเลือก"
+    },
+
+    {
+     "quesTypeId": "2",
+     "name": "พิมพ์ข้อความ"
+  },
+
+  {
+     "quesTypeId": "3",
+     "name": "ประโยคให้กำลังใจ"
+  }
+]
+}

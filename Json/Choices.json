@@ -1,0 +1,1305 @@
+{
+    "Choices":
+    [
+        {
+            "choice_id": 1,
+            "next_question_id": 41002,
+            "seq": "1",
+            "des": "มากที่สุด",
+            "choice_score": "5",
+            "question_id": [
+                41001
+            ]
+        },
+        {
+            "choice_id": 2,
+            "next_question_id": 41002,
+            "seq": "2",
+            "des": "มาก",
+            "choice_score": "4",
+            "question_id": [
+                41001
+            ]
+        },
+        {
+            "choice_id": 3,
+            "next_question_id": 41002,
+            "seq": "3",
+            "des": "ปานกลาง",
+            "choice_score": "3",
+            "question_id": [
+                41001
+            ]
+        },
+        {
+            "choice_id": 4,
+            "next_question_id": 41002,
+            "seq": "4",
+            "des": "น้อย",
+            "choice_score": "2",
+            "question_id": [
+                41001
+            ]
+        },
+        {
+            "choice_id": 5,
+            "next_question_id": 41002,
+            "seq": "5",
+            "des": "น้อยที่สุด",
+            "choice_score": "1",
+            "question_id": [
+                41001
+            ]
+        },
+        {
+            "choice_id": 6,
+            "next_question_id": 41003,
+            "seq": "1",
+            "des": "อยากปรับความเข้าใจตอนนี้",
+            "choice_score": "1",
+            "question_id": [
+                41002
+            ]
+        },
+        {
+            "choice_id": 7,
+            "next_question_id": 41003,
+            "seq": "2",
+            "des": "ยังไม่อยากปรับความเข้าใจตอนนี้",
+            "choice_score": "5",
+            "question_id": [
+                41002
+            ]
+        },
+        {
+            "choice_id": 8,
+            "next_question_id": 41004,
+            "seq": "1",
+            "des": "เกิดจากตัวเอง",
+            "choice_score": "1.5",
+            "question_id": [
+                41003
+            ]
+        },
+        {
+            "choice_id": 9,
+            "next_question_id": 41004,
+            "seq": "2",
+            "des": "เกิดจากคนอื่น",
+            "choice_score": "5.5",
+            "question_id": [
+                41003
+            ]
+        },
+        {
+            "choice_id": 10,
+            "next_question_id": 41005,
+            "seq": "1",
+            "des": "แสดงออกแบบทางตรง",
+            "choice_score": "2",
+            "question_id": [
+                41004
+            ]
+        },
+        {
+            "choice_id": 11,
+            "next_question_id": 41005,
+            "seq": "2",
+            "des": "แสดงออกแบบทางอ้อม",
+            "choice_score": "6",
+            "question_id": [
+                41004
+            ]
+        },
+        {
+            "choice_id": 12,
+            "next_question_id": 41006,
+            "seq": "1",
+            "des": "กล้าที่จะเข้าหาก่อน",
+            "choice_score": "2.5",
+            "question_id": [
+                41005
+            ]
+        },
+        {
+            "choice_id": 13,
+            "next_question_id": 41006,
+            "seq": "2",
+            "des": "ไม่กล้าที่จะเข้าหาก่อน",
+            "choice_score": "6.5",
+            "question_id": [
+                41005
+            ]
+        },
+        {
+            "choice_id": 14,
+            "next_question_id": 41007,
+            "seq": "1",
+            "des": "อยากเป็นเพื่อนต่อไป",
+            "choice_score": "3",
+            "question_id": [
+                41006
+            ]
+        },
+        {
+            "choice_id": 15,
+            "next_question_id": 41007,
+            "seq": "2",
+            "des": "ไม่อยากเป็นเพื่อนแล้ว",
+            "choice_score": "7",
+            "question_id": [
+                41006
+            ]
+        },
+        {
+            "choice_id": 16,
+            "next_question_id": 42002,
+            "seq": "1",
+            "des": "มากที่สุด",
+            "choice_score": "5",
+            "question_id": [
+                42001
+            ]
+        },
+        {
+            "choice_id": 17,
+            "next_question_id": 42002,
+            "seq": "2",
+            "des": "มาก",
+            "choice_score": "4",
+            "question_id": [
+                42001
+            ]
+        },
+        {
+            "choice_id": 18,
+            "next_question_id": 42002,
+            "seq": "3",
+            "des": "ปานกลาง",
+            "choice_score": "3",
+            "question_id": [
+                42001
+            ]
+        },
+        {
+            "choice_id": 19,
+            "next_question_id": 42002,
+            "seq": "4",
+            "des": "น้อย",
+            "choice_score": "2",
+            "question_id": [
+                42001
+            ]
+        },
+        {
+            "choice_id": 20,
+            "next_question_id": 42002,
+            "seq": "5",
+            "des": "น้อยที่สุด",
+            "choice_score": "1",
+            "question_id": [
+                42001
+            ]
+        },
+        {
+            "choice_id": 21,
+            "next_question_id": 42003,
+            "seq": "1",
+            "des": "ใช่ รู้สึกท้อเเท้",
+            "choice_score": "15",
+            "question_id": [
+                42002
+            ]
+        },
+        {
+            "choice_id": 22,
+            "next_question_id": 42003,
+            "seq": "2",
+            "des": "ไม่ใช่ ไม่ได้รู้สึกท้อเเท้",
+            "choice_score": "11",
+            "question_id": [
+                42002
+            ]
+        },
+        {
+            "choice_id": 23,
+            "next_question_id": 42004,
+            "seq": "1",
+            "des": "ไม่ชอบสิ่งที่เรียนอยู่",
+            "choice_score": "2",
+            "question_id": [
+                42003
+            ]
+        },
+        {
+            "choice_id": 24,
+            "next_question_id": 42004,
+            "seq": "2",
+            "des": "ผลลัพธ์กับความพยายามสวนทางกัน",
+            "choice_score": "1",
+            "question_id": [
+                42003
+            ]
+        },
+        {
+            "choice_id": 25,
+            "next_question_id": 42004,
+            "seq": "3",
+            "des": "รู้สึกถึงความกดดันที่มากเกินไป",
+            "choice_score": "3",
+            "question_id": [
+                42003
+            ]
+        },
+        {
+            "choice_id": 26,
+            "next_question_id": 42005,
+            "seq": "1",
+            "des": "อยากพยายาม",
+            "choice_score": "11.5",
+            "question_id": [
+                42004
+            ]
+        },
+        {
+            "choice_id": 27,
+            "next_question_id": 42005,
+            "seq": "2",
+            "des": "ไม่ไหวแล้ว",
+            "choice_score": "15.5",
+            "question_id": [
+                42004
+            ]
+        },
+        {
+            "choice_id": 28,
+            "next_question_id": 42006,
+            "seq": "1",
+            "des": "รู้สึกว่าตัวเองตัดสินใจผิด",
+            "choice_score": "6",
+            "question_id": [
+                42005
+            ]
+        },
+        {
+            "choice_id": 29,
+            "next_question_id": 42006,
+            "seq": "2",
+            "des": "ไม่ได้กำหนดทางเลือกในการเรียนด้วยตัวเอง",
+            "choice_score": "5",
+            "question_id": [
+                42005
+            ]
+        },
+        {
+            "choice_id": 30,
+            "next_question_id": 42006,
+            "seq": "3",
+            "des": "เนื้อหาที่เรียนยากเกินไป",
+            "choice_score": "4",
+            "question_id": [
+                42005
+            ]
+        },
+        {
+            "choice_id": 31,
+            "next_question_id": 42007,
+            "seq": "1",
+            "des": "กดดันตนเองมากเกินไป",
+            "choice_score": "16",
+            "question_id": [
+                42006
+            ]
+        },
+        {
+            "choice_id": 32,
+            "next_question_id": 42007,
+            "seq": "2",
+            "des": "ได้รับความกดดันจากผู้อื่น",
+            "choice_score": "12",
+            "question_id": [
+                42006
+            ]
+        },
+        {
+            "choice_id": 33,
+            "next_question_id": 43002,
+            "seq": "1",
+            "des": "มากที่สุด",
+            "choice_score": "5",
+            "question_id": [
+                43001
+            ]
+        },
+        {
+            "choice_id": 34,
+            "next_question_id": 43002,
+            "seq": "2",
+            "des": "มาก",
+            "choice_score": "4",
+            "question_id": [
+                43001
+            ]
+        },
+        {
+            "choice_id": 35,
+            "next_question_id": 43002,
+            "seq": "3",
+            "des": "ปานกลาง",
+            "choice_score": "3",
+            "question_id": [
+                43001
+            ]
+        },
+        {
+            "choice_id": 36,
+            "next_question_id": 43002,
+            "seq": "4",
+            "des": "น้อย",
+            "choice_score": "2",
+            "question_id": [
+                43001
+            ]
+        },
+        {
+            "choice_id": 37,
+            "next_question_id": 43002,
+            "seq": "5",
+            "des": "น้อยที่สุด",
+            "choice_score": "1",
+            "question_id": [
+                43001
+            ]
+        },
+        {
+            "choice_id": 38,
+            "next_question_id": 43003,
+            "seq": "1",
+            "des": "อยากปรับความเข้าใจ",
+            "choice_score": "21",
+            "question_id": [
+                43002
+            ]
+        },
+        {
+            "choice_id": 39,
+            "next_question_id": 43003,
+            "seq": "2",
+            "des": "ไม่อยากปรับความเข้าใจ",
+            "choice_score": "25",
+            "question_id": [
+                43002
+            ]
+        },
+        {
+            "choice_id": 40,
+            "next_question_id": 43004,
+            "seq": "1",
+            "des": "เกิดจากตัวเอง",
+            "choice_score": "3",
+            "question_id": [
+                43003
+            ]
+        },
+        {
+            "choice_id": 41,
+            "next_question_id": 43004,
+            "seq": "2",
+            "des": "เกิดจากตัวเองและคนอื่น",
+            "choice_score": "2",
+            "question_id": [
+                43003
+            ]
+        },
+        {
+            "choice_id": 42,
+            "next_question_id": 43004,
+            "seq": "3",
+            "des": "เกิดจากคนอื่น",
+            "choice_score": "1",
+            "question_id": [
+                43003
+            ]
+        },
+        {
+            "choice_id": 43,
+            "next_question_id": 43005,
+            "seq": "1",
+            "des": "หาเวลาพูดคุยกับครอบครัวแบบพร้อมหน้าพร้อมตา",
+            "choice_score": "7",
+            "question_id": [
+                43004
+            ]
+        },
+        {
+            "choice_id": 44,
+            "next_question_id": 43005,
+            "seq": "2",
+            "des": "ลองแสดงออกทางการกระทำ",
+            "choice_score": "5",
+            "question_id": [
+                43004
+            ]
+        },
+        {
+            "choice_id": 45,
+            "next_question_id": 43005,
+            "seq": "3",
+            "des": "รอให้เธอและอีกฝ่ายอารมณ์เย็นลงก่อน",
+            "choice_score": "4",
+            "question_id": [
+                43004
+            ]
+        },
+        {
+            "choice_id": 46,
+            "next_question_id": 43005,
+            "seq": "4",
+            "des": "ลองเป็นฝ่ายที่เข้าไปพูดคุยกับครอบครัวก่อน",
+            "choice_score": "6",
+            "question_id": [
+                43004
+            ]
+        },
+        {
+            "choice_id": 47,
+            "next_question_id": 43006,
+            "seq": "1",
+            "des": "ต้องการคนไกล่เกลี่ย",
+            "choice_score": "25.5",
+            "question_id": [
+                43005
+            ]
+        },
+        {
+            "choice_id": 48,
+            "next_question_id": 43006,
+            "seq": "2",
+            "des": "ไม่ต้องการคนไกล่เกลี่ย",
+            "choice_score": "21.5",
+            "question_id": [
+                43005
+            ]
+        },
+        {
+            "choice_id": 49,
+            "next_question_id": 43007,
+            "seq": "1",
+            "des": "แสดงออกว่าอยากปรับความเข้าใจทางตรง",
+            "choice_score": "22",
+            "question_id": [
+                43006
+            ]
+        },
+        {
+            "choice_id": 50,
+            "next_question_id": 43007,
+            "seq": "2",
+            "des": "แสดงออกว่าอยากปรับความเข้าใจทางอ้อม",
+            "choice_score": "26",
+            "question_id": [
+                43006
+            ]
+        },
+        {
+            "choice_id": 51,
+            "next_question_id": 45001,
+            "seq": "1",
+            "des": "โสด",
+            "choice_score": "0",
+            "question_id": [
+                44001
+            ]
+        },
+        {
+            "choice_id": 52,
+            "next_question_id": 45009,
+            "seq": "2",
+            "des": "มีแฟน",
+            "choice_score": "0",
+            "question_id": [
+                44001
+            ]
+        },
+        {
+            "choice_id": 53,
+            "next_question_id": 45017,
+            "seq": "3",
+            "des": "คนคุย",
+            "choice_score": "0",
+            "question_id": [
+                44001
+            ]
+        },
+        {
+            "choice_id": 54,
+            "next_question_id": 45025,
+            "seq": "4",
+            "des": "มือที่ 3",
+            "choice_score": "0",
+            "question_id": [
+                44001
+            ]
+        },
+        {
+            "choice_id": 55,
+            "next_question_id": 45002,
+            "seq": "1",
+            "des": "การมีความรัก กลัวการเริ่มต้นใหม่ ไม่กล้าเปิดใจ",
+            "choice_score": "2",
+            "question_id": [
+                45001
+            ]
+        },
+        {
+            "choice_id": 56,
+            "next_question_id": 45002,
+            "seq": "2",
+            "des": "เหงา โสดนานเกินไป",
+            "choice_score": "1",
+            "question_id": [
+                45001
+            ]
+        },
+        {
+            "choice_id": 57,
+            "next_question_id": 45002,
+            "seq": "3",
+            "des": "คิดถึงแฟนเก่า / move on ไม่ได้",
+            "choice_score": "3",
+            "question_id": [
+                45001
+            ]
+        },
+        {
+            "choice_id": 58,
+            "next_question_id": 45003,
+            "seq": "1",
+            "des": "พอใจ",
+            "choice_score": "41",
+            "question_id": [
+                45002
+            ]
+        },
+        {
+            "choice_id": 59,
+            "next_question_id": 45003,
+            "seq": "2",
+            "des": "ไม่พอใจ",
+            "choice_score": "45",
+            "question_id": [
+                45002
+            ]
+        },
+        {
+            "choice_id": 60,
+            "next_question_id": 45004,
+            "seq": "1",
+            "des": "ไม่อยากผูกมัดกับใคร",
+            "choice_score": "41.5",
+            "question_id": [
+                45003
+            ]
+        },
+        {
+            "choice_id": 61,
+            "next_question_id": 45004,
+            "seq": "2",
+            "des": "ยังเจ็บจากรักเก่า",
+            "choice_score": "45.5",
+            "question_id": [
+                45003
+            ]
+        },
+        {
+            "choice_id": 62,
+            "next_question_id": 45005,
+            "seq": "1",
+            "des": "ใช่",
+            "choice_score": "42",
+            "question_id": [
+                45004
+            ]
+        },
+        {
+            "choice_id": 63,
+            "next_question_id": 45005,
+            "seq": "2",
+            "des": "ไม่ใช่",
+            "choice_score": "46",
+            "question_id": [
+                45004
+            ]
+        },
+        {
+            "choice_id": 64,
+            "next_question_id": 45006,
+            "seq": "1",
+            "des": "ยอมรับได้",
+            "choice_score": "42.5",
+            "question_id": [
+                45005
+            ]
+        },
+        {
+            "choice_id": 65,
+            "next_question_id": 45006,
+            "seq": "2",
+            "des": "ยอมรับไม่ได้",
+            "choice_score": "46.5",
+            "question_id": [
+                45005
+            ]
+        },
+        {
+            "choice_id": 66,
+            "next_question_id": 45010,
+            "seq": "1",
+            "des": "พอใจ",
+            "choice_score": "51",
+            "question_id": [
+                45009
+            ]
+        },
+        {
+            "choice_id": 67,
+            "next_question_id": 45010,
+            "seq": "2",
+            "des": "ไม่พอใจ",
+            "choice_score": "55",
+            "question_id": [
+                45009
+            ]
+        },
+        {
+            "choice_id": 68,
+            "next_question_id": 45011,
+            "seq": "1",
+            "des": "ทะเลาะค่อนข้างน้อย",
+            "choice_score": "1",
+            "question_id": [
+                45010
+            ]
+        },
+        {
+            "choice_id": 69,
+            "next_question_id": 45011,
+            "seq": "2",
+            "des": "ทะเลาะกันปานกลาง",
+            "choice_score": "2",
+            "question_id": [
+                45010
+            ]
+        },
+        {
+            "choice_id": 70,
+            "next_question_id": 45011,
+            "seq": "3",
+            "des": "ทะเลาะกันบ่อยมาก",
+            "choice_score": "3",
+            "question_id": [
+                45010
+            ]
+        },
+        {
+            "choice_id": 71,
+            "next_question_id": 45012,
+            "seq": "1",
+            "des": "ได้ลองเปิดใจคุยกันแล้ว",
+            "choice_score": "51.5",
+            "question_id": [
+                45011
+            ]
+        },
+        {
+            "choice_id": 72,
+            "next_question_id": 45012,
+            "seq": "2",
+            "des": "ยังไม่เคยลองเปิดใจคุยกันเลย",
+            "choice_score": "55.5",
+            "question_id": [
+                45011
+            ]
+        },
+        {
+            "choice_id": 73,
+            "next_question_id": 45013,
+            "seq": "1",
+            "des": "แฟนของเธอมีข้อดีมากกว่า",
+            "choice_score": "52",
+            "question_id": [
+                45012
+            ]
+        },
+        {
+            "choice_id": 74,
+            "next_question_id": 45013,
+            "seq": "2",
+            "des": "แฟนของเธอมีข้อเสียมากกว่า",
+            "choice_score": "56",
+            "question_id": [
+                45012
+            ]
+        },
+        {
+            "choice_id": 75,
+            "next_question_id": 45014,
+            "seq": "1",
+            "des": "ยังอยากพยายามต่อกับความรัก",
+            "choice_score": "52.5",
+            "question_id": [
+                45013
+            ]
+        },
+        {
+            "choice_id": 76,
+            "next_question_id": 45014,
+            "seq": "2",
+            "des": "รู้สึกเหนื่อย ไม่อยากพยายามแล้ว",
+            "choice_score": "56.5",
+            "question_id": [
+                45013
+            ]
+        },
+        {
+            "choice_id": 77,
+            "next_question_id": 45018,
+            "seq": "1",
+            "des": "เพิ่งเริ่มคุยได้ไม่นาน",
+            "choice_score": "1",
+            "question_id": [
+                45017
+            ]
+        },
+        {
+            "choice_id": 78,
+            "next_question_id": 45018,
+            "seq": "2",
+            "des": "คุยมาสักพักแต่ไม่นานมาก",
+            "choice_score": "2",
+            "question_id": [
+                45017
+            ]
+        },
+        {
+            "choice_id": 79,
+            "next_question_id": 45018,
+            "seq": "3",
+            "des": "คุยมานานมาก",
+            "choice_score": "3",
+            "question_id": [
+                45017
+            ]
+        },
+        {
+            "choice_id": 80,
+            "next_question_id": 45019,
+            "seq": "1",
+            "des": "เข้ากันได้ดีมาก",
+            "choice_score": "61",
+            "question_id": [
+                45018
+            ]
+        },
+        {
+            "choice_id": 81,
+            "next_question_id": 45019,
+            "seq": "2",
+            "des": "เข้ากันได้บ้าง",
+            "choice_score": "63",
+            "question_id": [
+                45018
+            ]
+        },
+        {
+            "choice_id": 82,
+            "next_question_id": 45019,
+            "seq": "3",
+            "des": "เข้ากันไม่ได้เลย",
+            "choice_score": "65",
+            "question_id": [
+                45018
+            ]
+        },
+        {
+            "choice_id": 83,
+            "next_question_id": 45020,
+            "seq": "1",
+            "des": "ความสัมพันธ์ชัดเจน",
+            "choice_score": "61.5",
+            "question_id": [
+                45019
+            ]
+        },
+        {
+            "choice_id": 84,
+            "next_question_id": 45020,
+            "seq": "2",
+            "des": "ความสัมพันธ์ที่ไม่ชัดเจน",
+            "choice_score": "65.5",
+            "question_id": [
+                45019
+            ]
+        },
+        {
+            "choice_id": 85,
+            "next_question_id": 45021,
+            "seq": "1",
+            "des": "อยากพัฒนาความสัมพันธ์ต่อไป",
+            "choice_score": "62",
+            "question_id": [
+                45020
+            ]
+        },
+        {
+            "choice_id": 86,
+            "next_question_id": 45021,
+            "seq": "2",
+            "des": "ไม่อยากความสัมพันธ์ต่อ",
+            "choice_score": "66",
+            "question_id": [
+                45020
+            ]
+        },
+        {
+            "choice_id": 87,
+            "next_question_id": 45022,
+            "seq": "1",
+            "des": "เขาปฎิบัติกับเราเหมือนคนพิเศษ",
+            "choice_score": "62.5",
+            "question_id": [
+                45021
+            ]
+        },
+        {
+            "choice_id": 88,
+            "next_question_id": 45022,
+            "seq": "2",
+            "des": "เขาปฎิบัติกับเราเหมือนคนทั่วไป",
+            "choice_score": "66.5",
+            "question_id": [
+                45021
+            ]
+        },
+        {
+            "choice_id": 89,
+            "next_question_id": 45026,
+            "seq": "1",
+            "des": "พอใจ",
+            "choice_score": "75",
+            "question_id": [
+                45025
+            ]
+        },
+        {
+            "choice_id": 90,
+            "next_question_id": 45026,
+            "seq": "2",
+            "des": "ไม่พอใจ",
+            "choice_score": "71",
+            "question_id": [
+                45025
+            ]
+        },
+        {
+            "choice_id": 91,
+            "next_question_id": 45027,
+            "seq": "1",
+            "des": "รู้ตั้งแต่แรก",
+            "choice_score": "75.5",
+            "question_id": [
+                45026
+            ]
+        },
+        {
+            "choice_id": 92,
+            "next_question_id": 45027,
+            "seq": "2",
+            "des": "รู้เมื่อได้คุยมาสักพัก",
+            "choice_score": "71.5",
+            "question_id": [
+                45026
+            ]
+        },
+        {
+            "choice_id": 93,
+            "next_question_id": 45028,
+            "seq": "1",
+            "des": "เขามาบอก",
+            "choice_score": "76",
+            "question_id": [
+                45027
+            ]
+        },
+        {
+            "choice_id": 94,
+            "next_question_id": 45028,
+            "seq": "2",
+            "des": "รู้ด้วยตัวเอง",
+            "choice_score": "72",
+            "question_id": [
+                45027
+            ]
+        },
+        {
+            "choice_id": 95,
+            "next_question_id": 45029,
+            "seq": "1",
+            "des": "100%",
+            "choice_score": "5",
+            "question_id": [
+                45028
+            ]
+        },
+        {
+            "choice_id": 96,
+            "next_question_id": 45029,
+            "seq": "2",
+            "des": "75%",
+            "choice_score": "4",
+            "question_id": [
+                45028
+            ]
+        },
+        {
+            "choice_id": 97,
+            "next_question_id": 45029,
+            "seq": "3",
+            "des": "50%",
+            "choice_score": "3",
+            "question_id": [
+                45028
+            ]
+        },
+        {
+            "choice_id": 98,
+            "next_question_id": 45029,
+            "seq": "4",
+            "des": "25%",
+            "choice_score": "2",
+            "question_id": [
+                45028
+            ]
+        },
+        {
+            "choice_id": 99,
+            "next_question_id": 45029,
+            "seq": "5",
+            "des": "ไม่มีความจริงใจ",
+            "choice_score": "1",
+            "question_id": [
+                45028
+            ]
+        },
+        {
+            "choice_id": 100,
+            "next_question_id": 45030,
+            "seq": "1",
+            "des": "นอกใจแน่นอน",
+            "choice_score": "72.5",
+            "question_id": [
+                45029
+            ]
+        },
+        {
+            "choice_id": 101,
+            "next_question_id": 45030,
+            "seq": "2",
+            "des": "ไม่นอกใจ เชื่อมั่นในตัวเขา",
+            "choice_score": "76.5",
+            "question_id": [
+                45029
+            ]
+        },
+        {
+            "choice_id": 102,
+            "next_question_id": 46002,
+            "seq": "1",
+            "des": "มากที่สุด",
+            "choice_score": "5",
+            "question_id": [
+                46001
+            ]
+        },
+        {
+            "choice_id": 103,
+            "next_question_id": 46002,
+            "seq": "2",
+            "des": "มาก",
+            "choice_score": "4",
+            "question_id": [
+                46001
+            ]
+        },
+        {
+            "choice_id": 104,
+            "next_question_id": 46002,
+            "seq": "3",
+            "des": "ปานกลาง",
+            "choice_score": "3",
+            "question_id": [
+                46001
+            ]
+        },
+        {
+            "choice_id": 105,
+            "next_question_id": 46002,
+            "seq": "4",
+            "des": "น้อย",
+            "choice_score": "2",
+            "question_id": [
+                46001
+            ]
+        },
+        {
+            "choice_id": 106,
+            "next_question_id": 46002,
+            "seq": "5",
+            "des": "น้อยที่สุด",
+            "choice_score": "1",
+            "question_id": [
+                46001
+            ]
+        },
+        {
+            "choice_id": 107,
+            "next_question_id": 46003,
+            "seq": "1",
+            "des": "ลองจัดลำดับความสำคัญของหนี้กัน",
+            "choice_score": "85",
+            "question_id": [
+                46002
+            ]
+        },
+        {
+            "choice_id": 108,
+            "next_question_id": 46003,
+            "seq": "2",
+            "des": "มาลองวางแผนการใช้เงินกัน",
+            "choice_score": "80",
+            "question_id": [
+                46002
+            ]
+        },
+        {
+            "choice_id": 109,
+            "next_question_id": 46004,
+            "seq": "1",
+            "des": "คิดออกๆ",
+            "choice_score": "80.5",
+            "question_id": [
+                46003
+            ]
+        },
+        {
+            "choice_id": 110,
+            "next_question_id": 46004,
+            "seq": "2",
+            "des": "ยังไม่เข้าใจเท่าไหร่",
+            "choice_score": "85.5",
+            "question_id": [
+                46003
+            ]
+        },
+        {
+            "choice_id": 111,
+            "next_question_id": 46005,
+            "seq": "1",
+            "des": "ยืม/กู้เงินจากคนอื่นมาโปะหนี้",
+            "choice_score": "82",
+            "question_id": [
+                46004
+            ]
+        },
+        {
+            "choice_id": 112,
+            "next_question_id": 46005,
+            "seq": "2",
+            "des": "ขายสินทรัพย์ที่ตนเองมีอยู่",
+            "choice_score": "81.5",
+            "question_id": [
+                46004
+            ]
+        },
+        {
+            "choice_id": 113,
+            "next_question_id": 46005,
+            "seq": "3",
+            "des": "เพิ่มรายได้ด้วยงานพิเศษ",
+            "choice_score": "81",
+            "question_id": [
+                46004
+            ]
+        },
+        {
+            "choice_id": 114,
+            "next_question_id": 46006,
+            "seq": "1",
+            "des": "ข้อดีมากกว่า",
+            "choice_score": "86",
+            "question_id": [
+                46005
+            ]
+        },
+        {
+            "choice_id": 115,
+            "next_question_id": 46006,
+            "seq": "2",
+            "des": "ข้อเสียมากกว่า",
+            "choice_score": "82.5",
+            "question_id": [
+                46005
+            ]
+        },
+        {
+            "choice_id": 116,
+            "next_question_id": 46007,
+            "seq": "1",
+            "des": "เช็คว่ามีทรัพย์สินใดที่จะนำมาขายได้บ้าง",
+            "choice_score": "84",
+            "question_id": [
+                46006
+            ]
+        },
+        {
+            "choice_id": 117,
+            "next_question_id": 46007,
+            "seq": "2",
+            "des": "นำทรัพย์สินที่มีความจำเป็นน้อยไปขายก่อน",
+            "choice_score": "83.5",
+            "question_id": [
+                46006
+            ]
+        },
+        {
+            "choice_id": 118,
+            "next_question_id": 46007,
+            "seq": "3",
+            "des": "ทำทั้ง 2 วิธีข้างต้น",
+            "choice_score": "83",
+            "question_id": [
+                46006
+            ]
+        },
+        {
+            "choice_id": 119,
+            "next_question_id": 40002,
+            "seq": "1",
+            "des": "อารมณ์ดีมาก",
+            "choice_score": "0",
+            "question_id": [
+                40001
+            ]
+        },
+        {
+            "choice_id": 120,
+            "next_question_id": 40002,
+            "seq": "2",
+            "des": "อารมณ์ดี",
+            "choice_score": "0",
+            "question_id": [
+                40001
+            ]
+        },
+        {
+            "choice_id": 121,
+            "next_question_id": 40002,
+            "seq": "3",
+            "des": "รู้สึกเฉยๆ",
+            "choice_score": "0",
+            "question_id": [
+                40001
+            ]
+        },
+        {
+            "choice_id": 122,
+            "next_question_id": 40002,
+            "seq": "4",
+            "des": "ไม่ค่อยดีเลย",
+            "choice_score": "0",
+            "question_id": [
+                40001
+            ]
+        },
+        {
+            "choice_id": 123,
+            "next_question_id": 40002,
+            "seq": "5",
+            "des": "รู้สึกเศร้า",
+            "choice_score": "0",
+            "question_id": [
+                40001
+            ]
+        },
+        {
+            "choice_id": 124,
+            "next_question_id": 40003,
+            "seq": "1",
+            "des": "ใช่",
+            "choice_score": "0",
+            "question_id": [
+                40002
+            ]
+        },
+        {
+            "choice_id": 125,
+            "next_question_id": 40003,
+            "seq": "2",
+            "des": "ไม่ใช่",
+            "choice_score": "0",
+            "question_id": [
+                40002
+            ]
+        },
+        {
+            "choice_id": 126,
+            "next_question_id": 41001,
+            "seq": "1",
+            "des": "เรื่องเพื่อน",
+            "choice_score": "0",
+            "question_id": [
+                40003
+            ]
+        },
+        {
+            "choice_id": 127,
+            "next_question_id": 42001,
+            "seq": "2",
+            "des": "เรื่องเรียน",
+            "choice_score": "0",
+            "question_id": [
+                40003
+            ]
+        },
+        {
+            "choice_id": 128,
+            "next_question_id": 43001,
+            "seq": "3",
+            "des": "เรื่องครอบครัว",
+            "choice_score": "0",
+            "question_id": [
+                40003
+            ]
+        },
+        {
+            "choice_id": 129,
+            "next_question_id": 44001,
+            "seq": "4",
+            "des": "เรื่องความรัก",
+            "choice_score": "0",
+            "question_id": [
+                40003
+            ]
+        },
+        {
+            "choice_id": 130,
+            "next_question_id": 46001,
+            "seq": "5",
+            "des": "เรื่องการเงิน",
+            "choice_score": "0",
+            "question_id": [
+                40003
+            ]
+        }
+    ]
+}

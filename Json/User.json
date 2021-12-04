@@ -1,0 +1,18 @@
+{
+    "User" : [
+        {
+            "user_id": 1,
+            "first_name": "DO",
+            "last_name": "RO",
+            "user_name": "Deo",
+            "password": "iloveu",
+            "email": "deoro@gmail.com",
+            "birthday": "2020-09-04T17:00:00.000Z",
+            "create_date": "2021-10-16T18:12:01.000Z",
+            "update_date": "2021-10-16T18:12:01.000Z",
+            "pic_id": 1,
+            "hs_id": null
+        }
+    ]
+
+}

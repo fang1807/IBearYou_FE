@@ -1,0 +1,14 @@
+
+      {
+      "Result" : [
+        {
+            "result_id": 1,
+            "user_prompt": "วันนี้เป็นวันที่แย่ที่สุดเลยยย",
+            "create_date": "2021-10-16T20:38:01.000Z",
+            "questionnaire_id": 1,
+            "user_id": 1,
+            "card_id": 8
+        }
+    ]
+      }
+    
