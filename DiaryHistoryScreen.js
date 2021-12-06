@@ -37,7 +37,6 @@ loadHistory_Diary=async()=>{
         }
         else  if(res.data.message==="Fail") {
         } 
-
 }
 
 
@@ -71,6 +70,16 @@ loadHistory_Diary=async()=>{
 
 <View style={{marginTop: 320}}>
  
+    <TouchableOpacity style={styles.buttonVeryGood} activeOpacity={0.50}
+     onPress ={() => this.selectedFeel(data.feel_id)}>
+     <View>
+     <Text style={styles.textMood}></Text>
+      <Image source={require('./assets/images/bear-verygood.png')}
+     style={{width:57.24 ,height:57.37,marginTop: -38,marginLeft: -50}}
+     />
+     </View>
+     </TouchableOpacity>
+     
 
 </View>
 
@@ -280,7 +289,9 @@ button:{
       flex: 1,
       marginTop: -30,
     
-    }
+    },
+
+    
 
 
 });

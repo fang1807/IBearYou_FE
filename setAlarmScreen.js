@@ -20,7 +20,6 @@ class setAlarmScreen extends Component {
       listSoundData: [],
       heal_sentenceData:[],
       checked: 0,
-      day:['อา.','จ.','อ.','พ.','พฤ.','ศ.','ส.'] ,
       isVisible: false,
       choseTime: '',
       choseDateTime: '',

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { StyleSheet, View, Text, Image, SafeAreaView, Button
-       , TouchableHighlight,TouchableOpacity, Dementions}
+       , TouchableHighlight,TouchableOpacity, Dementions
+       ,TextInput}
        from 'react-native';
 import axios from 'axios';
 import CustomHeader from './CustomHeader';
@@ -25,13 +26,13 @@ class CalendarScreen extends Component {
                     user_name: [],
                     date: moment().format("YYYY-MM-DD"),
                     selected_date: '',
+                    selectedData:{}
     };
   }
 componentDidMount(){
   console.log("componentDidmount CalendarScreen this.props.userdata : ",this.props.userdata);
   //this.loadCalendarScreen();
-  this.loadUsername();
-  //this.loadSelect_Diary();
+  this.loadUsername(); 
 }
 
  setCurrentDiaryID = async(diaryID)=>{
@@ -62,24 +63,6 @@ loadCalendarScreen=async()=>{
 
 
 
-loadSelect_Diary=async()=>{
-   console.log("loadSelect_Diary");
-    const userData ={} 
-    const data =  {"user_id": this.props.userdata.user_id};
-    const endpoint = `${API_URL}/api/select-diary`;
-     console.log('endpoint : ',endpoint)
-    const res = await axios.get(endpoint,{params:data}) 
-       if(res.data.message==="Success"){
-          console.log("Success")
-          console.log("user_data: ",res.data.data)
-         //this.props.navigation.navigate('HomeApp') 
-        }
-        else  if(res.data.message==="Fail") {
-          console.log("Fail")
-        } 
-
-}
-
 
  loadUsername=async()=>{
    console.log("list_username");
@@ -100,6 +83,33 @@ loadSelect_Diary=async()=>{
 
 }
 
+    
+  selectCalendar=async(selected_date)=>{
+    console.log(selected_date);
+    this.setState({selected_date})
+       console.log("selectCalendar");
+    const userData ={} 
+    const data =  {"user_id": this.props.userdata.user_id,"create_date": selected_date};
+    const endpoint = `${API_URL}/api/select-diary`;
+     console.log('endpoint : ',endpoint)
+    const res = await axios.get(endpoint,{params:data}) 
+       if(res.data.message==="Success"&& res.data.data[0].title){
+          console.log("res.data.data[0].title")
+          console.log("res.data.data[0].title: ",res.data.data)
+          this.setState({"selectedData":res.data.data[0]})
+         //this.props.navigation.navigate('HomeApp') 
+        }
+       else if(!res.data.data){
+          console.log("res.data.data.length==0")
+          console.log("res.data.data: ",res.data.data)
+          this.setState({"selectedData":{}})
+         //this.props.navigation.navigate('HomeApp') 
+        }
+        else  if(res.data.message==="Fail") {
+          this.setState({"selectedData":{}})
+          console.log("Fail")
+        } 
+  }
 
 
   render() {
@@ -141,7 +151,7 @@ markedDates={{
 
   '2021-11-29': {selected: true,selectedColor: '#CB6863',selectedTextColor: '#FFFFFF'},
 }}
-onDayPress={(day) =>  this.setState({selected_date: day.dateString})}
+onDayPress={(day) => this.selectCalendar(day.dateString) }
 
 /*dayComponent={({date, state}) => {
     return (
@@ -200,51 +210,125 @@ onDayPress={(day) =>  this.setState({selected_date: day.dateString})}
   
   />
 
-
-
-
-
 </View>
 
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-
-    <View style={{marginTop:95}}>
-    {this.username()}  
-      <View style={styles.boxContent}>
-      <Text style={styles.content}>ในหนึ่งวันต้องพบเจอเรื่องราวมากมาย หลากหลายความรู้สึก สมุดเล่มนี้จะเก็บบันทึกเรื่องราวต่าง ๆ 
-      ความรู้สึกที่อยากบันทึกไว้ หรือจะเขียนตั้งเป้าหมายก้ได้ ถ้าพร้อมแล้วไปเขียนบันทึกในแบบฉบับของตัวเองกันเลย</Text>
-      </View>
-
-
-
-      <View style={{flex: 1, alignItems: 'center',}}>  
-       <Image source={require('./assets/images/boots.png')}
-    style={{width:50.91,height:41.96,marginTop:-20,marginRight:-320}} />     
+{this.username()}
+  
+{this.state.selectedData.create_date ?
+<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+ 
+<TouchableOpacity activeOpacity={0.75} 
+ onPress ={() => this.props.navigation.navigate('DiaryHistory')}>
+ 
+<View >
+ 
+<View style={{flex: 1}}>
+ 
+ <View style={styles.page}></View>
+ 
+ <View style={styles.spine}></View>
+ 
+</View>
+ 
+ 
+<View style={{marginTop: -30}}>
+<View style={{flex: 1}} >
+<Image source={require('./assets/images/line.png')}
+  style={{width: 290,height:256,marginTop: -232,marginLeft: 35}}
+  resizeMode='contain' /> 
+</View>
+ 
+<View style={{marginTop: -450}}>
+<View>
+<Text style={styles.textDate}>{this.state.selectedData.create_date}</Text>
+</View>
+<View style={styles.buttonEmoji}>
+<TouchableOpacity activeOpacity={0.75} disabled={true} >
+    <Text style={styles.textEmoji}>{this.state.selectedData.title}</Text>
+     <Image source={require('./assets/images/pencil.png')}
+  style={{width: 10.32,height:10.32,marginTop: 0,marginLeft:310}}
+  resizeMode='contain'
+    />
+ </TouchableOpacity>
  </View>
-
-   <View style={{flex: 1, alignItems: 'center',}}>  
-       <Image source={require('./assets/images/umbrella-blue.png')}
-    style={{width:135.42 ,height:111,marginTop: -235,marginRight: -180}} />     
+</View>
+ 
+ 
+<View style={{flex: 1,marginTop: -0}}>
+ 
+<View style={{flex: 1,marginTop: -11}}>
+ <Text style={styles.textType}>เรื่องราวที่ดี</Text>
+  <Text style={styles.textContent}>{this.state.selectedData.good}</Text>
+</View>
+ 
+ 
+<View style={{flex: 1,marginTop: 18.5}}>
+ <Text style={styles.textType}>เรื่องราวที่ไม่ดี</Text>
+  <Text style={styles.textContent}>{this.state.selectedData.bad}</Text>
  </View>
+ 
+ 
+<View style={{flex: 1,marginTop: 20.5}}>
+ <Text style={styles.textType}>ความคาดหวัง</Text>
+  <Text style={styles.textContent}>{this.state.selectedData.wish}</Text>
+</View>
+ 
+ 
+ 
+</View>
+</View>
+</View>
+ 
+</TouchableOpacity>
+ 
+</View>
+  :
+<View>
+  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+   <View style={{marginTop:25}}>
+   
 
- <View style={{flex: 1, alignItems: 'center',}}>  
-       <Image source={require('./assets/images/raincoat.png')}
-    style={{width:98.08 ,height:107.17,marginTop: -75,marginLeft: -280}} />     
- </View>
+     <View style={styles.boxContent}>
+     <Text style={styles.content}>ในหนึ่งวันต้องพบเจอเรื่องราวมากมาย หลากหลายความรู้สึก สมุดเล่มนี้จะเก็บบันทึกเรื่องราวต่าง ๆ
+     ความรู้สึกที่อยากบันทึกไว้ หรือจะเขียนตั้งเป้าหมายก้ได้ ถ้าพร้อมแล้วไปเขียนบันทึกในแบบฉบับของตัวเองกันเลย</Text>
      </View>
+ 
+ 
+ 
+     <View style={{flex: 1, alignItems: 'center',}}> 
+      <Image source={require('./assets/images/boots.png')}
+   style={{width:50.91,height:41.96,marginTop:-20,marginRight:-320}} />    
+</View>
+ 
+  <View style={{flex: 1, alignItems: 'center',}}> 
+      <Image source={require('./assets/images/umbrella-blue.png')}
+   style={{width:135.42 ,height:111,marginTop: -235,marginRight: -180}} />    
+</View>
+ 
+<View style={{flex: 1, alignItems: 'center',}}> 
+      <Image source={require('./assets/images/raincoat.png')}
+   style={{width:98.08 ,height:107.17,marginTop: -75,marginLeft: -280}} />    
+</View>
     </View>
+   </View>
+ 
+<View style = {styles.button}>
+         <TouchableOpacity
+       style={{marginTop: 590}}
+       onPress={() => this.props.navigation.navigate('Mood')  }
+      activeOpacity={0.75} >
+       <View style = {styles.buttonStart}>
+       <Text style = {styles.textStart}> Let's Get Started </Text>
+       </View>
+     </TouchableOpacity>
+   </View>
+  </View>
 
- <View style = {styles.button}>
-          <TouchableOpacity
-        style={{marginTop: 120}}
-        onPress={() => this.props.navigation.navigate('Mood')  }
-       activeOpacity={0.75} >
-        <View style = {styles.buttonStart}>
-        <Text style = {styles.textStart}> Let's Get Started </Text>
-        </View>
-      </TouchableOpacity>
-    </View>
 
+
+
+  }
+   
      </SafeAreaView>
     );
   }
@@ -254,7 +338,7 @@ onDayPress={(day) =>  this.setState({selected_date: day.dateString})}
   username() {
     return this.state.user_name.map((data) => {
       return (
-         <View style={{flex: 1}}>
+         <View style={{marginTop:-20,marginBottom:-80}}>
           <Text style={styles.textName}>ยินดีต้อนรับ {data.user_name}</Text>
           </View>
        )
@@ -307,7 +391,6 @@ const styles = StyleSheet.create({
        backgroundColor: '#E79995',
        height: 41,
        width: 278,
-       marginTop: -45,
        overflow: "hidden",
       
       
@@ -325,8 +408,8 @@ const styles = StyleSheet.create({
      fontSize: 36,
      fontFamily: 'Quark',
      fontWeight: 'bold',
-     marginBottom: -90,
-     marginLeft: -20
+     marginTop: 30,
+     marginLeft: 40
    },
 
     calendar: {
@@ -339,7 +422,95 @@ const styles = StyleSheet.create({
       elevation: 3,
       paddingLeft: 25,
       paddingRight: 25,
-    }
+    },
+
+    textDate: {
+     color: '#000000',
+     fontSize: 14,
+     fontFamily: 'Quark',
+     textAlign: 'center',   
+     marginLeft: -165,
+},
+
+textEmoji: {
+     color: '#000000',
+     fontSize: 14,
+     fontFamily: 'Quark',
+     textAlign: 'center',   
+     marginTop: -20,
+     marginLeft: 165,
+     
+},
+
+textButton:{
+     color: '#FFFFFF',
+     fontSize: 20,
+     fontFamily: 'Quark',
+     fontWeight: 'bold',
+     textAlign: 'center',
+     
+        
+},
+
+    textFeel: {
+     color: '#000000',
+     fontSize: 24,
+     fontFamily: 'Quark',
+     fontWeight: 'bold',
+     textAlign: 'center',
+     marginTop: 12,
+    },
+
+    page:{
+      height: 394,
+      width: 370,
+      backgroundColor: '#FFFFFF',
+      borderRadius: 20,
+      shadowColor: '#000000',
+      shadowOffset: { width: 0, height: 3 },
+      shadowOpacity:  0.3,
+      shadowRadius:3,
+      elevation: 2,
+      marginLeft: -25,
+      marginTop: 85,
+    },
+
+    textContent:{
+    color: '#000000',
+     fontSize: 14,
+     fontFamily: 'Quark',
+     textAlign: 'center',
+     marginTop: 10,
+    },
+
+    spine:{
+      height: 394,
+      width: 40,
+      backgroundColor: '#E79995',
+      borderRadius: 2,
+      shadowColor: '#000000',
+      shadowOffset: { width: 0, height: 3 },
+      shadowOpacity:  0.3,
+      shadowRadius:3,
+      elevation: 2,
+      marginTop: -394,
+      marginLeft: -24,
+    },
+
+    textType: {
+     color: '#000000',
+     fontSize: 13,
+     fontFamily: 'Quark',
+     fontWeight: 'bold',
+     marginLeft: 45,
+    },
+
+    Type: {
+      flex: 1,
+      marginTop: -30,
+    
+    },
+
 
   });
 

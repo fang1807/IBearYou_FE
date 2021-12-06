@@ -10,6 +10,10 @@ const initialState = {
 	currentFeelID :'',
 	currentDiaryID: '',
 	currentDate: '',
+	currentSound: '',
+	deleteAlarm: '',
+	addAlarm: '',
+	selectedDiaryData:{}
 
 
 };
@@ -44,6 +48,11 @@ export default function reducers(state=initialState, action) {
 				 ...state,   
 				questionId: action.payload
 			}
+		case 'SET_SELECTED_DIARY_DATA': 
+			return {
+				 ...state,   
+				selectedDiaryData: action.payload
+			}
 		case 'SET_CURRENT_FEEL_ID': 
 			return {
 				 ...state,   
@@ -69,6 +78,22 @@ export default function reducers(state=initialState, action) {
 				...state,
 				userdata:action.payload
 			}
+		case 'SET_ADD_ARARM' :
+			return {
+				...state,
+				addAlarm:action.payload
+			}
+		case 'SET_DELETE_ALARM' :
+			return {
+				...state,
+				deleteAlarm:action.payload
+			}
+		case 'SET_SOUND_ID' :
+			return {
+				...state,
+				currentSound:action.payload
+			}
+		
 
 	
 		default:
