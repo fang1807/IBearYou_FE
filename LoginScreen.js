@@ -440,3 +440,9 @@ const mapStateToProps=(state,props)=>{
   return{
  
    userdata:state.Quest
+  }
+}
+
+export default connect(mapStateToProps)(LoginScreen);
+
+

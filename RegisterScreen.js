@@ -33,7 +33,7 @@ class RegisterScreen extends Component {
 }
 
 
-     InputFirstname = () => {
+InputFirstname = () => {
      this.setState({
        first_name: !this.state.first_name
      })
@@ -77,7 +77,7 @@ InputPassword = () => {
 
    handleSubmit = async(event) => {
     //event.preventDefault();
-    if(this.state.first_name.length === 0 ){
+        if(this.state.first_name.length === 0 ){
       this.setState({FirstnameMessage: "please in put firstname"})
 
     }
@@ -143,7 +143,8 @@ InputPassword = () => {
           this.props.navigation.navigate('Login') 
         }
         else  if(res.data.message==="DuplicateEmailOrUserName or Email") {
-         console.log("DuplicateEmailOrUserName or Email")
+           
+         //console.log("DuplicateEmailOrUserName or Email")
         }
       })
   }
@@ -168,8 +169,6 @@ style={{width:390, height: 240, marginTop: -55}}
 
 <View style={{flex:1,marginLeft: -20,marginTop: 130}}>
       <View style={{ flexDirection: 'row',alignItems: 'center',justifyContent: 'space-between',marginBottom: 20}}>
-          
-          <View>
           { !this.state.first_name ?
           <View style={{marginLeft: 10}}>
           <View>
@@ -186,11 +185,8 @@ style={{width:390, height: 240, marginTop: -55}}
               style = {styles.TextInputName_true}
               autoCapitalize='none'
               value = {this.state.InputFirstname}
-
               />
             </View>
-            
-            
             :
             <View style={{marginLeft: 10}}>
            <View>
@@ -209,13 +205,9 @@ style={{width:390, height: 240, marginTop: -55}}
               />
               </View>
   }
-<Text style = {{marginTop: -4,color: "#E79995", fontSize : 16 }}>     {this.state.FirstnameMessage} </Text>
-</View>
-  
 
-<View style = {{marginBottom: -7}}>
   {  !this.state.last_name ?      
-          <View style={{marginLeft: 10, marginTop: 4}}>
+          <View style={{marginLeft: 10}}>
             <TextInput
               placeholder="Lastname"
               placeholderTextColor="#707070"
@@ -240,11 +232,8 @@ style={{width:390, height: 240, marginTop: -55}}
            </View> 
        
   }
-  <Text style = {{marginTop: 6,color: "#E79995", fontSize : 16 }}>   {this.state.LastnameMessage} </Text>
-  </View>
          </View>
 </View>
-
 
 <View style={{flex:1}}>
 { !this.state.email ?
@@ -286,7 +275,6 @@ style={{width:390, height: 240, marginTop: -55}}
               
               </View>
   }
-   <Text style = {{color: "#E79995", fontSize : 16 }}>{this.state.EmailMessage} </Text>
 </View> 
 
 <View style={{flex:1}}>
@@ -327,4 +315,280 @@ style={{width:390, height: 240, marginTop: -55}}
               value = {this.state.InputUsername}
               />
               
-              </View
+              </View>
+  }
+</View> 
+
+<View style={{flex:1}}>
+{ !this.state.password ?
+          <View>
+           <View>
+            <Image source={require('./assets/images/Lock.png')}
+              style ={{width: 19.61, height: 23,marginTop: -6,marginBottom: -30}}/>
+          </View>
+
+          
+          <TextInput
+          placeholder="Password"
+          placeholderTextColor="#707070"
+          defaultValue={this.state.password}
+          onChangeText={password=>this.setState({password})}
+          secureTextEntry={true}
+          style = {styles.TextInput_true}
+          autoCapitalize='none'
+          value = {this.state.InputPassword}
+         />
+            
+            </View>
+              :
+              <View>
+            <View>
+            <Image source={require('./assets/images/Lock-pink.png')}
+              style ={{width: 19.61, height: 23,marginTop: -6,marginBottom: -30}}/>
+            </View>
+            
+        <TextInput
+          placeholder="Password"
+          placeholderTextColor="#707070"
+          defaultValue={this.state.password}
+          onChangeText={password=>this.setState({password})}
+          secureTextEntry={true}
+          style = {styles.TextInput_fault}
+          autoCapitalize='none'
+          value = {this.state.InputPassword}
+         />
+              
+              </View>
+  }
+</View> 
+
+    <View style = {styles.button}>
+   <TouchableOpacity onPress={() => this.handleSubmit()}>
+    <View style = {styles.buttonRegister}>  
+           <Text style = {styles.textRegister}>Sign up</Text>  
+       </View>  
+   </TouchableOpacity >
+ 
+  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+ <View style={{width: 170, height: 1, backgroundColor: '#EA8681',marginTop: 12}} />
+   <View>
+     <Text style = {styles.textOr}> or </Text>
+   </View>
+   <View style={{width: 170, height: 1 ,backgroundColor: '#EA8681',marginTop: 12}} />   
+</View>
+ 
+ <TouchableOpacity    onPress={() => this.props.navigation.navigate('Login')}>
+   <View style = {styles.buttonLogin}>  
+           <Text style = {styles.textLogin}>Login</Text>  
+       </View>
+   </TouchableOpacity>
+   </View>
+     </SafeAreaView>
+  );
+  }
+}
+
+
+
+const containerStyle = {
+
+        flex: 1 ,
+        flexDirection: 'column' ,  
+}
+
+const TextInputStyle = {
+paddingLeft: 40,
+marginTop: 40,
+
+
+}
+
+
+const styles = StyleSheet.create({
+    
+   container: {   
+       backgroundColor: '#FFFFFF',
+        alignItems: 'center',
+        justifyContent: 'center', 
+        width: '100%',
+        height: '100%',
+        
+          
+   },
+    button: {
+        marginBottom: 20,
+        alignItems: 'center',
+        
+         
+    },
+
+    buttonLogin: {
+        borderRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+         backgroundColor: '#FFFFFF',
+        height: 35,
+        width: 360,
+      shadowColor: '#000000',
+      shadowOffset: { width: 0, height: 3 },
+      shadowOpacity:  0.40,
+      shadowRadius: 2,
+      elevation: 5,
+      marginTop: 14,
+           
+        
+    },
+
+      buttonRegister: {
+        alignItems: 'center',
+        justifyContent: 'center',
+      
+         backgroundColor: '#EA8681',
+       height: 35,
+        width: 360,
+        borderRadius: 5,
+      shadowColor: '#000000',
+      shadowOffset: { width: 0, height: 3 },
+      shadowOpacity:  0.40,
+      shadowRadius: 3,
+      elevation: 5,
+        
+
+    
+    },
+
+    textLogin: {
+        color: '#E79995',
+        fontSize: 20,
+    
+    },
+
+    textRegister: {
+        color: '#FFFFFF',
+        fontSize: 20,
+    },
+
+
+    textOr: {
+      color: '#EA8681',
+      fontSize: 12,
+      marginTop: 10,
+    },
+
+ TextInput: {
+      margin: 40,
+      height:20,
+      width: 360,
+      padding: 18,
+      fontSize: 20,
+      borderBottomWidth: 1,
+      borderBottomColor: '#707070',
+  
+    },
+
+    Input: {
+      marginBottom: 20,
+    },
+
+
+    TextInputName_true: {
+      height: 40, 
+      width: 170,
+      paddingLeft: 40,
+      fontSize: 20,
+      borderBottomWidth: 1,
+      borderBottomColor: '#707070',
+      color:'#707070',
+      fontFamily: 'Philosopher',
+      margin:10,
+      marginTop: 0,
+      
+    },
+
+      TextInputName_fault: {
+      height: 40, 
+      width: 170,
+      paddingLeft: 40,
+      fontSize: 20,
+      borderBottomWidth: 1,
+      borderBottomColor: '#E79995',
+      color:'#E79995',
+      fontFamily: 'Philosopher',
+      margin:10,
+      marginTop: 0,
+      
+    },
+
+      TextInputLastname_true: {
+      height: 40, 
+      width: 170,
+      paddingLeft: 40,
+      fontSize: 20,
+      borderBottomWidth: 1,
+      borderBottomColor: '#707070',
+      color:'#707070',
+      fontFamily: 'Philosopher',
+      marginTop: -10,
+    },
+
+      TextInputLastname_fault: {
+      height: 40, 
+      width: 170,
+      paddingLeft: 40,
+      fontSize: 20,
+      borderBottomWidth: 1,
+      borderBottomColor: '#E79995',
+      color:'#E79995',
+      fontFamily: 'Philosopher',
+      marginTop: -10
+    },
+
+      TextInput_true: {
+      height: 40, 
+      width: 360,
+      paddingLeft: 40,
+      fontSize: 20,
+      borderBottomWidth: 1,
+      borderBottomColor: '#707070',
+      color:'#707070',
+      fontFamily: 'Philosopher',
+      marginTop: -10
+    },
+   
+     TextInput_fault: {
+      height: 40,
+      width: 360,
+      paddingLeft: 40,
+      fontSize: 20,
+      borderBottomWidth: 1,
+      borderBottomColor: '#E79995',
+      color:'#E79995',
+      fontFamily: 'Philosopher',
+      marginTop: -10,
+      
+    },
+   
+      textName: {
+      margin: 40,
+      height:20,
+      width: 171,
+      padding: 18,
+      paddingLeft: 42,
+      fontSize: 20,
+      borderBottomWidth: 1,
+      borderBottomColor: '#707070',
+      marginLeft: -65,
+      
+      
+      
+    },
+
+    
+   
+
+   });
+
+   
+
+
+export default RegisterScreen;
