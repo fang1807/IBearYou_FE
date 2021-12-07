@@ -1,4 +1,3 @@
-
 import React, {Component} from 'react';
 import { StyleSheet, View, Text, Image, SafeAreaView, Button
        , TouchableHighlight,TouchableOpacity, Dementions, TextInput,Separator,KeyboardAvoidingView
@@ -15,12 +14,15 @@ class LoginScreen extends Component {
    constructor(props) {
      super(props);
      this.state = { user_name : '',
-                    password : ''
+                    password : '',
+                    message: '',
+                    nullMessage: '',
+                    
      };
    }
    handleChange = (e) =>
         {
-          	this.setState({[e.target.name]: e.target.value })
+           this.setState({[e.target.name]: e.target.value })
           //  console.log(this.state.first_name)
         }
    logIn=()=>{
@@ -38,6 +40,16 @@ handleSubmit = async(event) => {
     userLogin.user_name=this.state.user_name 
     userLogin.password = String(this.state.password).trim()
     console.log("urlendpoint : ",  API_URL)
+
+    //  if(this.state.user_name.length === 0  ){
+    //   this.setState({nullmessage: "please input username and password"})
+
+    // }
+
+    //  if(this.state.password.length === 0 ){
+    //   this.setState({nullMessage: "please input username and password"})
+
+    // }
     
     axios.post(`${API_URL}/api/login`, userLogin)
       .then(res => { 
@@ -49,6 +61,7 @@ handleSubmit = async(event) => {
          this.props.navigation.navigate('HomeApp') 
         }
         else  if(res.data.message==="Fail") {
+          this.setState({message: "username or password is wrong"})
          // console.log("DuplicateEmailOrUserName")
         }
       })
@@ -86,7 +99,8 @@ return (
 
   <View style={{flex: 1, alignItems : 'flex-start',marginTop: 0}}>
  <CustomHeader title='Login'  navigation={this.props.navigation}/>
- </View>
+ </View> 
+
 
 
 <View>
@@ -132,7 +146,9 @@ return (
 
   </View>  
   }
-  
+
+
+
   { 
   !this.state.password ? 
     <View style={{flex:1,marginTop: 30}}>
@@ -154,8 +170,13 @@ return (
          />
         </View>    
 
+        
   </View>  
+
+  
 :
+
+
  <View style={{flex:1,marginTop: 30}}>
 
        <View>
@@ -177,7 +198,24 @@ return (
 
   </View>  
   }
-</View>
+
+
+  
+</View> 
+
+
+<View style = {{marginTop: -180}} >
+  <Text style = {{color: "#E79995", marginBottom: 20, fontSize : 16 }}>  
+  {this.state.message}
+  </Text>
+
+  
+  {/* <View style = {{marginTop: -180}} >
+  <Text style = {{color: "#E79995", marginBottom: 20, fontSize : 16 }}>  
+  {this.state.nullMessage}
+  </Text>
+  */}
+  
   
 
 <View style = {styles.button}>
@@ -204,8 +242,11 @@ return (
  
  
  
-</View>
+{/* </View> */}
 
+ </View>
+
+ </View>
 
     </SafeAreaView>   
       
@@ -232,10 +273,17 @@ const styles = StyleSheet.create({
         
           
    },
+
+    messageError: {
+        alignItems: 'center',
+        marginTop: -180,
+      
+         
+    },
  
     button: {
         alignItems: 'center',
-        marginTop: -140,
+
         marginBottom: 15,
          
     },
@@ -391,7 +439,4 @@ const styles = StyleSheet.create({
 const mapStateToProps=(state,props)=>{
   return{
  
-   userdata:state.Questions.userdata, 
- }
-}
-export default connect(mapStateToProps)(LoginScreen);
+   userdata:state.Quest
