@@ -61,7 +61,7 @@ handleSubmit = async(event) => {
          this.props.navigation.navigate('HomeApp') 
         }
         else  if(res.data.message==="Fail") {
-          this.setState({message: "username or password is wrong"})
+          this.setState({message: "Username Or Password Is Wrong!!"})
          // console.log("DuplicateEmailOrUserName")
         }
       })
@@ -204,8 +204,8 @@ return (
 </View> 
 
 
-<View style = {{marginTop: -180}} >
-  <Text style = {{color: "#E79995", marginBottom: 20, fontSize : 16 }}>  
+<View style = {{marginTop: -135}} >
+  <Text style = {{color: "#E79995", marginBottom: 10, fontSize : 16 ,marginTop:-75,marginLeft:-60,fontFamily: 'Quark',fontWeight: 'bold'}}>  
   {this.state.message}
   </Text>
 
@@ -215,8 +215,8 @@ return (
   {this.state.nullMessage}
   </Text>
   */}
-  
-  
+
+ </View>
 
 <View style = {styles.button}>
    <TouchableOpacity onPress={() => this.handleSubmit()}>
@@ -239,14 +239,8 @@ return (
        </View>
   </TouchableOpacity>
  
- 
- 
- 
-{/* </View> */}
-
  </View>
 
- </View>
 
     </SafeAreaView>   
       
