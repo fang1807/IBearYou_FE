@@ -28,7 +28,7 @@ class CalendarScreen extends Component {
                     user_name: [],
                     date: moment().format("YYYY-MM-DD"),
                     selected_date: '',
-                    selectedData:{}
+                    selectedData:{},
     };
   }
 componentDidMount(){
@@ -63,7 +63,7 @@ loadCalendarScreen=async()=>{
 
 }
 
-
+//selectedDiaryData
 
 
  loadUsername=async()=>{
@@ -85,64 +85,38 @@ loadCalendarScreen=async()=>{
 
 }
 
-/*    
-  selectCalendar=async(selected_date)=>{
-     console.log(selected_date);
-    this.setState({selected_date})
-    console.log("selectCalendar");
-    const userData ={} 
-    const clientData =  {"user_id": this.props.userdata.user_id,"create_date": selected_date};
-    const endpoint = `${API_URL}/api/select-diary`;
-     console.log('endpoint : ',endpoint)
-    const res = await axios.get(endpoint,{params:clientData}) 
-    const {data,message}=res.data // Destructuring
-    console.log("res.data ",data)
-    console.log("message ",message)
-    
-       if(message==="Success"&& data.title){ 
-          console.log("data.title: ",data.title)
-          this.setState({"selectedData":data})
-         //this.props.navigation.navigate('HomeApp') 
-         this.props.dispatch(setSelectedDiaryData(data))
-        }
-       else if(!data){
-          console.log("res.data.data.length==0")
-          console.log("res.data.data: ",res.data.data)
-          this.setState({"selectedData":{}})
-         //this.props.navigation.navigate('HomeApp') 
-        }
-        else  if(message==="Fail") {
-          this.setState({"selectedData":{}})
-          console.log("Fail")
-        } 
-  }*/
-
+  
  selectCalendar=async(selected_date)=>{
-   console.log(selected_date);
+    console.log(selected_date);
    this.setState({selected_date})
-      console.log("selectCalendar");
+   console.log("selectCalendar");
    const userData ={}
-   const data =  {"user_id": this.props.userdata.user_id,"create_date": selected_date};
+   const clientData =  {"user_id": this.props.userdata.user_id,"create_date": selected_date};
    const endpoint = `${API_URL}/api/select-diary`;
     console.log('endpoint : ',endpoint)
-   const res = await axios.get(endpoint,{params:data})
-      if(res.data.message==="Success"&& res.data.data[0].title){
-         console.log("res.data.data[0].title")
-         console.log("res.data.data[0].title: ",res.data.data)
-         this.setState({"selectedData":res.data.data[0]})
+   const res = await axios.get(endpoint,{params:clientData})
+   const {data,message}=res.data // Destructuring
+   console.log("res.data ",data)
+   console.log("message ",message)
+  
+      if(message==="Success"&& data.title){
+         console.log("data.title: ",data.title)
+         this.setState({"selectedData":data})
         //this.props.navigation.navigate('HomeApp')
+        this.props.dispatch(setSelectedDiaryData(data))
        }
-      else if(!res.data.data){
+      else if(!data){
          console.log("res.data.data.length==0")
          console.log("res.data.data: ",res.data.data)
          this.setState({"selectedData":{}})
         //this.props.navigation.navigate('HomeApp')
        }
-       else  if(res.data.message==="Fail") {
+       else  if(message==="Fail") {
          this.setState({"selectedData":{}})
          console.log("Fail")
        }
  }
+
 
 
   setSelectedDiaryData=async(selectedDiaryData)=>{  
