@@ -11,10 +11,8 @@ import {connect} from 'react-redux';
 import SwitchToggle from "react-native-switch-toggle";
 import DateTimePickerModel from "react-native-modal-datetime-picker";
 
-import {setCurrentPriorityID} from './actions/TodoList'
 
-
-class setAlarmScreen extends Component {
+class editTodoList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,13 +24,11 @@ class setAlarmScreen extends Component {
       choseTime: '',
       choseDateTime: '',
       listPriority: [],
-      title:'',
-      description: '',
     };
   }
 
      componentDidMount(){
-    console.log("componentDidmount setAlarmScreen this.props.userdata : ",this.props.userdata);
+    console.log("componentDidmount editTodoList this.props.userdata : ",this.props.userdata);
     //this.loadHeal_Sentence();
     //this.loadSound();
     this.loadPriority();
@@ -58,36 +54,39 @@ class setAlarmScreen extends Component {
 
 }
 
+
 handleSubmit = async(event) => {
     //event.preventDefault();
      console.log("handleSubmit")
-     console.log("this.state.first_name  : ", this.state.first_name)
-      this.setState ({
-      title : this.state.title,
-      good : this.state.good,
-      bad : this.state.bad,
-      wish : this.state.wish,
-    }); 
-    const createTodoList = {}
-    createTodoList.user_id= this.props.userdata.user_id
-    createTodoList.priority_id= this.props.
-    createTodoList.finish_date= this.props.
-    createTodoList.title =this.state.title
-    createTodoList.description =this.state.description
+     console.log("this.state.title: ",this.state.title) 
+     console.log("this.state.good: ",this.state.good) 
+     console.log("this.state.bad: ",this.state.bad) 
+     console.log("this.state.wish: ",this.state.wish) 
+     
+    
 
-    axios.post(API_URL+'/api/create-to_do_list', createTodoList)
+    const editTodoList = {}
+    editTodoList.user_id= this.props.userdata.user_id
+    editTodoList.diary_id= this.props.selectedDiaryData.diary_id
+    editTodoList.title =this.state.title
+    editTodoList.good =this.state.good
+    editTodoList.bad =this.state.bad
+    editTodoList.wish =this.state.wish
+
+    console.log("editTodoList: ",editTodoList)
+
+    axios.put(API_URL+'/api/edit-to_do_list', editTodoList)
       .then(res => { 
           console.log(res.data);
         if(res.data.message==="Success"){
           console.log("Success")
-         this.props.navigation.navigate('Alarm') 
+         this.props.navigation.navigate('Alarm')
         }
         else  if(res.data.message==="create fail") {
           console.log("create fail")
         }
       })
   }
-
 
 
 loadPriority=async()=>{
@@ -159,27 +158,6 @@ hidePicker = () => {
 }
 
 
-  InputTitle = () => {
-     this.setState({
-       title : !this.state.title
-     })
-      console.log ('selected seccess!')
-  }
-
-    InputDescription = () => {
-     this.setState({
-       description: !this.state.description
-     })
-      console.log ('selected seccess!')
-  }
-
-    selectedPriority = (priorityID) => {
-    console.log("priorityID ",priorityID)
-    this.setCurrentPriorityID(priorityID)
-    console.log ('selected priotity seccess!')
-  }
-
-
 
   render() {
     const {userdata}= this.props
@@ -205,18 +183,28 @@ hidePicker = () => {
           <Text style={styles.textAlarm}>Todo-List</Text>
 
       <View style={styles.setting}>
+
+<View style={{marginTop:-20}}>     
+<TouchableOpacity activeOpacity={0.75}>
+        <View>  
+       <Image source={require('./assets/images/delete-red.png')}
+    style={{width:25,height:30,marginTop: -20,marginLeft:305,marginBottom:10}} />     
+        </View>
+</TouchableOpacity>
+</View> 
+
+<View>
         <Text style={styles.textTitlePlan}>เธอวางแผนว่าจะทำอะไร ?</Text>
         <View style={{marginTop:-5}}>
           <TextInput
             placeholder="ชื่อการแจ้งเตือน"
             placeholderTextColor="#014A5C"
-            defaultValue={this.state.title}
-            onChangeText={title=> this.setState({title}) }
-            value = {this.state.InputTitle}
             autoCapitalize='none'
             style={styles.text}
           />
         </View>
+</View>
+
 
 
         <View style={{width: 313, height: 1, backgroundColor: '#014A5C',marginTop: 21, marginLeft:20}} />
@@ -259,13 +247,12 @@ hidePicker = () => {
 
  <View>
        <TextInput
+       style={styles.input}
         placeholder="รายละเอียดเกี่ยวกับงาน..."
         placeholderTextColor="#000000"
-        defaultValue={this.state.description}
-        onChangeText={description=> this.setState({description}) }
-        value = {this.state.InputDescription}
-        autoCapitalize='none'
-        style={styles.input}
+         defaultValue={this.state.user_name}
+         onChangeText={user_name=>this.setState({user_name})}
+         autoCapitalize='none'
      />
 </View>
 
@@ -283,12 +270,13 @@ hidePicker = () => {
       </View>
 
       <View style={styles.saveButton}>
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('Alarm')} activeOpacity={0.75} >  
+            <TouchableOpacity onPress={() => this.handleSubmit()} activeOpacity={0.75} >  
              <Text style={styles.textSave}>บันทึก</Text> 
              </TouchableOpacity>
       </View>
   </View>
 </View>
+
      </SafeAreaView>
   );
   }
@@ -551,4 +539,4 @@ const mapStateToProps=(state,props)=>{
  }
 }
 
-export default connect(mapStateToProps)(setAlarmScreen);
+export default connect(mapStateToProps)(editTodoList);

@@ -12,6 +12,7 @@ class resultScreen extends Component {
   
 
   render() {
+     const {userdata}= this.props
     return (
       <SafeAreaView style={{ flex: 1 }}>
  <CustomHeader title='Result' navigation={this.props.navigation}/>
@@ -116,6 +117,13 @@ button:{
 },
 
 });
+
+const mapStateToProps=(state,props)=>{
+  return{
+ 
+   userdata:state.Questions.userdata, 
+ }
+}
  
 
-export default resultScreen;
+export default connect(mapStateToProps)(resultScreen);

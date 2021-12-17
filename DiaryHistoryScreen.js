@@ -19,6 +19,7 @@ class DiaryHistoryScreen extends Component {
 
  componentDidMount(){
   console.log("componentDidmount BadScreen this.props.userdata : ",this.props.userdata);
+  console.log("this,props.selectedDiaryData",this.props.selectedDiaryData)
   //this.loadHistory_Diary();
 }
 
@@ -27,7 +28,7 @@ loadHistory_Diary=async()=>{
     const userData ={} 
     userData.user_id="27"
     const data =  {"user_id": this.props.userdata.user_id};
-    const endpoint = `${API_URL}/api/list-diary`;
+    const endpoint = `${API_URL}/api/select-diary`;
      console.log('endpoint : ',endpoint)
     const res = await axios.get(endpoint,{params:data}) 
        if(res.data.message==="Success"){
@@ -38,11 +39,8 @@ loadHistory_Diary=async()=>{
         else  if(res.data.message==="Fail") {
         } 
 }
-
-
-
   render() {
-    const {userdata}= this.props
+    const {userdata,selectedDiaryData}= this.props
     return (
 
 <SafeAreaView style={{ flex: 1,backgroundColor: '#EAD6A4' }}>
@@ -52,11 +50,6 @@ loadHistory_Diary=async()=>{
  <View style={{flex: 1, alignItems: 'center',}}> 
       <Image source={require('./assets/images/rainy.png')}
    style={{width:392 ,height:294,marginTop: 540}} /> 
-</View>
-
-
-<View style={{flex: 1, alignItems : 'center',marginTop:610}}>  
-   <CustomHeader title='DiaryHistory'  navigation={this.props.navigation}/>
 </View>
 
 
@@ -106,11 +99,11 @@ loadHistory_Diary=async()=>{
 
 <View style={{marginTop: 5}}>
  <View>
-<Text style={styles.textDate}>11 กันยายน 2564</Text>
+<Text style={styles.textDate}>{this.props.selectedDiaryData.create_date}</Text>
  </View>
 <View style={styles.buttonEmoji}>
 
-     <Text style={styles.textEmoji}>ชื่อเรื่องราวของเธอ</Text>
+     <Text style={styles.textEmoji}>{this.props.selectedDiaryData.title}</Text>
       <Image source={require('./assets/images/pencil.png')}
    style={{width: 10.32,height:10.32,marginTop: -15,marginLeft:310}}
    resizeMode='contain'  
@@ -124,19 +117,19 @@ loadHistory_Diary=async()=>{
 
 <View style={{flex: 1,marginTop: -11}}>
   <Text style={styles.textType}>เรื่องราวที่ดี</Text>
-   <Text style={styles.textContent}>เขียนบันทึกเรื่องราวที่ดี </Text> 
+   <Text style={styles.textContent}>{this.props.selectedDiaryData.good} </Text> 
  </View>
 
 
  <View style={{flex: 1,marginTop: 18.5}}>
   <Text style={styles.textType}>เรื่องราวที่ไม่ดี</Text>
- <Text style={styles.textContent}>เขียนบันทึกเรื่องราวที่ไม่ดี </Text> 
+ <Text style={styles.textContent}>{this.props.selectedDiaryData.bad} </Text> 
   </View>
 
 
 <View style={{flex: 1,marginTop: 20.5}}>
   <Text style={styles.textType}>ความคาดหวัง</Text>
-<Text style={styles.textContent}>เขียนบันทึกควkมคาดหวัง </Text> 
+<Text style={styles.textContent}>{this.props.selectedDiaryData.wish} </Text> 
 </View>
 
 
@@ -299,7 +292,8 @@ button:{
 const mapStateToProps=(state,props)=>{
   return{
  
-   userdata:state.Questions.userdata, 
+   userdata:state.Questions.userdata,
+   selectedDiaryData:state.Questions.selectedDiaryData 
  }
 }
 

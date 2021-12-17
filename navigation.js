@@ -9,6 +9,7 @@ import thunk from 'redux-thunk';
 import Choices from './Choices';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 
+import EditTodoList from './EditTodoList';
 import CustomHeader from './CustomHeader';
 import HomeScreen from './HomeScreen';
 import CalendarScreen from './CalendarScreen';
@@ -96,6 +97,7 @@ function BearStack() {
     <StackBear.Navigator initialRouteName='Alarm'>
       <StackBear.Screen name='Alarm' component={AlarmScreen} options={navOptionHandler}/>
       <StackBear.Screen name='setAlarm' component={setAlarmScreen} options={navOptionHandler}/>
+      <StackBear.Screen name='EditTodoList' component={EditTodoList} options={navOptionHandler}/>
      </StackBear.Navigator>
 
   )

@@ -18,10 +18,10 @@ class AlarmScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      toggle: true,
+      
       
     };
-    this.edit = false;
+   
   }
 
     componentDidMount(){
@@ -71,7 +71,7 @@ const editAlarm = this.state.edit
 
     return (
      <SafeAreaView style={{ flex: 1, backgroundColor: '#EAD6A4' }}>
-      <CustomHeader title='Alarm' isHome={true} navigation={this.props.navigation}/>
+     
 
     <View style={{flex: 1,alignItems: 'center',paddingTop: 30,}}>
        
@@ -89,50 +89,39 @@ const editAlarm = this.state.edit
 
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <View style={styles.alarmList}>
-        <View style={{flexDirection: 'row'}}>
-          <Text style={styles.textAlarm}>การแจ้งเตือน</Text>
-      </View>
+        <View>
+          <Text style={styles.textAlarm}>To Do List</Text>
+    </View>
 
 
 
           <View style={{width: 310, height: 1, backgroundColor: '#000000',marginTop: 8,marginLeft: 20}}></View>
         
-    <View style={{flexDirection: 'row',paddingLeft: 160,marginTop: 10}}>
+
+      <View style={{paddingLeft: 160,marginTop: 0}}>
 
         <TouchableOpacity onPress={() => this.props.navigation.navigate('setAlarm')} activeOpacity={0.75}>
-                  <View style={{flex: 1, alignItems: 'center'}}>  
                     <Image source={require('./assets/images/add.png')}
-                            style={{width:19.41,height:19.41,marginLeft: -65}} />     
-                  </View>
-                  <Text style={styles.textAdd}>เพิ่มรายการแจ้งเตือน</Text>
+                            style={{width:19.41,height:19.41,marginLeft: 10}} />     
         </TouchableOpacity>
       </View>
-  
 
          <View style={{flex: 1,justifyContent: 'center',marginBottom:340 }}>
            
         <View style={styles.buttonAlarm}>
-            <View style={{marginLeft:60,marginTop:10}}>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('EditTodoList')} activeOpacity={0.75}>
+            <View style={{marginLeft:60,marginTop:5,marginLeft:20}}>
+              <Text style={styles.textTime}>Full-Stack2</Text>
               <Text style={styles.textTask}>task</Text>
-              <Text style={styles.textTime}>time</Text>
             </View>
-              <Image source={require('./assets/images/time.png')}
-              style={{width:27 ,height:27,marginTop: -45,marginLeft:15}}
-              />
+        </TouchableOpacity>
         </View>
 
-<View style={{marginTop:-65,marginLeft:120}}> 
+<View style={{marginTop:-78,marginLeft:120}}> 
         <TouchableOpacity>
                   <View style={{flex: 1, alignItems: 'center'}}>  
-                    <Image source={require('./assets/images/edit.png')}
-                            style={{width:22,height:22,marginLeft: 70}} />     
-                  </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity>
-                  <View style={{flex: 1, alignItems: 'center'}}>  
-                    <Image source={require('./assets/images/delete.png')}
-                            style={{width:22,height:22,marginLeft: 140}} />     
+                    <Image source={require('./assets/images/Progress.png')}
+                            style={{width:100,height:52,marginLeft: 90}} />     
                   </View>
         </TouchableOpacity>
 </View>
@@ -141,6 +130,8 @@ const editAlarm = this.state.edit
 
       </View>
 </View>
+
+
 
      </SafeAreaView>
   );
@@ -185,8 +176,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'Quark',
     fontWeight: 'bold',
-    paddingLeft: 20 ,
-    paddingTop: 20,
+    paddingTop: 15,
+    marginBottom:-6,
+    marginLeft: 20
 
   },
 
@@ -262,7 +254,7 @@ const styles = StyleSheet.create({
       width: 315,
       height: 70,
       backgroundColor: '#FFFFFF',
-      borderColor: '#87D6E8',
+      borderColor: '#70BA97',
       borderLeftWidth: 32,
       borderRightWidth: 3,
       borderBottomWidth: 3,
@@ -277,15 +269,7 @@ const styles = StyleSheet.create({
       marginLeft: 18.5,
     },
 
-    textAlarm: {
-     color: '#000000',
-     fontSize: 18,
-     fontFamily: 'Quark',
-     fontWeight: 'bold',
-     marginLeft: 15,
-     marginTop: 12,
-    
-    },
+
 
     textAdd: {
     color: '#000000',

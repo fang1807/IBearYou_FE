@@ -26,7 +26,7 @@ componentDidMount(){
 
   
     <SafeAreaView style={{ flex: 1,backgroundColor: '#EAD6A4' }}>
-       <CustomHeader title='Home' isHome={true} navigation={this.props.navigation}/>
+      
    <View style={{ flex: 1,justifyContent: 'center', alignItems: 'center'}}>
    
    <View style = {styles.banner}>

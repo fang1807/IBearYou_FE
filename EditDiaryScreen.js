@@ -12,15 +12,18 @@ import {connect} from 'react-redux';
 class EditDiaryScreen extends Component {
   constructor(props) {
     super(props);
-    this.state = {title : '',
-                  good : '',
-                  bad : '',
-                  wish : '',
+    this.state = {title : this.props.selectedDiaryData.title,
+                  good : this.props.selectedDiaryData.good,
+                  bad : this.props.selectedDiaryData.bad,
+                  wish : this.props.selectedDiaryData.wish,
+                  date : this.props.selectedDiaryData.create_date,
+
     };
   }
 
  componentDidMount(){
-   this.loadHistory_Diary()
+  // this.loadHistory_Diary();
+   console.log("this,props.selectedDiaryData EditScreen",this.props.selectedDiaryData);
     
  }
   
@@ -31,7 +34,7 @@ loadHistory_Diary=async()=>{
     const data = JSON.stringify({
   "user_id": "27","first_name":"first_name","last_name":"last_name"
 });
-    const endpoint = `${API_URL}/api/list-diary`;
+    const endpoint = `${API_URL}/api/select-diary`;
      console.log('endpoint : ',endpoint)
     const res = await axios.get(endpoint,{params:data}) 
        if(res.data.message==="Success"){
@@ -48,27 +51,29 @@ loadHistory_Diary=async()=>{
 handleSubmit = async(event) => {
     //event.preventDefault();
      console.log("handleSubmit")
-     console.log("this.props.currentFeelID", this.props.currentFeelID)
-     console.log("this.state.first_name  : ", this.state.first_name)
-      this.setState ({
-      title : this.state.title,
-      good : this.state.good,
-      bad : this.state.bad,
-      wish : this.state.wish,
-    }); 
+     console.log("this.state.title: ",this.state.title) 
+     console.log("this.state.good: ",this.state.good) 
+     console.log("this.state.bad: ",this.state.bad) 
+     console.log("this.state.wish: ",this.state.wish) 
+     
+    
+
     const createDiary = {}
-    createDiary.diary_id= this.props.userdata.user_id
+    createDiary.user_id= this.props.userdata.user_id
+    createDiary.diary_id= this.props.selectedDiaryData.diary_id
     createDiary.title =this.state.title
     createDiary.good =this.state.good
     createDiary.bad =this.state.bad
     createDiary.wish =this.state.wish
 
-    axios.post(API_URL+'/api/edit_diary', createDiary)
+    console.log("createDiary: ",createDiary)
+
+    axios.put(API_URL+'/api/edit_diary', createDiary)
       .then(res => { 
           console.log(res.data);
         if(res.data.message==="Success"){
           console.log("Success")
-         this.props.navigation.navigate('Calendar') 
+         this.props.navigation.navigate('Calendar')
         }
         else  if(res.data.message==="create fail") {
           console.log("create fail")
@@ -78,7 +83,7 @@ handleSubmit = async(event) => {
 
 
   render() {
-    const {userdata}= this.props
+    const {userdata,selectedDiaryData}= this.props
     return (
 <SafeAreaView style={{ flex: 1,backgroundColor: '#EAD6A4' }}>
    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -89,10 +94,6 @@ handleSubmit = async(event) => {
    style={{width:392 ,height:294,marginTop: 540}} /> 
 </View>
 
-
-<View style={{flex: 1, alignItems : 'center',marginTop:610}}>  
-   <CustomHeader title='EditDiary'  navigation={this.props.navigation}/>
-</View>
 
 
 <View style={{marginTop: -10}}>
@@ -131,11 +132,11 @@ handleSubmit = async(event) => {
 
 <View style={{marginTop: 5}}>
  <View>
-<Text style={styles.textDate}>1 กันยายน 2564</Text>
+<Text style={styles.textDate}>{this.props.selectedDiaryData.create_date}</Text>
  </View>
 <View style={styles.buttonEmoji}>
 <TouchableOpacity activeOpacity={0.75}>
-     <Text style={styles.textEmoji}>ชื่อเรื่องราวของเธอ</Text>
+     <Text style={styles.textEmoji}>{this.props.selectedDiaryData.title}</Text>
       <Image source={require('./assets/images/pencil.png')}
    style={{width: 10.32,height:10.32,marginTop: -15,marginLeft:310}}
    resizeMode='contain'
@@ -153,8 +154,9 @@ handleSubmit = async(event) => {
    <TextInput placeholder="เขียนบันทึกเรื่องราวที่ดี"
             placeholderTextColor="#707070"
             autoCapitalize='none'
-            onchangeText={ (good) => this.setState({good}) }
+            onChangeText={ (good) => this.setState({good}) }
             style={styles.textContent}
+            defaultValue={this.props.selectedDiaryData.good}
  />
  </View>
 
@@ -164,8 +166,9 @@ handleSubmit = async(event) => {
    <TextInput placeholder="เขียนบันทึกเรื่องราวที่ไม่ดี"
             placeholderTextColor="#707070"
             autoCapitalize='none'
-            onchangeText={ (bad) => this.setState({bad}) }
+            onChangeText={ (bad) => this.setState({bad:bad}) }
             style={styles.textContent}
+            defaultValue={this.state.bad}
  />
   </View>
 
@@ -175,7 +178,8 @@ handleSubmit = async(event) => {
    <TextInput placeholder="เขียนบันทึกความคาดหวัง"
             placeholderTextColor="#707070"
             autoCapitalize='none'
-            onchangeText={ (wish) => this.setState({wish}) }
+            onChangeText={ (wish) => this.setState({wish}) }
+            defaultValue={this.props.selectedDiaryData.wish}
             style={styles.textContent}
  />
 </View>
@@ -190,17 +194,17 @@ handleSubmit = async(event) => {
  <Image source={require('./assets/images/rain-doll.png')}
    style={{width: 91,height:95.71,marginLeft: 10}}
    resizeMode='contain' />  
- </View>
+</View>
  
 <View style={{flex: 1,flexDirection: 'row' , justifyContent: 'space-between',alignItems: 'flex-end',marginBottom: 30}}>
   <TouchableOpacity style={styles.button} activeOpacity ={0.75}
-     onPress = {() => this.props.navigation.navigate('CalendarHistory')}
+     onPress = {() => this.props.navigation.navigate('Calendar')}
    >
        <Text style={styles.textButton}>ยกเลิก</Text>
   </TouchableOpacity>
  
      <TouchableOpacity style={styles.button} activeOpacity ={0.75}
-       onPress ={() => this.props.navigation.navigate('CalendarHistory')}
+       onPress ={() => this.handleSubmit()}
      >
        <Text style={styles.textButton}>บันทึก</Text>
      </TouchableOpacity>
@@ -342,6 +346,14 @@ button:{
 
 });
 
+const mapStateToProps=(state,props)=>{
+  return{
+ 
+   userdata:state.Questions.userdata,
+   selectedDiaryData:state.Questions.selectedDiaryData 
+ }
+}
 
 
-export default EditDiaryScreen;
+
+export default connect(mapStateToProps)(EditDiaryScreen);

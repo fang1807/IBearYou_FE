@@ -8,7 +8,7 @@ import CustomHeader from './CustomHeader';
 import {API_URL} from './config'
 import moment from 'moment';
 import {connect} from 'react-redux';
-import {setCurrentDiaryID,setCurrentDate} from './actions/Diary'
+import {setSelectedDiaryData} from './actions/Diary'
 
 import {Calendar, LocaleConfig} from 'react-native-calendars';
   /*LocaleConfig.locales['th'] = {
@@ -85,31 +85,46 @@ loadCalendarScreen=async()=>{
 
     
   selectCalendar=async(selected_date)=>{
-    console.log(selected_date);
     this.setState({selected_date})
-       console.log("selectCalendar");
+    console.log("selectCalendar");
     const userData ={} 
-    const data =  {"user_id": this.props.userdata.user_id,"create_date": selected_date};
+    const clientData =  {"user_id": this.props.userdata.user_id,"create_date": selected_date};
     const endpoint = `${API_URL}/api/select-diary`;
      console.log('endpoint : ',endpoint)
-    const res = await axios.get(endpoint,{params:data}) 
-       if(res.data.message==="Success"&& res.data.data[0].title){
-          console.log("res.data.data[0].title")
-          console.log("res.data.data[0].title: ",res.data.data)
-          this.setState({"selectedData":res.data.data[0]})
+    const res = await axios.get(endpoint,{params:clientData}) 
+    const {data,message}=res.data // Destructuring
+    console.log("res.data ",data)
+    console.log("message ",message)
+    
+       if(message==="Success"&& data.title){ 
+          console.log("data.title: ",data.title)
+          this.setState({"selectedData":data})
          //this.props.navigation.navigate('HomeApp') 
+         this.props.dispatch(setSelectedDiaryData(data))
         }
-       else if(!res.data.data){
+       else if(!data){
           console.log("res.data.data.length==0")
           console.log("res.data.data: ",res.data.data)
           this.setState({"selectedData":{}})
          //this.props.navigation.navigate('HomeApp') 
         }
-        else  if(res.data.message==="Fail") {
+        else  if(message==="Fail") {
           this.setState({"selectedData":{}})
           console.log("Fail")
         } 
   }
+
+  setSelectedDiaryData=async(selectedDiaryData)=>{  
+     await this.props.dispatch(setSelectedDiaryData(selectedDiaryData)); 
+  }
+
+ 
+  selectedEdit = (selectCalendar) => {
+  this.props.navigation.navigate('DiaryHistory')
+  }
+
+
+
 
 
   render() {
@@ -118,7 +133,7 @@ loadCalendarScreen=async()=>{
     
    return (
      <SafeAreaView style={{ flex: 1,backgroundColor: '#EAD6A4' }}>
-     <CustomHeader title='Calendar' isHome={true} navigation={this.props.navigation}/>
+     
 
 <View>
   <Calendar
@@ -218,7 +233,7 @@ onDayPress={(day) => this.selectCalendar(day.dateString) }
 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
  
 <TouchableOpacity activeOpacity={0.75} 
- onPress ={() => this.props.navigation.navigate('DiaryHistory')}>
+ onPress ={() => this.selectedEdit()}>
  
 <View >
  
@@ -429,7 +444,7 @@ const styles = StyleSheet.create({
      fontSize: 14,
      fontFamily: 'Quark',
      textAlign: 'center',   
-     marginLeft: -165,
+     marginLeft: -185,
 },
 
 textEmoji: {

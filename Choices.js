@@ -5,6 +5,9 @@ import { StyleSheet, View, Text, Image, SafeAreaView, Button
 import { connect } from 'react-redux';
 import {fetchQuestions,setCurrentQuestion} from './actions/Questions';
 import {setQuestionId,incrementAction} from './actions/Questions';
+import {setCurrentCardData} from './actions/Card';
+import {setChoiceScore} from './actions/Questions';
+import {fetchCards} from './actions/Card';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 
 import axios from 'axios';
@@ -26,10 +29,10 @@ class Choices extends Component {
   //this.loadHeal_Sentence();
   //this.loadChoices();
   //this.loadQuestionType();
-  //this.loadQuestions();
+  this.loadQuestions();
   //this.loadQuestionnnaires();
   //this.loadQuestionnnaire_Question();
-  this.loadAllCard();
+  //this.loadAllCard();
 }
 
 
@@ -73,6 +76,7 @@ loadQuestions=async()=>{
     const data =  {"user_id": this.props.userdata.user_id};
     const endpoint = `${API_URL}/api/list-question`; 
     const res = await axios.get(endpoint,{params:data}) 
+    //console.log("res.data",res.data)
        if(res.data.message==="Success"){
           console.log("Success")
           console.log("user_data: ",res.data.data)
@@ -116,10 +120,9 @@ loadQuestionnnaire_Question=async()=>{
         }
         else  if(res.data.message==="Fail") {
         } 
-
 }
 
-//เอาไว้คำนวณคะแนน
+
 loadAllCard=async()=>{ 
      console.log("load all card");
     const data =  {"user_id": this.props.userdata.user_id};
@@ -131,8 +134,10 @@ loadAllCard=async()=>{
           //this.setState({"choiceData":res.data.data})
           //console.log("this.state.choiceData ",this.state.choiceData)
          //this.props.navigation.navigate('HomeApp') 
+         await this.props.dispatch(fetchCards(res.data.message))
         }
         else  if(res.data.message==="Fail") {
+          
         } 
 
 }
@@ -142,19 +147,11 @@ handleSubmit = async(event) => {
     //event.preventDefault();
      console.log("handleSubmit")
      console.log("this.state.first_name  : ", this.state.first_name)
-      this.setState ({
-      user_prompt : this.state.user_prompt,
-      final_score : this.state.final_score,
-      quesionnaire_id : "22",
-      card_id : "10",
-    }); 
+      
     const resultData = {}
     resultData.user_id= this.props.userdata.user_id
-    resultData.title =this.state.title
-    resultData.good =this.state.good
-    resultData.bad =this.state.bad
-    resultData.wish =this.state.wish
-    resultData.feel_id = this.props.currentFeelID
+    resultData.final_score = this.props.choiceScore
+    resultData.card_id =this.state.
 
     axios.post(API_URL+'/api/result', resultData)
       .then(res => { 
@@ -162,6 +159,7 @@ handleSubmit = async(event) => {
         if(res.data.message==="Success"){
           console.log("Success")
          this.props.navigation.navigate('CalendarHistory') 
+         
         }
         else  if(res.data.message==="create fail") {
           console.log("create fail")
@@ -170,26 +168,109 @@ handleSubmit = async(event) => {
   }
  
  nextQuestion=async()=>{
-   const currentIndex = this.props.questions.findIndex(e=>e.questionId === this.props.questionId)
-   if(currentIndex>=this.props.questions.length-1) return;
-   const nextIndex =currentIndex+1
-   await this.props.dispatch(setCurrentQuestion(this.props.questions[nextIndex])) //Question.currentQuestion
-   await this.props.dispatch(setQuestionId(this.props.questions[nextIndex].questionId)); 
- 
+
+   const currentIndex= this.props.questions.findIndex(e=>e.questionId==parseInt(this.props.questionId))  
+
+   if (currentIndex >= this.props.questions.length-1) return;
+   const nextIndex =currentIndex+1;
+
+   const question=this.props.questions[nextIndex-1]
+if(question.answer!=0){
+ var score=this.props.choiceScore;
+ if(isNaN(score)){
+   score=0;
  }
 
- submitQuestion=async()=>{
+ var newscoreint=parseInt(question.choices[question.answer-1].choice_score,10);
+
+
+ await this.props.dispatch(setChoiceScore(newscoreint+score))
+}
+
+   if(question.questionId==40003){
+     
+     if(question.answer==1){
+       await this.props.dispatch(setCurrentQuestion(this.props.questions[nextIndex]))
+       await this.props.dispatch(setQuestionId(this.props.questions[nextIndex].questionId)); 
+     }
+
+if(question.answer==2){
+ 
+  const index= nextIndex+8;
+  
+await this.props.dispatch(setCurrentQuestion(this.props.questions[index])) 
+await this.props.dispatch(setQuestionId(this.props.questions[index].questionId)); 
+}
+else if(question.answer==3){
+    const index= nextIndex+16;
+ await this.props.dispatch(setCurrentQuestion(this.props.questions[index])) 
+ await this.props.dispatch(setQuestionId(this.props.questions[index].questionId)); 
+}
+else if(question.answer==4){
+    const index= nextIndex+24;
+ await this.props.dispatch(setCurrentQuestion(this.props.questions[index])) 
+ await this.props.dispatch(setQuestionId(this.props.questions[index].questionId)); 
+}
+else if(question.answer==5){
+   const index= nextIndex+34;
+await this.props.dispatch(setCurrentQuestion(this.props.questions[index]))  
+await this.props.dispatch(setQuestionId(this.props.questions[index].questionId)); 
+}
+
+   }
+   else{
+
+
+     await this.props.dispatch(setCurrentQuestion(this.props.questions[nextIndex]))
+     await this.props.dispatch(setQuestionId(this.props.questions[nextIndex].questionId)); 
+   }
+   
+    console.log(this.props.questionId)
+ }
+
+ submitQuestion=async()=>{ 
+   console.log(this.props.choiceScore ) //all score
+   console.log(this.props.fetchcard)
+   if(this.props.choiceScore>=11&&this.props.choiceScore<=30){
+     //ส่งไปหน้า1
+   }
+   else if(this.props.choiceScore>=31&&this.props.choiceScore<50){
+     //ส่งไปหน้า2
+   }
    const arr = this.props.questions.map((a,i)=>{
      return {"questionId":a.questionId,"answer":a.answer}
    })
    console.log("this.props.questions_answer : ",arr.length)
  }
+/*
+   setCardId = (handleSubmit) => {
+        this.props.navigation.navigate('Result')
+        //this.props.dispatch(setCurrentCardData(data))
+   }*/
+
+ setCurrentCardData=async(currentCardID)=>{  
+     await this.props.dispatch(setCurrentCardData(currentCardID)); 
+  }
+ 
+
+  fetchCards=async(fetchcard)=>{  
+     await this.props.dispatch(fetchCards(fetchcard)); 
+  }
  
   previousQuestion=async()=>{
-   const currentIndex = this.props.questions.findIndex(e=>e.questionId === this.props.questionId)
+    const firstpage=[41001,42001,43001,45001,45011]
+  
+    if(firstpage.includes(parseInt(this.props.questionId)) ){
+      
+       await this.props.dispatch(setQuestionId(41001)); 
+    }
+  
+   const currentIndex = this.props.questions.findIndex(e=>e.questionId == this.props.questionId)
+   
    if(currentIndex<1) return;
    const previousIndex =currentIndex-1
    await this.props.dispatch(setCurrentQuestion(this.props.questions[previousIndex])) //Question.currentQuestion
+   console.log("this.props.questions[previousIndex]",this.props.questions[previousIndex])
    await this.props.dispatch(setQuestionId(this.props.questions[previousIndex].questionId)); 
  
  }
@@ -204,6 +285,10 @@ handleSubmit = async(event) => {
      console.log("this.props.questions ",this.props.questions)
  
  }
+
+ 
+
+
    RadioGroup(props){
      const index = parseInt(props.answer)>0?parseInt(props.answer)-1:-1
      const choice_props =  props.questionType==="1"? props.choices.map((e)=>{
@@ -246,7 +331,7 @@ handleSubmit = async(event) => {
    }
  render() {
 
-let {questions,questionId,currentQuestion,userdata} = this.props
+let {questions,questionId,currentQuestion,userdata,currentCardID,choiceScore,fetchcard} = this.props
  
 /*const choice_props = (typeof(currentQuestion.choices)!=='undefined' &&currentQuestion.choices!==null) ? currentQuestion.choices.map((e)=>{
   return {...e,label:e.desc,value:parseInt(e.seq)}
@@ -268,7 +353,7 @@ const choice_props =  currentQuestion.questionType==="1"? currentQuestion.choice
 <View style={{flex: 1, alignItems: 'center'}}> 
  
       <Image source={require('./assets/images/Vector-Pink.png')}
-   style={{width:552.17 ,height: 323.61,marginTop: -45}} />
+   style={{width:552.17 ,height: 323.61,marginTop: -150}} />
  
    <View style={styles.date}>
    <Text style={styles.day}>จ.</Text>
@@ -282,12 +367,6 @@ const choice_props =  currentQuestion.questionType==="1"? currentQuestion.choice
    </View>
  
 </View>
- 
- 
-<View style={{flex: 1, alignItems : 'flex-start',marginTop: 100}}>
-<CustomHeader title='Choices'  navigation={this.props.navigation}/>
-</View>
- 
  
 <View style={{flex: 1, alignItems: 'center',}}> 
       <Image source={require('./assets/images/Sunflower.png')}
@@ -309,41 +388,52 @@ const choice_props =  currentQuestion.questionType==="1"? currentQuestion.choice
     <View style={{flex: 1, alignItems: 'center',}}> 
       <Image source={require('./assets/images/Star-5.png')}
    style={{width:28.3, height: 28.3,marginTop: 400,marginRight: 350}} />    
-</View>
-
- 
-
- 
- 
-   
+</View> 
  
 <View style={{flexDirection: 'column' ,justifyContent: 'center', alignItems: 'center'}}>
 {currentQuestion.questionType==="1" &&
  
     <View >
-    <View style={{flex:1,marginTop: 120}}>
+    <View style={{flex:1,marginTop: 80,marginLeft: 45}}>
  <View style={styles.question}>
       <Text style={styles.textQuestion} >{currentQuestion.detail} QuestionId : {currentQuestion.questionId} Answer : {currentQuestion.answer} </Text>
  </View>
 </View>
-     <View style={{height: 200,width: 300, backgroundColor: '#FFFFFF',borderRadius: 10,marginTop: 40,paddingTop: 20,marginBottom: 135,marginLeft: 30}}>
+     <View style={{height: 200,width: 353, backgroundColor: '#FFFFFF',borderRadius: 10,marginTop: 200,paddingTop: 20,marginBottom: 60,marginLeft: 45}}>
     {this.RadioGroup(currentQuestion)}
      </View>
+
+     <View style={{flex: 1,flexDirection: 'row' , justifyContent: 'space-between',alignItems: 'flex-end',marginBottom: 30}}>
+ <TouchableOpacity style={styles.button} activeOpacity ={0.75} onPress = {() => this.previousQuestion()}>
+      <Text style={styles.textButton}>ย้อนกลับ</Text>
+ </TouchableOpacity>
+
+    <TouchableOpacity style={styles.button} activeOpacity ={0.75}
+       onPress = {() => this.nextQuestion()}
+    >
+      <Text style={styles.textButton}>ถัดไป</Text>
+    </TouchableOpacity>
+
+</View>
     </View>
+
+    
+
+    
 }
  
 {currentQuestion.questionType==="2" &&
     <View >
          
  
-  <View style={{flex:1}}>
+  <View style={{flex:1,marginTop: -20,marginLeft: 30}}>
  <View style={styles.questionM}>
       <Text style={styles.textQuestionM}> {currentQuestion.detail} Answer : {currentQuestion.answer}</Text>
 </View>
 </View>
  
     <View style={{flexDirection: 'column' ,justifyContent: 'center', alignItems: 'center'}}>
-       <View >
+       <View>
        <TextInput
        style={styles.input}
         placeholder="บอกความในใจของเธอมาได้เลย..."
@@ -353,36 +443,9 @@ const choice_props =  currentQuestion.questionType==="1"? currentQuestion.choice
      />
      </View>
   </View>
- 
-    </View>
-}
- 
-{currentQuestion.questionType==="3" &&
-    <View >
-         
-<View style={{flexDirection: 'column' ,justifyContent: 'center', alignItems: 'center',marginTop: 100}}>
-   <View style= {styles.containerS}>
-       <Text style={styles.textS}>{currentQuestion.detail} Current : {currentQuestion.answer}</Text>
-   </View>
-</View>
- 
-    </View>
-}
- 
-</View>
 
-<View style={{flex:1}}>
-      <TouchableOpacity style={styles.button_submit} activeOpacity ={0.75}
-       onPress = {() => this.submitQuestion()}>
-      <Text style={styles.textButton}>ส่งคำตอบ</Text>
-    </TouchableOpacity>
-</View>
-
- 
-<View style={{flex: 1,flexDirection: 'row' , justifyContent: 'space-between',alignItems: 'flex-end',marginBottom: 100}}>
- <TouchableOpacity style={styles.button} activeOpacity ={0.75}
-   onPress = {() => this.previousQuestion()}
-  >
+  <View style={{flex: 1,flexDirection: 'row' , justifyContent: 'space-between',alignItems: 'flex-end',marginBottom: 5}}>
+ <TouchableOpacity style={styles.button} activeOpacity ={0.75} onPress = {() => this.previousQuestion()}>
       <Text style={styles.textButton}>ย้อนกลับ</Text>
  </TouchableOpacity>
 
@@ -394,6 +457,44 @@ const choice_props =  currentQuestion.questionType==="1"? currentQuestion.choice
 
 </View>
  
+    </View>
+
+
+ 
+}
+ 
+{currentQuestion.questionType==="3" &&
+    <View >
+         
+<View style={{flexDirection: 'column' ,justifyContent: 'center', alignItems: 'center',marginTop: 300}}>
+   <View style= {styles.containerS}>
+       <Text style={styles.textS}>{currentQuestion.detail} Current : {currentQuestion.answer}</Text>
+   </View>
+</View>
+
+
+
+ 
+<View style={{flex: 1,flexDirection: 'row' , justifyContent: 'space-between',alignItems: 'flex-end',marginBottom: 100,marginLeft:-10}}>
+ <TouchableOpacity style={styles.button} activeOpacity ={0.75} onPress = {() => this.previousQuestion()}>
+      <Text style={styles.textButton}>ย้อนกลับ</Text>
+ </TouchableOpacity>
+
+<View style={{flex:1}}>
+      <TouchableOpacity style={styles.button_submit} activeOpacity ={0.75}
+       onPress = {() => this.submitQuestion()}>
+      <Text style={styles.textButton}>ส่งคำตอบ</Text>
+    </TouchableOpacity>
+</View>
+
+</View>
+ 
+    </View>
+}
+ 
+</View>
+
+
 
    </SafeAreaView>
  
@@ -401,6 +502,43 @@ const choice_props =  currentQuestion.questionType==="1"? currentQuestion.choice
  
    );
 }
+
+choice_List(){
+
+   return this.state.listSoundData.map((data,key) => {
+      return (
+   
+          
+         <View key={key}>
+            {this.state.checked == key ?
+     <View>
+          <View style={styles.choices_Box_Click}>
+                <TouchableOpacity activeOpacity={1} onPress={(value) => {this.setAnswerForType1(value)}}>
+                    <Image source={require('./assets/images/radioBt-2.png')}
+                           style={{width:23,height:23,marginTop: 10,marginLeft:280}} />      
+                </TouchableOpacity>
+                <Text style={styles.textChoices}>wwwww</Text>
+          </View>              
+   </View>
+                :
+        <View>
+          <View style={styles.choices_Box}>
+                <TouchableOpacity onPress={()=>{this.setState({checked: key})}} activeOpacity={1}>
+                    <Image source={require('./assets/images/radioBt-1.png')}
+                           style={{width:23,height:23,marginTop: 10,marginLeft:280}} />      
+                </TouchableOpacity>
+                <Text style={styles.textChoices}>wwwww</Text>
+          </View>   
+      </View>
+            }
+        </View>
+ 
+      
+      )
+    })
+
+  }
+
 }
 const containerStyle = {
       backgroundColor: '#4C6FAF',
@@ -567,7 +705,7 @@ date: {
    },
  
    input:{
-   height: 270,
+   height: 250,
    width : 320,
    margin: 30,
    borderWidth: 1,
@@ -583,8 +721,8 @@ date: {
    shadowOpacity:  5,
    shadowRadius:2,
    elevation: 1,
-   marginBottom: -40,
-   marginTop: -360,
+   marginBottom: -50,
+   marginTop: 225,
    },
  
   questionM: {
@@ -647,7 +785,10 @@ const mapStateToProps=(state,props)=>{
    questions:state.Questions.questions,
    questionId:state.Questions.questionId,
    currentQuestion:state.Questions.currentQuestion,
-   userdata:state.Questions.userdata
+   userdata:state.Questions.userdata,
+   choiceScore:state.Questions.choiceScore,
+   currentCardID:state.Questions.currentCardID,
+   fetchcard:state.Questions.fetchcard,
  }
 }
 export default connect (mapStateToProps) (Choices);

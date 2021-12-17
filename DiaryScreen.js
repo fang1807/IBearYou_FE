@@ -96,19 +96,13 @@ return (
      
 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
 
-<View style={{flex: 1, marginTop : -610}}>
+<View style={{flex: 1, marginTop : -635}}>
  <View style={{flex: 1, alignItems: 'center',}}> 
       <Image source={require('./assets/images/rainy.png')}
    style={{width:392 ,height:294,marginTop: 540}} /> 
 </View>
 
-
-<View style={{flex: 1, alignItems : 'center',marginTop:610}}>  
-   <CustomHeader title='Diary'  navigation={this.props.navigation}/>
-</View>
-
-
-<View style={{marginTop: -10}}>
+<View style={{marginTop: 600}}>
   <View style={styles.buttonFeel}>
     <Text style={styles.textFeel}>วันนี้เป็นยังไงบ้าง</Text>
   </View>
@@ -135,10 +129,10 @@ return (
 </View>
 
 
-<View style={{marginTop: 270}}>
+<View style={{marginTop: 340}}>
  <View style={{flex: 1}} >
  <Image source={require('./assets/images/line.png')}
-   style={{width: 290,height:256,marginTop: 220,marginLeft: 35}}
+   style={{width: 290,height:256,marginTop: 165,marginLeft: 35}}
    resizeMode='contain' />  
  </View>
 
@@ -196,13 +190,14 @@ return (
 
 <View style={{flex: 1,marginTop: 20.5}}>
   <Text style={styles.textType}>ความคาดหวัง</Text>
-   <TextInput placeholder="เขียนบันทึกความคาดหวัง"
+   <TextInput placeholder="เขียนสิ่งที่เธออยากให้เกิดขึ้นมากที่สุดในวันนี้"
             placeholderTextColor="#707070"
             autoCapitalize='none'
             defaultValue={this.state.wish}
             onChangeText={wish=> this.setState({wish}) }
             style={styles.textContent}
             value = {this.state.InputWish}
+            maxLength={80}
  />
 </View>
 
@@ -212,13 +207,13 @@ return (
 </View>
 </View>
 
-<View style={{flex: 1,marginTop: 135}}>
+<View style={{flex: 1,marginTop: 170}}>
  <Image source={require('./assets/images/rain-doll.png')}
    style={{width: 91,height:95.71,marginLeft: 10}}
    resizeMode='contain' />  
  </View>
  
-<View style={{flex: 1,flexDirection: 'row' , justifyContent: 'space-between',alignItems: 'flex-end',marginBottom: 30}}>
+<View style={{flex: 1,flexDirection: 'row' , justifyContent: 'space-between',alignItems: 'flex-end',marginBottom: 20}}>
   <TouchableOpacity style={styles.button} activeOpacity ={0.75}
      onPress = {() => this.props.navigation.navigate('Mood')}
    >

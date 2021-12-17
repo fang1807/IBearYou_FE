@@ -11,6 +11,9 @@ import CustomHeader from './CustomHeader';
 import Questions from './Json/Questions'
 import {fetchQuestions,setCurrentQuestion} from './actions/Questions';
 import {setQuestionId,incrementAction} from './actions/Questions';
+import {setChoiceScore} from './actions/Questions';
+import {setCurrentCardData} from './actions/Questions';
+import {fetchCards} from './actions/Questions';
 
 import moment from 'moment';
 import axios from 'axios';
@@ -96,7 +99,19 @@ class CheckupScreen extends Component {
  }
    setSwitch = async()=> {
 
-     const {Question} =Questions 
+     //const {Question} =Questions 
+     let Questions = []
+     console.log("load questions");
+    const data =  {"user_id": this.props.userdata.user_id};
+    const endpoint = `${API_URL}/api/list-question`; 
+    const res = await axios.get(endpoint,{params:data}) 
+    //console.log("res.data",res.data)
+       if(res.data.message==="Success"){
+              Questions= res.data.data
+        }
+        else  if(res.data.message==="Fail") {
+        } 
+       // console.log("Questions: ",Questions)
     //const no. ${i } questid ${e.questionId}`)
      //const newDetail = "รายละเอียด "+e.detail + " ขี้เกียจทำ"
      //return {"questionId":e.questionId,atty:"value", "newDetail":newDetail}
@@ -104,18 +119,21 @@ class CheckupScreen extends Component {
    //console.log(questionProcess)
   //fetchQuestions(2)
    //incrementAction(2) 
-  const questionForUser=   Question.map((q,i)=>{
+  const questionForUser=   Questions.map((q,i)=>{
     
      return {...q,"answer":""}
 
   }
+
   )
+
+  //console.log("questionForUser: ",questionForUser)
    
    await this.props.dispatch(fetchQuestions(questionForUser));
    // console.log("this.props.questions ",this.props.questions)
-   await this.props.dispatch(setQuestionId(Question[0].questionId));
+   await this.props.dispatch(setQuestionId(Questions[0].questionId));
    //console.log("this.props.questionId ",this.props.questionId)
-   const currentQ = Question.find(e=>e.questionId === this.props.questionId )
+   const currentQ = Questions.find(e=>e.questionId === this.props.questionId )
    //console.log("currentQ " ,currentQ) 
    //printVal(Question[71])
    
@@ -132,12 +150,13 @@ class CheckupScreen extends Component {
    //console.log("questionLength : ",questionLength) 
    await this.props.dispatch(setCurrentQuestion(currentQ))
    //console.log("this.props.currentQuestion :",this.props.currentQuestion)
+   
    this.props.navigation.navigate('Choices') 
   }
   
 
   render() {
-     const {userdata}= this.props
+     const {userdata,fetchcard}= this.props
   return (
      <SafeAreaView style={[styles.container, containerStyle]}> 
  
@@ -442,7 +461,12 @@ const mapStateToProps=(state,props)=>{
     questions:state.Questions.questions,
     questionId:state.Questions.questionId,
     currentQuestion:state.Questions.currentQuestion,
-    userdata:state.Questions.userdata
+    userdata:state.Questions.userdata,
+    choiceScore:state.Questions.choiceScore,
+    currentCardID:state.Questions.currentCardID,
+    fetchcard:state.Questions.fetchcard,
+    
+    
   }
 }
 

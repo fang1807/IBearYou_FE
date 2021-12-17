@@ -47,15 +47,14 @@ class MoodScreen extends Component {
 
 }
  
-
-
-
   selectedFeel = (feelID) => {
     console.log("feelID ",feelID)
    this.setCurrentFeelID(feelID)
      this.setState({
        feel: !this.state.feel,
        next: !this.state.next,
+      
+      
      })
       console.log ('selected seccess!')
   }
@@ -77,11 +76,6 @@ class MoodScreen extends Component {
     <View style={{flex: 1, alignItems: 'center',}}>  
        <Image source={require('./assets/images/rainy.png')}
         style={{width:392 ,height:294,marginTop: -47}} />  
-    </View>
-
-
-    <View style={{flex: 1, alignItems : 'center',marginTop:-165}}>   
-      <CustomHeader title='Mood'  navigation={this.props.navigation}/>
     </View>
 </View>
     
@@ -134,26 +128,32 @@ class MoodScreen extends Component {
 
    return this.state.listFeelData.map((data,key) => {
       return (
-<View style={{flex: 1,marginBottom: -110}}>
-   {this.state.feel
-    ? 
-    <TouchableOpacity style={styles.buttonVeryGood} activeOpacity={0.50}
+ 
+     <View key={key} style={{flex: 1,marginBottom: -110}}>
+     {this.state.checked == key 
+     ?
+    <TouchableOpacity style={styles.buttonVeryGood} activeOpacity={0.5}
      onPress ={() => this.selectedFeel(data.feel_id)}>
      <View>
      <Text style={styles.textMood}>{data.feel_name}</Text>
       <Image source={require('./assets/images/bear-verygood.png')}
      style={{width:57.24 ,height:57.37,marginTop: -38,marginLeft: -50}}
      />
+     <Image source={require('./assets/images/radioBt-Green-2.png')}
+     style={{width:20 ,height:20,marginTop: -38,marginLeft: 250}}
+     />
      </View>
      </TouchableOpacity>
-     :
-     <View>
-     <View></View>
+      :
+    <View>
      <TouchableOpacity style={styles.buttonVeryGood} activeOpacity={1}
      onPress ={() => this.selectedFeel(data.feel_id)}>
      <Text style={styles.textMood}>{data.feel_name}</Text>
       <Image source={require('./assets/images/bear-verygood.png')}
      style={{width:57.24 ,height:57.37,marginTop: -38,marginLeft: -50}}
+     />
+     <Image source={require('./assets/images/radioBt-Green-1.png')}
+     style={{width:20 ,height:20,marginTop: -38,marginLeft: 250}}
      />
      </TouchableOpacity>
      </View>
@@ -161,7 +161,6 @@ class MoodScreen extends Component {
   
 </View>
  
-
 
       )
     })

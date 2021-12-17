@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { StyleSheet, View, Text, Image, SafeAreaView, Button
        , TouchableHighlight,TouchableOpacity, Dementions
-       , TextInput}
+       , TextInput,ScrollView}
        from 'react-native';
 import axios from 'axios';
 import CustomHeader from './CustomHeader';
@@ -81,7 +81,7 @@ loadGoodScreen=async()=>{
   <View style={{flex: 1, alignItems: 'center'}}>  
 
        <Image source={require('./assets/images/Vector-Pink.png')}
-    style={{width:552.17 ,height: 323.61,marginTop: -140}} /> 
+    style={{width:552.17 ,height: 323.61,marginTop: -150}} /> 
 
     <View style={styles.date}>
     <Text style={styles.day}>จ.</Text>
@@ -89,70 +89,51 @@ loadGoodScreen=async()=>{
     <Text style={styles.month}>พ.ค</Text>
     </View> 
 
-    <View style={{marginLeft: 100,marginTop: -85}}>
+    <View style={{marginLeft: 101,marginTop: -85}}>
       <Text style={styles.topic}>ประโยคพิเศษจากน้องหมี</Text>
-      <Text style={styles.sentence}>ขนาดมะม่วงยังสุข แล้วคุณจะทุกข์ทำไม?</Text>
+      <Text style={styles.sentence}>น้องหมีอยากให้กำลังใจเธอในทุก ๆ วันนะ
+      ไม่ว่าจะเจออะไร จำไว้เสมอนะว่ายังมีวันพรุ่งนี้ที่สดใสรอเธออยู่เสมอนะ สู้ ๆ นะ</Text>
     </View>
 
  </View>
 
-<View>
+{/* <View>
   <View style={{flex: 1, alignItems : 'flex-start',marginTop: -239}}>
       <CustomHeader title='goodStory' navigation={this.props.navigation}/>
   </View>
-</View>
+</View> */}
 
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
   
-  <View style={{flex: 1,marginTop: -52}}>  
+  <View style={{flex: 1,marginTop: -152}}>  
   <View style = {styles.Good}>  
            <Text style = {styles.textType}>เรี่องราวที่ดี</Text>  
   </View>
   
- 
+ <ScrollView>
 {this.goodList()}
+</ScrollView>
       
 </View>
   
 </View>
       
 
-
-<View style = {{flex: 1}}>
+{/* <View style = {{flex: 1}}>
    <View style={{flex: 1, alignItems: 'center',}}>  
        <Image source={require('./assets/images/shell-2.png')}
-    style={{width:35 ,height:29,marginTop:-78,marginLeft:375}} />     
+    style={{width:35 ,height:29,marginTop:-40,marginLeft:500}} />     
  </View>
 
   <View style={{flex: 1, alignItems: 'center',}}>  
        <Image source={require('./assets/images/crab.png')}
-    style={{width:43 ,height:25,marginTop:-185,marginRight:380}} />     
+    style={{width:43 ,height:25,marginTop:-250,marginRight:480}} />     
  </View>
 
 
-<View style={{flex: 1}}>
-    <View style={{flex: 1, alignItems: 'center',}}>  
-       <Image source={require('./assets/images/shoe.png')}
-    style={{width:22.33,height:22.99,marginTop:-15,marginLeft:-120}} />     
- </View>
 
-  <View style={{flex: 1, alignItems: 'center',}}>  
-       <Image source={require('./assets/images/bear-sun.png')}
-    style={{width:113.89,height:106.56,marginTop:-60,marginRight:250}} />     
- </View>
 
-   <View style={{flex: 1, alignItems: 'center',}}>  
-       <Image source={require('./assets/images/umbrella-red.png')}
-    style={{width:127 ,height:125.35,marginTop: -90,marginRight: -260}} />     
- </View>
-
- <View style={{flex: 1, alignItems: 'center',}}>  
-       <Image source={require('./assets/images/Polygon.png')}
-    style={{width:436 ,height:109,marginTop: -40,marginRight: 10}} />   
-</View>  
-</View>
-
-</View>
+</View> */}
 
     </SafeAreaView>
     );
@@ -162,14 +143,33 @@ loadGoodScreen=async()=>{
    return this.state.goodStoryData.map((data) => {
      if(String(data.good).trim()!=="")
       return (
-      <View style={{flex: 1}}>
-      <View>
+
+  
+<View style={styles.container}>
+      
+      <View style = {{marginBottom: -90}}>
+
+     
+<View >
+     
       <Text style={styles.textDate}>{data.date}</Text>
-      </View>
+
       <View style={styles.boxContent}>
-        <Text style ={styles.textContent}>{data.good}</Text>
-      </View>
-</View>
+
+    
+      
+      <Text style ={styles.textContent}>{data.good}</Text>
+      </View> 
+</View> 
+
+      </View> 
+
+       </View>
+       
+      
+
+      
+
       )
     })
 
@@ -191,6 +191,14 @@ loadGoodScreen=async()=>{
 
 
 const styles = StyleSheet.create({
+
+  container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingTop: 10,
+        marginBottom: 60,
+    },
 
     Good:{
       width: 354,
@@ -229,9 +237,11 @@ const styles = StyleSheet.create({
       color:'#000000',
       fontFamily: 'Quark',
       fontWeight: 'bold',
-      padding: 10,
-      textAlign: 'center',
+      textAlign: 'left',
+      marginLeft: 40,
+      marginTop: 10,
       flexWrap: 'wrap',
+
     },
 
     boxContent: {
@@ -263,7 +273,7 @@ const styles = StyleSheet.create({
       shadowOpacity:  0.4,
       shadowRadius: 3,
       elevation: 1,
-      marginTop: -135,
+      marginTop: -140,
       marginLeft: -270,
     },
 

@@ -13,9 +13,11 @@ const initialState = {
 	currentSound: '',
 	deleteAlarm: '',
 	addAlarm: '',
-	selectedDiaryData:{}
-
-
+	selectedDiaryData:{},
+	currentCardID: {},
+	choiceScore: {},
+	fetchcard: [],
+	priorityID: '',
 };
 
 export default function reducers(state=initialState, action) {
@@ -26,7 +28,7 @@ export default function reducers(state=initialState, action) {
 			return { ...state, fetching: true };
 		case 'FETCH_SECOND_REJECTED': 
 			return { ...state, fetching: false, error: action.payload };
-		case 'FETCH_QUESTIONS': 
+		case 'FETCH_QUESTIONS1': 
 					return { ...state, fetching: false, error: action.payload };
 		case 'FETCH_GOOD_STORY': 
 					return { ...state, fetching: false, error: action.payload };
@@ -38,11 +40,18 @@ export default function reducers(state=initialState, action) {
 					return { ...state, fetching: false, error: action.payload };
 		case 'FETCH_LIST_ALARM': 
 					return { ...state, fetching: false, error: action.payload };
-		
+		case 'FETCH_QUESTIONS': 
 			return {
 				 ...state,   
 				questions: action.payload
 			}
+
+		case 'FETCH_CARD': 
+			return {
+				 ...state,   
+				fetchcard: action.payload
+			}
+
 		case 'SET_QUESTION_ID': 
 			return {
 				 ...state,   
@@ -92,6 +101,21 @@ export default function reducers(state=initialState, action) {
 			return {
 				...state,
 				currentSound:action.payload
+			}
+		case 'SET_CURRENT_CARD_ID' :
+			return {
+				...state,
+				currentCardID:action.payload
+			}
+	    		case 'SET_CHOICE_SCORE' :
+			return {
+				...state,
+				choiceScore:action.payload
+			}
+		case 'SET_CURRENT_PRIORITY_ID': 
+			return {
+				 ...state,   
+				priorityID: action.payload
 			}
 		
 

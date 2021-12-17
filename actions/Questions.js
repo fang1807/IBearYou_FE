@@ -30,3 +30,12 @@ export function setCurrentQuestion(questionId) {
 		
 	};
 } 
+
+export function setChoiceScore(choiceScore) {
+	return (dispatch, getState) => {
+		const state = getState();	 
+	    dispatch({type:'SET_CHOICE_SCORE',payload:choiceScore})
+		 
+		
+	};
+} 

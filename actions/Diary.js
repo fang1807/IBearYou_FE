@@ -27,5 +27,12 @@ export function setCurrentDate(currentdate) {
 	};
 } 
 
+export function setSelectedDiaryData(selectedDiaryData) {
+	return (dispatch, getState) => {
+		const state = getState();	 
+	    dispatch({type:'SET_SELECTED_DIARY_DATA',payload:selectedDiaryData})		
+	};
+} 
+
 
 

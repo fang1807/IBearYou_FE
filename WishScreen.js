@@ -86,12 +86,6 @@ loadHeal_Sentence=async()=>{
 
  </View>
 
-<View>
-    <View style={{flex: 1, alignItems : 'flex-start',marginTop: -239}}>
-        <CustomHeader title='wish' navigation={this.props.navigation}/>
-    </View>
- </View>
-
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       
       <View style={{flex: 1,marginTop: -52}}>  
@@ -148,10 +142,9 @@ loadHeal_Sentence=async()=>{
   }
 
   wishList(){
-
    return this.state.wishStoryData.map((data) => {
+      if(String(data.wish).trim()!=="")
       return (
-      
       <View style={{flex: 1}}>
       <View>
       <Text style={styles.textDate}>{data.date}</Text>
