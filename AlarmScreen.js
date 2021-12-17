@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 import { StyleSheet, View, Text, Image, SafeAreaView, Button
-       , TouchableHighlight,TouchableOpacity, Dementions, Switch}
+       , TouchableHighlight,TouchableOpacity, Dementions, Switch,ScrollView}
        from 'react-native';
 import SwitchToggle from "react-native-switch-toggle";
 import ToggleSwitch from 'toggle-switch-react-native';
 import DateTimePickerModel from "react-native-modal-datetime-picker";
- 
 
 import axios from 'axios';
 import CustomHeader from './CustomHeader';
@@ -13,11 +12,16 @@ import {API_URL} from './config'
 import moment from 'moment';
 import {connect} from 'react-redux';
 
+import {setTodoListID} from './actions/TodoList';
+
 
 class AlarmScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      todoListData: [],
+      complete: true,
+      checked: 0,
       
       
     };
@@ -26,13 +30,13 @@ class AlarmScreen extends Component {
 
     componentDidMount(){
     console.log("componentDidmount AlarmScreen this.props.userdata : ",this.props.userdata);
-    this.loadHeal_Sentence();
+    //this.loadHeal_Sentence();
+    this.loadAllTodoList();
+    //this.loadTodoList_ID();
 }
 
 loadHeal_Sentence=async()=>{
    console.log("loadHeal_Sentence");
-    const userData ={} 
-    userData.user_id="27"
     const data =  {"user_id": this.props.userdata.user_id};
     const endpoint = `${API_URL}/api/list-heal_sentence`;
      console.log('endpoint : ',endpoint)
@@ -47,19 +51,61 @@ loadHeal_Sentence=async()=>{
 
 }
 
+// todo-list ทั้งหมด
+loadAllTodoList=async()=>{
+   console.log("load All Todo-List");
+    const data =  {"user_id": this.props.userdata.user_id};
+    const endpoint = `${API_URL}/api/list-to_do_list`;
+     console.log('endpoint : ',endpoint)
+    const res = await axios.get(endpoint,{params:data}) 
+       if(res.data.message==="Success"){
+          console.log("Success")
+          console.log("user_data: ",res.data.data)
+          this.setState({"todoListData":res.data.data})
+          console.log("this.state.todoListData ",this.state.todoListData)
+        }
+        else  if(res.data.message==="Fail") {
+        } 
 
-  switchToggle = () => {
-     this.setState({
-       toggle: !this.state.toggle 
-     })
-      console.log ('selected switch!')
+}
+
+//todo-list แค่ id ที่เลือก
+loadTodoList_ID=async(selectedTodoList)=>{
+    console.log("load All Todo-List");
+    const clientData =  {"user_id": this.props.userdata.user_id,"to_do_list_id": selectedTodoList};
+    const endpoint = `${API_URL}/api/get-one_to_do_list`;
+    console.log('endpoint : ',endpoint)
+    const res = await axios.get(endpoint,{params:clientData}) 
+       if(res.data.message==="Success"&& data.title){
+          console.log("data.title: ",data.title)
+          console.log("Success")
+          console.log("user_data: ",res.data.data)
+         this.setState({"todoListData":res.data.data})
+          console.log("this.state.todoListData ",this.state.todoListData) 
+
+          this.props.dispatch(setTodoListID(data))
+        }
+        else  if(res.data.message==="Fail") {
+          console.log("Fail")
+        } 
+
+}
+
+
+   setTodoListID = async(todolistID)=>{
+   await this.props.dispatch(setTodoListID(todolistID))
+ }
+
+    selectedTodoList = (todolistID) => {
+    console.log("todolistID ",todolistID)
+    this.setTodoListID(todolistID)
+    console.log ('selected todolistID success!')
   }
 
-  editAlarm = ()=> {
-    this.edit({
-      edit: !this.state.edit
-    })
-    console.log ('edit!')
+  selectEditTodoList = (loadTodoList_ID) => {
+    //this.props.navigation.navigate('EditTodoList') 
+     console.log ('selected go to edit success!')
+     console.log ('edit todo-list id: ',loadTodoList_ID)
   }
 
 
@@ -98,7 +144,7 @@ const editAlarm = this.state.edit
           <View style={{width: 310, height: 1, backgroundColor: '#000000',marginTop: 8,marginLeft: 20}}></View>
         
 
-      <View style={{paddingLeft: 160,marginTop: 0}}>
+      <View style={{paddingLeft: 300,marginTop: 10}}>
 
         <TouchableOpacity onPress={() => this.props.navigation.navigate('setAlarm')} activeOpacity={0.75}>
                     <Image source={require('./assets/images/add.png')}
@@ -106,27 +152,11 @@ const editAlarm = this.state.edit
         </TouchableOpacity>
       </View>
 
-         <View style={{flex: 1,justifyContent: 'center',marginBottom:340 }}>
-           
-        <View style={styles.buttonAlarm}>
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('EditTodoList')} activeOpacity={0.75}>
-            <View style={{marginLeft:60,marginTop:5,marginLeft:20}}>
-              <Text style={styles.textTime}>Full-Stack2</Text>
-              <Text style={styles.textTask}>task</Text>
-            </View>
-        </TouchableOpacity>
-        </View>
-
-<View style={{marginTop:-78,marginLeft:120}}> 
-        <TouchableOpacity>
-                  <View style={{flex: 1, alignItems: 'center'}}>  
-                    <Image source={require('./assets/images/Progress.png')}
-                            style={{width:100,height:52,marginLeft: 90}} />     
-                  </View>
-        </TouchableOpacity>
+<ScrollView>
+<View style={{flex:1,marginTop:-20,paddingTop:-80}}>
+    {this.AlltodoList()}
 </View>
-           
-         </View>
+ </ScrollView>   
 
       </View>
 </View>
@@ -136,6 +166,56 @@ const editAlarm = this.state.edit
      </SafeAreaView>
   );
   }
+
+   AlltodoList(){
+
+   return this.state.todoListData.map((data,key) => {
+     
+      return (
+      <View>
+
+      <View style={{flex:1}}>
+        <Text style={styles.textPriority}>{data.priority_name}</Text>
+      </View>
+       
+        <View style={{flex: 1,justifyContent: 'center',marginTop:80 }}>
+        <View style={styles.buttonAlarm}>
+        <TouchableOpacity onPress={() => this.selectEditTodoList(data.to_do_list_id)} activeOpacity={0.75}>
+            <View style={{marginLeft:60,marginTop:5,marginLeft:20}}>
+              <Text style={styles.textTime}>{data.title}</Text>
+              <Text style={styles.textTask}>{data.description}</Text>
+            </View>
+        </TouchableOpacity>
+        </View>
+
+      <View key={key} style={{marginTop:-78,marginLeft:120}}> 
+      {this.state.checked == key  ?
+              <TouchableOpacity onPress={()=>{this.setState({checked: !key})}}>
+                  <View style={{flex: 1, alignItems: 'center'}}>  
+                    <Image source={require('./assets/images/Progress.png')}
+                            style={{width:100,height:52,marginLeft: 90}} />     
+                  </View>
+                 
+        </TouchableOpacity>
+        :
+                <TouchableOpacity onPress={()=>{this.setState({checked: key})}} >
+                  <View style={{flex: 1, alignItems: 'center'}}>  
+                    <Image source={require('./assets/images/Complete.png')}
+                            style={{width:41,height:56,marginLeft: 90}} />     
+                  </View>
+                  
+        </TouchableOpacity>
+       }
+
+      </View>      
+         </View>
+
+        </View>
+      )
+    })
+
+}
+  
 }
 
 const styles = StyleSheet.create({
@@ -279,6 +359,16 @@ const styles = StyleSheet.create({
     paddingLeft: 65 ,
 
   },
+
+  textPriority: {
+    marginTop:20,
+    marginBottom:-18,
+    marginLeft:20,
+    fontFamily: 'Quark',
+    fontWeight: 'bold',
+    color: '#000000',
+    fontSize: 16,
+  }
 
 });
 

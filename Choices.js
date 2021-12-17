@@ -232,10 +232,10 @@ await this.props.dispatch(setQuestionId(this.props.questions[index].questionId))
    console.log(this.props.choiceScore ) //all score
    console.log(this.props.fetchcard)
    if(this.props.choiceScore>=11&&this.props.choiceScore<=30){
-     //ส่งไปหน้า1
+     //ดึงการ์ด id 1
    }
    else if(this.props.choiceScore>=31&&this.props.choiceScore<50){
-     //ส่งไปหน้า2
+     //ดึงการ์ด id 2
    }
    const arr = this.props.questions.map((a,i)=>{
      return {"questionId":a.questionId,"answer":a.answer}

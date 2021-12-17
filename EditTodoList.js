@@ -24,11 +24,16 @@ class editTodoList extends Component {
       choseTime: '',
       choseDateTime: '',
       listPriority: [],
+      title : this.props.todolistID.title,
+      description : this.props.todolistID.description,
+      finish_date : this.props.todolistID.finish_date,
+      priority : this.props.todolistID.priority_id,
     };
   }
 
      componentDidMount(){
     console.log("componentDidmount editTodoList this.props.userdata : ",this.props.userdata);
+     console.log("componentDidmount editTodoList this.props.todolistID : ",this.props.todolistID);
     //this.loadHeal_Sentence();
     //this.loadSound();
     this.loadPriority();
@@ -59,19 +64,17 @@ handleSubmit = async(event) => {
     //event.preventDefault();
      console.log("handleSubmit")
      console.log("this.state.title: ",this.state.title) 
-     console.log("this.state.good: ",this.state.good) 
-     console.log("this.state.bad: ",this.state.bad) 
-     console.log("this.state.wish: ",this.state.wish) 
-     
-    
+     console.log("this.state.description: ",this.state.description) 
+     console.log("this.state.finish_date: ",this.state.finish_date) 
+     console.log("this.state.priority_id: ",this.state.priority_id) 
 
     const editTodoList = {}
     editTodoList.user_id= this.props.userdata.user_id
-    editTodoList.diary_id= this.props.selectedDiaryData.diary_id
+    editTodoList.to_do_list_id= this.props.todolistID.to_do_list_id
     editTodoList.title =this.state.title
-    editTodoList.good =this.state.good
-    editTodoList.bad =this.state.bad
-    editTodoList.wish =this.state.wish
+    editTodoList.description =this.state.description
+    editTodoList.finish_date =this.state.finish_date
+    editTodoList.priority_id =this.state.priority_id
 
     console.log("editTodoList: ",editTodoList)
 
@@ -160,7 +163,7 @@ hidePicker = () => {
 
 
   render() {
-    const {userdata}= this.props
+    const {userdata,todolistID}= this.props
   return (
      <SafeAreaView style={{ flex: 1 , backgroundColor: '#EAD6A4'}}>
 
@@ -199,6 +202,8 @@ hidePicker = () => {
           <TextInput
             placeholder="ชื่อการแจ้งเตือน"
             placeholderTextColor="#014A5C"
+            defaultValue={this.props.todolistID.title}
+            onChangeText={ (title) => this.setState({title}) }
             autoCapitalize='none'
             style={styles.text}
           />
@@ -536,6 +541,7 @@ const mapStateToProps=(state,props)=>{
   return{
  
    userdata:state.Questions.userdata, 
+   todolistID:state.Questions.todolistID, 
  }
 }
 

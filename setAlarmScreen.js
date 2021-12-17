@@ -12,6 +12,7 @@ import SwitchToggle from "react-native-switch-toggle";
 import DateTimePickerModel from "react-native-modal-datetime-picker";
 
 import {setCurrentPriorityID} from './actions/TodoList'
+import {setFinishDate} from './actions/TodoList'
 
 
 class setAlarmScreen extends Component {
@@ -24,10 +25,12 @@ class setAlarmScreen extends Component {
       checked: 0,
       isVisible: false,
       choseTime: '',
-      choseDateTime: '',
+      chooseDateTime: '',
       listPriority: [],
       title:'',
       description: '',
+      choosefinishdate: '',
+    
     };
   }
 
@@ -64,23 +67,25 @@ handleSubmit = async(event) => {
      console.log("this.state.first_name  : ", this.state.first_name)
       this.setState ({
       title : this.state.title,
-      good : this.state.good,
-      bad : this.state.bad,
-      wish : this.state.wish,
+      description : this.state.description,
+      chooseDateTime : this.state.chooseDateTime,
     }); 
     const createTodoList = {}
     createTodoList.user_id= this.props.userdata.user_id
-    createTodoList.priority_id= this.props.
-    createTodoList.finish_date= this.props.
+    createTodoList.priority_id= this.props.priorityID
+    createTodoList.finish_date= this.state.chooseDateTime
     createTodoList.title =this.state.title
     createTodoList.description =this.state.description
+
+
 
     axios.post(API_URL+'/api/create-to_do_list', createTodoList)
       .then(res => { 
           console.log(res.data);
         if(res.data.message==="Success"){
-          console.log("Success")
+         console.log("Success")
          this.props.navigation.navigate('Alarm') 
+
         }
         else  if(res.data.message==="create fail") {
           console.log("create fail")
@@ -130,25 +135,21 @@ loadPriority=async()=>{
 
 }
 
-  switchToggle = () => {
-     this.setState({
-       toggle: !this.state.toggle 
-     })
-      console.log ('selected switch!')
-  }
-
 handlePicker = (datetime) => {
   this.setState({
     isVisible:false,
     //choseTime: moment(time).format('LT')
-    choseDateTime: moment(datetime).format('LL'),
+    chooseDateTime: moment(datetime).format('LL'),
   })
+  console.log("finishdate ",this.state.chooseDateTime)
 }
 
 showPicker = () => {
     this.setState({
-    isVisible:true
+    isVisible:true,
+   
   })
+  
 }
 
 hidePicker = () => {
@@ -156,6 +157,7 @@ hidePicker = () => {
     isVisible:false
     
   })
+  
 }
 
 
@@ -173,16 +175,30 @@ hidePicker = () => {
       console.log ('selected seccess!')
   }
 
+   setCurrentPriorityID = async(priorityID)=>{
+   await this.props.dispatch(setCurrentPriorityID(priorityID))
+ }
+
     selectedPriority = (priorityID) => {
     console.log("priorityID ",priorityID)
     this.setCurrentPriorityID(priorityID)
     console.log ('selected priotity seccess!')
   }
 
+   setFinishDate = async(finishdate)=>{
+   await this.props.dispatch(setFinishDate(finishdate))
+ }
+
+    selectedFinishDate = (finishdate) => {
+    //console.log("finishdate ",finishdate)
+    this.setFinishDate(finishdate)
+    console.log ('selected finish_date seccess!')
+  }
+
 
 
   render() {
-    const {userdata}= this.props
+    const {userdata,priorityID,finishdate}= this.props
   return (
      <SafeAreaView style={{ flex: 1 , backgroundColor: '#EAD6A4'}}>
 
@@ -227,10 +243,10 @@ hidePicker = () => {
       <TouchableOpacity activeOpacity={0.75} onPress={this.showPicker}>
       <View style={{marginTop: -205}}>
         <Text  style = {styles.text}> 
-            {!this.state.choseDateTime ?
+            {!this.state.chooseDateTime ?
             <Text>วันที่ต้องส่งงาน</Text>  
             :
-            <Text>{this.state.choseDateTime}</Text>  
+            <Text>{this.state.chooseDateTime}</Text>  
             }
         </Text>
         
@@ -283,7 +299,7 @@ hidePicker = () => {
       </View>
 
       <View style={styles.saveButton}>
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('Alarm')} activeOpacity={0.75} >  
+            <TouchableOpacity onPress={() => this.handleSubmit()} activeOpacity={0.75} >  
              <Text style={styles.textSave}>บันทึก</Text> 
              </TouchableOpacity>
       </View>
@@ -301,7 +317,7 @@ hidePicker = () => {
          <View key={key}>
             {this.state.checked == key ?
             <View >
-                <TouchableOpacity activeOpacity={0.75}>
+                <TouchableOpacity  onPress ={() => this.selectedPriority(data.priority_id)} activeOpacity={0.75}>
                     <Image source={require('./assets/images/circle-2.png')}
                            style={{width:13,height:13,marginTop: 5,marginLeft:20}} /> 
                     <Text style={styles.textSound}>{data.priority_name}</Text>
@@ -310,7 +326,7 @@ hidePicker = () => {
               </View>
                 :
                 <View>
-                <TouchableOpacity onPress={()=>{this.setState({checked: key})}} activeOpacity={1}>
+                <TouchableOpacity onPress ={() => this.selectedPriority(data.priority_id)} activeOpacity={1}>
                     <Image source={require('./assets/images/circle-1.png')}
                            style={{width:13,height:13,marginTop: 5,marginLeft:20}} /> 
                     <Text style={styles.textSound}>{data.priority_name}</Text>
@@ -548,6 +564,8 @@ const mapStateToProps=(state,props)=>{
   return{
  
    userdata:state.Questions.userdata, 
+   priorityID:state.Questions.priorityID, 
+   finishdate:state.Questions.finishdate,
  }
 }
 

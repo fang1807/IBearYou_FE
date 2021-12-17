@@ -18,6 +18,8 @@ const initialState = {
 	choiceScore: {},
 	fetchcard: [],
 	priorityID: '',
+	finishdate:'',
+	todolistID:{},
 };
 
 export default function reducers(state=initialState, action) {
@@ -116,6 +118,16 @@ export default function reducers(state=initialState, action) {
 			return {
 				 ...state,   
 				priorityID: action.payload
+			}
+		case 'SET_CURRENT_FINISH_DATE': 
+			return {
+				 ...state,   
+				finishdate: action.payload
+			}
+		case 'SET_CURRENT_TODO_LIST_ID': 
+			return {
+				 ...state,   
+				todolistID: action.payload
 			}
 		
 

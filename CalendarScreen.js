@@ -9,6 +9,8 @@ import {API_URL} from './config'
 import moment from 'moment';
 import {connect} from 'react-redux';
 import {setSelectedDiaryData} from './actions/Diary'
+import {setCurrentDiaryID,setCurrentDate} from './actions/Diary'
+
 
 import {Calendar, LocaleConfig} from 'react-native-calendars';
   /*LocaleConfig.locales['th'] = {
@@ -83,8 +85,9 @@ loadCalendarScreen=async()=>{
 
 }
 
-    
+/*    
   selectCalendar=async(selected_date)=>{
+     console.log(selected_date);
     this.setState({selected_date})
     console.log("selectCalendar");
     const userData ={} 
@@ -112,7 +115,35 @@ loadCalendarScreen=async()=>{
           this.setState({"selectedData":{}})
           console.log("Fail")
         } 
-  }
+  }*/
+
+ selectCalendar=async(selected_date)=>{
+   console.log(selected_date);
+   this.setState({selected_date})
+      console.log("selectCalendar");
+   const userData ={}
+   const data =  {"user_id": this.props.userdata.user_id,"create_date": selected_date};
+   const endpoint = `${API_URL}/api/select-diary`;
+    console.log('endpoint : ',endpoint)
+   const res = await axios.get(endpoint,{params:data})
+      if(res.data.message==="Success"&& res.data.data[0].title){
+         console.log("res.data.data[0].title")
+         console.log("res.data.data[0].title: ",res.data.data)
+         this.setState({"selectedData":res.data.data[0]})
+        //this.props.navigation.navigate('HomeApp')
+       }
+      else if(!res.data.data){
+         console.log("res.data.data.length==0")
+         console.log("res.data.data: ",res.data.data)
+         this.setState({"selectedData":{}})
+        //this.props.navigation.navigate('HomeApp')
+       }
+       else  if(res.data.message==="Fail") {
+         this.setState({"selectedData":{}})
+         console.log("Fail")
+       }
+ }
+
 
   setSelectedDiaryData=async(selectedDiaryData)=>{  
      await this.props.dispatch(setSelectedDiaryData(selectedDiaryData)); 
@@ -186,7 +217,6 @@ onDayPress={(day) => this.selectCalendar(day.dateString) }
     '2021-11-17': {selected: true,marked: true,},
     '2021-11-18': {marked: true, dotColor: 'red', activeOpacity: 0},
     '2021-11-19': {disabled: true, disableTouchEvent: true}
-
   }}
   */
 /*
@@ -229,7 +259,7 @@ onDayPress={(day) => this.selectCalendar(day.dateString) }
 
 {this.username()}
   
-{this.state.selectedData.create_date ?
+{this.state.selectedData.date ?
 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
  
 <TouchableOpacity activeOpacity={0.75} 
@@ -255,7 +285,7 @@ onDayPress={(day) => this.selectCalendar(day.dateString) }
  
 <View style={{marginTop: -450}}>
 <View>
-<Text style={styles.textDate}>{this.state.selectedData.create_date}</Text>
+<Text style={styles.textDate}>{this.state.selectedData.date}</Text>
 </View>
 <View style={styles.buttonEmoji}>
 <TouchableOpacity activeOpacity={0.75} disabled={true} >
