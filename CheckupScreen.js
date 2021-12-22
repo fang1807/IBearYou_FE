@@ -12,8 +12,8 @@ import Questions from './Json/Questions'
 import {fetchQuestions,setCurrentQuestion} from './actions/Questions';
 import {setQuestionId,incrementAction} from './actions/Questions';
 import {setChoiceScore} from './actions/Questions';
-import {setCurrentCardData} from './actions/Questions';
-import {fetchCards} from './actions/Questions';
+import {setCurrentCardData} from './actions/Card';
+import {fetchCards} from './actions/Card';
 
 import moment from 'moment';
 import axios from 'axios';
@@ -83,11 +83,16 @@ class CheckupScreen extends Component {
      title:'',
      checkupSwitch:'',
      checked:0,
+     user_name: [],
+     allCard: {},
+     listSoundData: [],
    };
   }
  componentDidMount(){
    console.log("componentDidmount CheckupScreen");
    console.log("componentDidmount CheckupScreen this.props.userdata : ",this.props.userdata);
+   this.loadUsername();
+
    
  }
  async setfirstquestion(){
@@ -121,7 +126,7 @@ class CheckupScreen extends Component {
    //incrementAction(2) 
   const questionForUser=   Questions.map((q,i)=>{
     
-     return {...q,"answer":""}
+     return {...q,"answer":"","score":[0]}
 
   }
 
@@ -153,24 +158,66 @@ class CheckupScreen extends Component {
    
    this.props.navigation.navigate('Choices') 
   }
+
+
+
+
+loadSound=async()=>{
+   
+   console.log("All_Sound");
+    const userData ={} 
+    const data =  {"user_id": this.props.userdata.user_id};;
+    const endpoint = `${API_URL}/api/list-sound`;
+     console.log('endpoint : ',endpoint)
+    const res = await axios.get(endpoint,{params:data}) 
+       if(res.data.message==="Success"){
+          console.log("Success")
+          console.log("user_data: ",res.data.data)
+          this.setState({"listSoundData":res.data.data})
+          console.log("this.state.listSoundData ",this.state.listSoundData)
+        }
+        else  if(res.data.message==="Fail") {
+        } 
+
+}
+
   
+
+ loadUsername=async()=>{
+   console.log("list_username");
+    const data =  {"user_id": this.props.userdata.user_id};
+    const endpoint = `${API_URL}/api/list-user_name`;
+     console.log('endpoint : ',endpoint)
+    const res = await axios.get(endpoint,{params:data}) 
+       if(res.data.message==="Success"){
+          console.log("Success")
+          console.log("user_data: ",res.data.data)
+          this.setState({"user_name":res.data.data})
+          console.log("this.state.user_name",this.state.user_name)
+         //this.props.navigation.navigate('HomeApp') 
+        }
+        else  if(res.data.message==="Fail") {
+        } 
+
+}
 
   render() {
      const {userdata,fetchcard}= this.props
   return (
      <SafeAreaView style={[styles.container, containerStyle]}> 
  
-  
+
 
  <View style={{flex: 1, alignItems: 'center',}}>  
        <Image source={require('./assets/images/Bg-Blue.png')}
-    style={{width:568 ,height: 580,marginTop:87,marginRight: 40}} />     
+    style={{width:568 ,height: 580,marginTop:80,marginRight: 40}} />     
  </View>
     
-
-         <View style={{flex: 1, alignItems : 'flex-start',marginTop: -26}}>
- <CustomHeader title='Checkup' isHome={true} navigation={this.props.navigation}/>
+<View style={{flex: 1, alignItems: 'center',}}>  
+       <Image source={require('./assets/images/star-3.png')}
+    style={{width:380, height: 134,marginTop: -10,marginRight: 0}} />     
  </View>
+
 
 <View style={{flex: 1, alignItems: 'center',}}>  
        <Image source={require('./assets/images/Sunflower.png')}
@@ -187,11 +234,11 @@ class CheckupScreen extends Component {
 
      <View style={{flex: 1, alignItems: 'center',}}>  
        <Image source={require('./assets/images/Star-4.png')}
-    style={{width:40.33, height: 40.33,marginTop: 500}} />     
+    style={{width:40.33, height: 40.33,marginTop: 400,marginRight:150}} />     
  </View>
      <View style={{flex: 1, alignItems: 'center',}}>  
        <Image source={require('./assets/images/Star-5.png')}
-    style={{width:28.3, height: 28.3,marginTop: 400,marginRight: 350}} />     
+    style={{width:28.3, height: 28.3,marginTop: 320,marginRight: 350}} />     
  </View>
      <View style={{flex: 1, alignItems: 'center',}}>  
        <Image source={require('./assets/images/Star-7.png')}
@@ -208,9 +255,10 @@ class CheckupScreen extends Component {
 
       <View style={{flex: 1, alignItems: 'center',}}>  
        <Image source={require('./assets/images/Bear-Cupid.png')}
-    style={{width:145.52, height: 155.24,marginTop: 270,marginRight: -200}} />     
+    style={{width:145.52, height: 155.24,marginTop: 190,marginRight: -280}} />     
  </View>
-   
+
+ 
      <View style={{flexDirection: 'row' ,justifyContent: 'space-around', alignItems: 'center'}}>
  
       
@@ -237,21 +285,14 @@ class CheckupScreen extends Component {
     />
 
 </View>
- 
-        
 
-<View style={styles.textHeaderStyle}>
-    
-       <Text style={styles.textHeader}>Hi Atty !</Text>
-      </View>
- 
+<View style={{flex:1,marginTop:40,marginBottom:160}}>
+{this.username()} 
+
       <View style={styles.Content}>
-       <Text style={styles.textContent}>"แบบทดสอบนี้ จะพาเธอไปสำรวจตนเอง ถ้าหากเธอกำลังเผชิญปัญหา หมดกำลังใจ เรามาทำแบบทดสอบนี้กัน"</Text>
+       <Text style={styles.textContent}>"แบบทดสอบนี้ จะพาเธอไปสำรวจตนเอง ถ้าหากเธอกำลังเผชิญปัญหา หมดกำลังใจ เรามาทำแบบทดสอบนี้กัน"</Text> 
      </View>
-   
-
-
-
+</View>
 
       <View style = {styles.button}>
           <TouchableOpacity
@@ -269,41 +310,20 @@ class CheckupScreen extends Component {
   );
   }
 
-choice_List(){
 
-   return this.state.listSoundData.map((data,key) => {
+
+  
+  username() {
+    return this.state.user_name.map((data) => {
       return (
-   
-          
-         <View key={key}>
-            {this.state.checked == key ?
-     <View>
-          <View style={styles.choices_Box_Click}>
-                <TouchableOpacity activeOpacity={1}>
-                    <Image source={require('./assets/images/radioBt-2.png')}
-                           style={{width:23,height:23,marginTop: 10,marginLeft:280}} />      
-                </TouchableOpacity>
-                <Text style={styles.textChoices}>wwwww</Text>
-          </View>              
-   </View>
-                :
-        <View>
-          <View style={styles.choices_Box}>
-                <TouchableOpacity onPress={()=>{this.setState({checked: key})}} activeOpacity={1}>
-                    <Image source={require('./assets/images/radioBt-1.png')}
-                           style={{width:23,height:23,marginTop: 10,marginLeft:280}} />      
-                </TouchableOpacity>
-                <Text style={styles.textChoices}>wwwww</Text>
-          </View>   
+      <View style={styles.textHeaderStyle}>
+       <Text style={styles.textHeader}>ยินดีต้อนรับ {data.user_name}</Text>
       </View>
-            }
-        </View>
- 
-      
-      )
+       )
     })
 
-  }
+}
+
 
 
 
@@ -327,16 +347,17 @@ const styles = StyleSheet.create({
   },
  
  textHeaderStyle: {
-  flex: 1,
    alignItems: 'flex-start',
-   marginLeft: -145,
-     
+
  },
  
  textHeader: {
        color: '#E79995',
        fontSize: 36,
-       marginTop: -70,
+       marginTop: -100,
+       marginBottom:-200,
+       fontFamily: 'Quark',
+       fontWeight: 'bold',
        
       
       
@@ -347,7 +368,7 @@ const styles = StyleSheet.create({
        fontSize: 18,
        paddingLeft: '5%',
        paddingRight: '5%',
-       marginTop: 100 ,
+       marginTop: 60 ,
        fontFamily: 'Quark',
 
    },
@@ -355,7 +376,7 @@ const styles = StyleSheet.create({
   Content: {
       alignItems: 'center',
       width: 350,
-      height: 230,
+      height: 160,
       backgroundColor: '#FFFFFF',
       borderRadius: 10,
       shadowColor: '#E79995',
@@ -405,7 +426,7 @@ const styles = StyleSheet.create({
        backgroundColor: '#E79995',
        height: 41,
        width: 278,
-       marginTop: -55,
+       marginTop: -83,
        overflow: "hidden",
       
       

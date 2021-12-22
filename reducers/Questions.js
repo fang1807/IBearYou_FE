@@ -14,12 +14,14 @@ const initialState = {
 	deleteAlarm: '',
 	addAlarm: '',
 	selectedDiaryData:{},
-	currentCardID: {},
+	currentCardID: [],
 	choiceScore: {},
 	fetchcard: [],
 	priorityID: '',
 	finishdate:'',
 	todolistID:{},
+	currentResultID:{},
+	
 };
 
 export default function reducers(state=initialState, action) {
@@ -128,6 +130,11 @@ export default function reducers(state=initialState, action) {
 			return {
 				 ...state,   
 				todolistID: action.payload
+			}
+		case 'SET_CURRENT_RESULT_ID': 
+			return {
+				 ...state,   
+				currentResultID: action.payload
 			}
 		
 

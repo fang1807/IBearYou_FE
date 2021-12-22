@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { StyleSheet, View, Text, Image, SafeAreaView, Button
        , TouchableHighlight,TouchableOpacity, Dementions
-       , TextInput}
+       , TextInput,ScrollView}
        from 'react-native';
 import axios from 'axios';
 import CustomHeader from './CustomHeader';
@@ -69,7 +69,7 @@ loadBadScreen=async()=>{
 <View style={{flex: 1, alignItems: 'center'}}>  
 
        <Image source={require('./assets/images/Vector-Pink.png')}
-    style={{width:552.17 ,height: 323.61,marginTop: -140}} /> 
+    style={{width:552.17 ,height: 323.61,marginTop: -150}} /> 
 
     <View style={styles.date}>
     <Text style={styles.day}>จ.</Text>
@@ -77,69 +77,32 @@ loadBadScreen=async()=>{
     <Text style={styles.month}>พ.ค</Text>
     </View> 
 
-    <View style={{marginLeft: 100,marginTop: -85}}>
+    <View style={{marginLeft: 101,marginTop: -85}}>
       <Text style={styles.topic}>ประโยคพิเศษจากน้องหมี</Text>
-      <Text style={styles.sentence}>จงเคารพตัวเองให้มากพอ ที่จะเดินออกมาจากสิ่งต่าง ๆ ที่ไม่ทำให้คุณเติบโตขึ้นอีกต่อไป</Text>
+      <Text style={styles.sentence}>น้องหมีอยากให้กำลังใจเธอในทุก ๆ วันนะ
+      ไม่ว่าจะเจออะไร จำไว้เสมอนะว่ายังมีวันพรุ่งนี้ที่สดใสรอเธออยู่เสมอนะ สู้ ๆ นะ</Text>
     </View>
 
  </View>
 
-<View>
-    <View style={{flex: 1, alignItems : 'flex-start',marginTop: -239}}>
-        <CustomHeader title='badStory' navigation={this.props.navigation}/>
-    </View>
-</View>
+
 
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
 
-     <View style={{flex: 1,marginTop: -52}}>  
+     <View style={{flex: 1,marginTop: -152}}>  
   <View style = {styles.Bad}>  
            <Text style = {styles.textType}>เรื่องราวที่ไม่ดี</Text>  
   </View>
   
 
 <View style={{flex: 1}}>
+<ScrollView>
      {this.badList()}
+     </ScrollView>
 </View>
       </View>
 </View>
 
-
-<View style = {{flex: 1}}>
-   <View style={{flex: 1, alignItems: 'center',}}>  
-       <Image source={require('./assets/images/shell-2.png')}
-    style={{width:35 ,height:29,marginTop:-78,marginLeft:375}} />     
- </View>
-
-  <View style={{flex: 1, alignItems: 'center',}}>  
-       <Image source={require('./assets/images/crab.png')}
-    style={{width:43 ,height:25,marginTop:-185,marginRight:380}} />     
- </View>
-
-
-<View style={{flex: 1}}>
-    <View style={{flex: 1, alignItems: 'center',}}>  
-       <Image source={require('./assets/images/shoe.png')}
-    style={{width:22.33,height:22.99,marginTop:-15,marginLeft:-120}} />     
- </View>
-
-  <View style={{flex: 1, alignItems: 'center',}}>  
-       <Image source={require('./assets/images/bear-sun.png')}
-    style={{width:113.89,height:106.56,marginTop:-60,marginRight:250}} />     
- </View>
-
-   <View style={{flex: 1, alignItems: 'center',}}>  
-       <Image source={require('./assets/images/umbrella-red.png')}
-    style={{width:127 ,height:125.35,marginTop: -90,marginRight: -260}} />     
- </View>
-
- <View style={{flex: 1, alignItems: 'center',}}>  
-       <Image source={require('./assets/images/Polygon.png')}
-    style={{width:436 ,height:109,marginTop: -40,marginRight: 10}} />   
-</View>  
-</View>
-
-</View>
     </SafeAreaView>
     );
   }
@@ -149,12 +112,50 @@ loadBadScreen=async()=>{
    return this.state.badStoryData.map((data) => {
       if(String(data.bad).trim()!=="")
       return (
-      <View style={{flex: 1}}>
+
+  
+<View style={styles.container}>
+      
+      <View style = {{marginBottom: -90}}>
+
+     
+<View >
+     
       <Text style={styles.textDate}>{data.date}</Text>
+
       <View style={styles.boxContent}>
-        <Text style ={styles.textContent}>{data.bad}</Text>
+
+    
+      
+      <Text style ={styles.textContent}>{data.bad}</Text>
+      </View> 
+</View> 
+
+      </View> 
+
+       </View>
+       
+
+
+
+    //   <View style = {{flex: 1}}>
+
+    //   <Text style= {styles.textDate}>{data.date}</Text>
+    //   <View style={styles.boxContent}>
+    //     <Text style ={styles.textContent}>{data.bad}</Text>
+    //   </View>
+    // </View>
+      )
+    })
+
+}
+heal_sentence_List(){
+
+   return this.state.heal_sentenceData.map((data) => {
+      return (
+      <View style={{flex: 1}}>
+     <Text style={styles.sentence}>{data.heal_sentence}</Text>
       </View>
-    </View>
       )
     })
 
@@ -163,6 +164,14 @@ loadBadScreen=async()=>{
 }
 
 const styles = StyleSheet.create({
+
+   container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingTop: 10,
+        marginBottom: 60,
+    },
 
     Bad:{
       width: 354,
@@ -202,7 +211,8 @@ const styles = StyleSheet.create({
       fontFamily: 'Quark',
       fontWeight: 'bold',
       padding: 10,
-      textAlign: 'center',
+      textAlign: 'left',
+      marginLeft: 40,
       flexWrap: 'wrap',
     },
 

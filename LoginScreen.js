@@ -41,6 +41,12 @@ handleSubmit = async(event) => {
     userLogin.password = String(this.state.password).trim()
     console.log("urlendpoint : ",  API_URL)
 
+   
+    if(this.state.user_name.length === 0 || this.state.password.length === 0 || this.state.user_name.length === ' ' || this.state.password.length === ' ' ){
+      
+    return this.props.navigation.navigate('Login') 
+
+    }
     //  if(this.state.user_name.length === 0  ){
     //   this.setState({nullmessage: "please input username and password"})
 
@@ -59,14 +65,14 @@ handleSubmit = async(event) => {
           console.log("user_data: ",res.data.data)
           this.setUserData(res.data.data)
          this.props.navigation.navigate('HomeApp') 
-        }
-        else  if(res.data.message==="Fail") {
-          this.setState({message: "Username Or Password Is Wrong!!"})
+       
+        }else  if(res.data.message==="Fail") {
+          this.setState({message: "ชื่อผู้ใช้งานหรือรหัสผ่านผิด"})
          // console.log("DuplicateEmailOrUserName")
         }
       })
   }
-  
+ 
 
  setUserData=async(userdata)=>{  
      await this.props.dispatch(setUserData(userdata)); 
@@ -205,7 +211,7 @@ return (
 
 
 <View style = {{marginTop: -135}} >
-  <Text style = {{color: "#E79995", marginBottom: 10, fontSize : 16 ,marginTop:-75,marginLeft:-60,fontFamily: 'Quark',fontWeight: 'bold'}}>  
+  <Text style = {{color: "#E79995", marginBottom: 10, fontSize : 16 ,marginTop:-75,marginLeft:-140,fontFamily: 'Quark',fontWeight: 'bold'}}>  
   {this.state.message}
   </Text>
 

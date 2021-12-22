@@ -18,9 +18,9 @@ class ProfileScreen extends Component {
   render() {
      return (
      <SafeAreaView style={{ flex: 1 }}>
-      <CustomHeader title='Profile' isHome={true} navigation={this.props.navigation}/>
+    
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Profile!</Text>
+      
            <TouchableOpacity
         style={{marginTop: 20}}
          onPress={() => this.props.navigation.navigate('Welcome')}

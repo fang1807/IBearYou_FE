@@ -19,20 +19,25 @@ import moment from 'moment';
 class Choices extends Component {
   constructor(props) {
     super(props);
-    this.state = { choiceData: [],
+    this.state = { 
+      choiceData: [],
+      allCard: [],
       
     };
   }
 
   componentDidMount(){
   console.log("componentDidmount ChoiceScreen this.props.userdata : ",this.props.userdata);
+    console.log("this.props.fetchcard: ",this.props.fetchcard );
+    console.log("currentCardID : ",this.props.currentCardID);
   //this.loadHeal_Sentence();
   //this.loadChoices();
   //this.loadQuestionType();
   this.loadQuestions();
   //this.loadQuestionnnaires();
   //this.loadQuestionnnaire_Question();
-  //this.loadAllCard();
+  this.loadAllCard();
+
 }
 
 
@@ -123,49 +128,35 @@ loadQuestionnnaire_Question=async()=>{
 }
 
 
-loadAllCard=async()=>{ 
-     console.log("load all card");
-    const data =  {"user_id": this.props.userdata.user_id};
-    const endpoint = `${API_URL}/api/list-card`; 
-    const res = await axios.get(endpoint,{params:data}) 
-       if(res.data.message==="Success"){
+
+loadAllCard=async()=>{
+   console.log("load all card");
+    let Cards = []
+    const clientData =  {"user_id": this.props.userdata.user_id};
+    const endpoint = `${API_URL}/api/list-card`;
+    console.log('endpoint : ',endpoint)
+    const res = await axios.get(endpoint,{params:clientData})
+    const {data,message}=res.data 
+    console.log("res.data ",data)
+    console.log("message ",message)
+       if(message==="Success"&& data){
+         console.log("data.title: ",data)
           console.log("Success")
-          console.log("user_data: ",res.data.data)
-          //this.setState({"choiceData":res.data.data})
-          //console.log("this.state.choiceData ",this.state.choiceData)
+          
+       this.setState({allCard:data})
+       console.log("this.state.allCard ",this.state.allCard) 
+
+       this.props.dispatch(fetchCards(data))
          //this.props.navigation.navigate('HomeApp') 
-         await this.props.dispatch(fetchCards(res.data.message))
         }
         else  if(res.data.message==="Fail") {
-          
         } 
-
 }
 
-// กดส่งคำตอบ
-handleSubmit = async(event) => {
-    //event.preventDefault();
-     console.log("handleSubmit")
-     console.log("this.state.first_name  : ", this.state.first_name)
-      
-    const resultData = {}
-    resultData.user_id= this.props.userdata.user_id
-    resultData.final_score = this.props.choiceScore
-    resultData.card_id =this.state.
+fetchCards=async(fetchcard)=>{  
+     await this.props.dispatch(fetchCards(fetchcard));  
+ }
 
-    axios.post(API_URL+'/api/result', resultData)
-      .then(res => { 
-          console.log(res.data);
-        if(res.data.message==="Success"){
-          console.log("Success")
-         this.props.navigation.navigate('CalendarHistory') 
-         
-        }
-        else  if(res.data.message==="create fail") {
-          console.log("create fail")
-        }
-      })
-  }
  
  nextQuestion=async()=>{
 
@@ -229,22 +220,346 @@ await this.props.dispatch(setQuestionId(this.props.questions[index].questionId))
  }
 
  submitQuestion=async()=>{ 
-   console.log(this.props.choiceScore ) //all score
-   console.log(this.props.fetchcard)
-   if(this.props.choiceScore>=11&&this.props.choiceScore<=30){
-     //ดึงการ์ด id 1
+   //event.preventDefault();
+   console.log("final score: ",this.props.choiceScore ) //all score
+   console.log("fetch all card: ",this.props.fetchcard)
+   console.log("******************************************")
+    
+    /*
+    //ดึงการ์ด id 1
+    const card = this.props.fetchcard;
+    const card_result = card[31];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result)); 
+    */
+
+    /*
+    const card_result = this.props.fetchcard.findIndex(e=>e.card_id == '1')
+    console.log('Card Result: ', fetchcard(card_result))
+    await this.props.dispatch(setCurrentCardData(card_result)); 
+    */
+
+    /*await this.props.dispatch(setCurrentCardData(currentCardID[card_result])); */
+   
+   if(this.props.choiceScore>=11&&this.props.choiceScore<=13.2){
+    //ดึงการ์ด id 1
+    const card = this.props.fetchcard;
+    const card_result = card[1];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result)); 
    }
-   else if(this.props.choiceScore>=31&&this.props.choiceScore<50){
+   else if(this.props.choiceScore>=13.3&&this.props.choiceScore<=15.5){
      //ดึงการ์ด id 2
+    const card = this.props.fetchcard;
+    const card_result = card[2];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result)); 
+   }
+   if(this.props.choiceScore>=20.2&&this.props.choiceScore<=22.4){
+     //ดึงการ์ด id 3
+    const card = this.props.fetchcard;
+    const card_result = card[3];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result));  
+   }
+   else if(this.props.choiceScore>=22.5&&this.props.choiceScore<=24.7){
+     //ดึงการ์ด id 4
+    const card = this.props.fetchcard;
+    const card_result = card[4];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result));  
+   }
+   if(this.props.choiceScore>=24.8&&this.props.choiceScore<=27){
+     //ดึงการ์ด id 5
+    const card = this.props.fetchcard;
+    const card_result = card[5];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result)); 
+   }
+   else if(this.props.choiceScore>=15.6&&this.props.choiceScore<=17.8){
+    //ดึงการ์ด id 6
+    const card = this.props.fetchcard;
+    const card_result = card[6];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result)); 
+   }
+   if(this.props.choiceScore>=31.7&&this.props.choiceScore<=33.9){
+     //ดึงการ์ด id 7
+    const card = this.props.fetchcard;
+    const card_result = card[7];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result));  
+   }
+   else if(this.props.choiceScore>=27.1&&this.props.choiceScore<=29.3){
+     //ดึงการ์ด id 8
+    const card = this.props.fetchcard;
+    const card_result = card[8];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result));  
+   }
+   if(this.props.choiceScore>=29.4&&this.props.choiceScore<=31.6){
+     //ดึงการ์ด id 9
+    const card = this.props.fetchcard;
+    const card_result = card[9];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result)); 
+   }
+   else if(this.props.choiceScore>=17.9&&this.props.choiceScore<=20.1){
+     //ดึงการ์ด id 10
+    const card = this.props.fetchcard;
+    const card_result = card[10];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result));  
+   }
+   if(this.props.choiceScore>=34&&this.props.choiceScore<=35){
+     //ดึงการ์ด id 11
+    const card = this.props.fetchcard;
+    const card_result = card[11];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result)); 
+   }
+   else if(this.props.choiceScore>=50&&this.props.choiceScore<=51.8){
+     //ดึงการ์ด id 12
+    const card = this.props.fetchcard;
+    const card_result = card[12];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result)); 
+   }
+   if(this.props.choiceScore>=55.7&&this.props.choiceScore<=57.5){
+     //ดึงการ์ด id 13
+    const card = this.props.fetchcard;
+    const card_result = card[13];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result)); 
+   }
+   else if(this.props.choiceScore>=46.2&&this.props.choiceScore<=48){
+     //ดึงการ์ด id 14
+    const card = this.props.fetchcard;
+    const card_result = card[14];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result)); 
+   }
+   if(this.props.choiceScore>=57.6&&this.props.choiceScore<=59.4){
+     //ดึงการ์ด id 15
+    const card = this.props.fetchcard;
+    const card_result = card[15];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result)); 
+   }
+   else if(this.props.choiceScore>=42.4&&this.props.choiceScore<=44.2){
+     //ดึงการ์ด id 16
+    const card = this.props.fetchcard;
+    const card_result = card[16];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result));  
+   }
+   if(this.props.choiceScore>=53.8&&this.props.choiceScore<=55.6){
+     //ดึงการ์ด id 17
+    const card = this.props.fetchcard;
+    const card_result = card[17];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result)); 
+   }
+   else if(this.props.choiceScore>=51.9&&this.props.choiceScore<=53.7){
+     //ดึงการ์ด id 18
+    const card = this.props.fetchcard;
+    const card_result = card[18];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result)); 
+   }
+   if(this.props.choiceScore>=59.5&&this.props.choiceScore<=60.5){
+     //ดึงการ์ด id 19
+    const card = this.props.fetchcard;
+    const card_result = card[19];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result));  
+   }
+   else if(this.props.choiceScore>=48.1&&this.props.choiceScore<=49.9){
+     //ดึงการ์ด id 20
+    const card = this.props.fetchcard;
+    const card_result = card[20];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result));  
+   }
+   if(this.props.choiceScore>=44.3&&this.props.choiceScore<=46.1){
+     //ดึงการ์ด id 21
+    const card = this.props.fetchcard;
+    const card_result = card[21];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result)); 
+   }
+   else if(this.props.choiceScore>=40.5&&this.props.choiceScore<=42.3){
+     //ดึงการ์ด id 22
+    const card = this.props.fetchcard;
+    const card_result = card[22];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result)); 
+   }
+   if(this.props.choiceScore>=72.1&&this.props.choiceScore<=73.6){
+     //ดึงการ์ด id 23
+    const card = this.props.fetchcard;
+    const card_result = card[23];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result)); 
+   }
+   else if(this.props.choiceScore>=73.7&&this.props.choiceScore<=75.2){
+     //ดึงการ์ด id 24
+    const card = this.props.fetchcard;
+    const card_result = card[24];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result));   
+   }
+   if(this.props.choiceScore>=78.5&&this.props.choiceScore<=80){
+     //ดึงการ์ด id 25
+    const card = this.props.fetchcard;
+    const card_result = card[25];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result)); 
+   }
+   else if(this.props.choiceScore>=80.1&&this.props.choiceScore<=81.6){
+     //ดึงการ์ด id 26
+    const card = this.props.fetchcard;
+    const card_result = card[26];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result)); 
+   }
+   if(this.props.choiceScore>=76.9&&this.props.choiceScore<=78.4){
+     //ดึงการ์ด id 27
+    const card = this.props.fetchcard;
+    const card_result = card[27];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result)); 
+   }
+   else if(this.props.choiceScore>=81.7&&this.props.choiceScore<=83.2){
+     //ดึงการ์ด id 28
+    const card = this.props.fetchcard;
+    const card_result = card[28];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result));  
+   }
+   if(this.props.choiceScore>=83.3&&this.props.choiceScore<=84.8){
+     //ดึงการ์ด id 29
+    const card = this.props.fetchcard;
+    const card_result = card[29];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result)); 
+   }
+   else if(this.props.choiceScore>=88.1&&this.props.choiceScore<=89.6){
+     //ดึงการ์ด id 30
+    const card = this.props.fetchcard;
+    const card_result = card[30];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result)); 
+   }
+   if(this.props.choiceScore>=75.3&&this.props.choiceScore<=76.8){
+     //ดึงการ์ด id 31
+    const card = this.props.fetchcard;
+    const card_result = card[31];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result)); 
+   }
+   else if(this.props.choiceScore>=84.9&&this.props.choiceScore<=86.4){
+     //ดึงการ์ด id 32
+    const card = this.props.fetchcard;
+    const card_result = card[32];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result));  
+   }
+   if(this.props.choiceScore>=86.5&&this.props.choiceScore<=88){
+     //ดึงการ์ด id 33
+    const card = this.props.fetchcard;
+    const card_result = card[33];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result));  
+   }
+   else if(this.props.choiceScore>=89.7&&this.props.choiceScore<=91.2){
+     //ดึงการ์ด id 34
+    const card = this.props.fetchcard;
+    const card_result = card[34];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result)); 
+   }
+   if(this.props.choiceScore>=70.5&&this.props.choiceScore<=72){
+     //ดึงการ์ด id 35
+    const card = this.props.fetchcard;
+    const card_result = card[35];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result)); 
+   }
+   else if(this.props.choiceScore>=91.3&&this.props.choiceScore<=91.5){
+     //ดึงการ์ด id 36
+    const card = this.props.fetchcard;
+    const card_result = card[36];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result));  
+   }
+   if(this.props.choiceScore>=285.3&&this.props.choiceScore<=294.5){
+     //ดึงการ์ด id 37
+    const card = this.props.fetchcard;
+    const card_result = card[37];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result)); 
+   }
+   else if(this.props.choiceScore>=266.1&&this.props.choiceScore<=275.6){
+     //ดึงการ์ด id 38
+    const card = this.props.fetchcard;
+    const card_result = card[38];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result)); 
+   }
+   if(this.props.choiceScore>=256.5&&this.props.choiceScore<=266){
+     //ดึงการ์ด id 39
+    const card = this.props.fetchcard;
+    const card_result = card[39];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result)); 
+   }
+   else if(this.props.choiceScore>=275.7&&this.props.choiceScore<=285.2){
+     //ดึงการ์ด id 40
+    const card = this.props.fetchcard;
+    const card_result = card[40];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result)); 
+     
+   }
+   if(this.props.choiceScore>=408&&this.props.choiceScore<=412.9){
+     //ดึงการ์ด id 41
+    const card = this.props.fetchcard;
+    const card_result = card[41];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result));  
+   }
+   else if(this.props.choiceScore>=413&&this.props.choiceScore<=417.9){
+     //ดึงการ์ด id 42
+    const card = this.props.fetchcard;
+    const card_result = card[42];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result));  
+   }
+   if(this.props.choiceScore>=418&&this.props.choiceScore<=422.9){
+     //ดึงการ์ด id 43
+    const card = this.props.fetchcard;
+    const card_result = card[43];
+    console.log('Card Result: ', card_result)
+   await this.props.dispatch(setCurrentCardData(card_result)); 
+   }
+   else if(this.props.choiceScore>=423&&this.props.choiceScore<=427.5){
+     //ดึงการ์ด id 44
+    const card = this.props.fetchcard;
+    const card_result = card[44];
+    console.log('Card Result: ', card_result)
+    await this.props.dispatch(setCurrentCardData(card_result)); 
    }
    const arr = this.props.questions.map((a,i)=>{
      return {"questionId":a.questionId,"answer":a.answer}
    })
    console.log("this.props.questions_answer : ",arr.length)
+   this.props.navigation.navigate('Sentence')
  }
+
 /*
-   setCardId = (handleSubmit) => {
-        this.props.navigation.navigate('Result')
+   handleSubmit = ( submitQuestion) => {
+        this.props.navigation.navigate('Sentence')
         //this.props.dispatch(setCurrentCardData(data))
    }*/
 
@@ -252,10 +567,6 @@ await this.props.dispatch(setQuestionId(this.props.questions[index].questionId))
      await this.props.dispatch(setCurrentCardData(currentCardID)); 
   }
  
-
-  fetchCards=async(fetchcard)=>{  
-     await this.props.dispatch(fetchCards(fetchcard)); 
-  }
  
   previousQuestion=async()=>{
     const firstpage=[41001,42001,43001,45001,45011]
@@ -342,161 +653,143 @@ const choice_props =  currentQuestion.questionType==="1"? currentQuestion.choice
  
  
    return (
-     <SafeAreaView  style={[styles.container, containerStyle]}>
-    
- 
-<View style={{flex: 1, alignItems: 'center',}}> 
-      <Image source={require('./assets/images/Bg-Blue.png')}
-   style={{width:568 ,height: 580,marginTop:200,marginRight: 40}} />    
+<SafeAreaView  style={[styles.container, containerStyle]}>
+  
+<View style={{flex: 1, alignItems: 'center',}}>
+     <Image source={require('./assets/images/Bg-Blue.png')}
+  style={{width:568 ,height: 580,marginTop:200,marginRight: 40}} />   
 </View>
- 
-<View style={{flex: 1, alignItems: 'center'}}> 
- 
-      <Image source={require('./assets/images/Vector-Pink.png')}
-   style={{width:552.17 ,height: 323.61,marginTop: -150}} />
- 
-   <View style={styles.date}>
-   <Text style={styles.day}>จ.</Text>
-   <Text style={styles.number}>27</Text>
-   <Text style={styles.month}>ก.ย.</Text>
-   </View>
- 
-   <View style={{marginLeft: 100,marginTop: -85}}>
-     <Text style={styles.topic}>ประโยคพิเศษประจำวันจากน้องหมี </Text>
-     <Text style={styles.sentence}>"มะม่วงยังสุก เราจะทุกข์ทำไม"</Text>
-   </View>
- 
+<View style={{flex: 1, alignItems: 'center'}}>
+     <Image source={require('./assets/images/Vector-Pink.png')}
+  style={{width:552.17 ,height: 323.61,marginTop: -150}} />
+  <View style={styles.date}>
+  <Text style={styles.day}>จ.</Text>
+  <Text style={styles.number}>27</Text>
+  <Text style={styles.month}>ก.ย.</Text>
+  </View>
+  <View style={{marginLeft: 100,marginTop: -85}}>
+    <Text style={styles.topic}>ประโยคพิเศษประจำวันจากน้องหมี </Text>
+    <Text style={styles.sentence}>"มะม่วงยังสุก เราจะทุกข์ทำไม"</Text>
+  </View>
 </View>
- 
-<View style={{flex: 1, alignItems: 'center',}}> 
-      <Image source={require('./assets/images/Sunflower.png')}
-   style={{width:90.18, height: 90.18, marginTop:552,marginRight: 385}} />    
+<View style={{flex: 1, alignItems: 'center',}}>
+     <Image source={require('./assets/images/Sunflower.png')}
+  style={{width:90.18, height: 90.18, marginTop:552,marginRight: 385}} />   
 </View>
-<View style={{flex: 1, alignItems: 'center',}}> 
-      <Image source={require('./assets/images/Sunflower.png')}
-   style={{width:58.18, height: 58.18, marginTop: 120,marginRight: 170}} />    
+<View style={{flex: 1, alignItems: 'center',}}>
+     <Image source={require('./assets/images/Sunflower.png')}
+  style={{width:58.18, height: 58.18, marginTop: 120,marginRight: 170}} />   
 </View>
-<View style={{flex: 1, alignItems: 'center',}}> 
-      <Image source={require('./assets/images/Sunflower.png')}
-   style={{width:58.18, height: 58.18,marginTop: 310,marginLeft: 385}} />    
-   </View>
- 
-    <View style={{flex: 1, alignItems: 'center',}}> 
-      <Image source={require('./assets/images/Star-4.png')}
-   style={{width:40.33, height: 40.33,marginTop: 500}} />    
+<View style={{flex: 1, alignItems: 'center',}}>
+     <Image source={require('./assets/images/Sunflower.png')}
+  style={{width:58.18, height: 58.18,marginTop: 310,marginLeft: 385}} />   
+  </View>
+   <View style={{flex: 1, alignItems: 'center',}}>
+     <Image source={require('./assets/images/Star-4.png')}
+  style={{width:40.33, height: 40.33,marginTop: 500}} />   
 </View>
-    <View style={{flex: 1, alignItems: 'center',}}> 
-      <Image source={require('./assets/images/Star-5.png')}
-   style={{width:28.3, height: 28.3,marginTop: 400,marginRight: 350}} />    
-</View> 
- 
+   <View style={{flex: 1, alignItems: 'center',}}>
+     <Image source={require('./assets/images/Star-5.png')}
+  style={{width:28.3, height: 28.3,marginTop: 400,marginRight: 350}} />   
+</View>
 <View style={{flexDirection: 'column' ,justifyContent: 'center', alignItems: 'center'}}>
 {currentQuestion.questionType==="1" &&
- 
-    <View >
-    <View style={{flex:1,marginTop: 80,marginLeft: 45}}>
- <View style={styles.question}>
-      <Text style={styles.textQuestion} >{currentQuestion.detail} QuestionId : {currentQuestion.questionId} Answer : {currentQuestion.answer} </Text>
- </View>
+   <View >
+   <View style={{flex:1,marginTop: 80,marginLeft: 45}}>
+<View style={styles.question}>
+     <Text style={styles.textQuestion} >{currentQuestion.detail} QuestionId : {currentQuestion.questionId} Answer : {currentQuestion.answer} </Text>
 </View>
-     <View style={{height: 200,width: 353, backgroundColor: '#FFFFFF',borderRadius: 10,marginTop: 200,paddingTop: 20,marginBottom: 60,marginLeft: 45}}>
-    {this.RadioGroup(currentQuestion)}
-     </View>
-
-     <View style={{flex: 1,flexDirection: 'row' , justifyContent: 'space-between',alignItems: 'flex-end',marginBottom: 30}}>
- <TouchableOpacity style={styles.button} activeOpacity ={0.75} onPress = {() => this.previousQuestion()}>
-      <Text style={styles.textButton}>ย้อนกลับ</Text>
- </TouchableOpacity>
-
-    <TouchableOpacity style={styles.button} activeOpacity ={0.75}
-       onPress = {() => this.nextQuestion()}
-    >
-      <Text style={styles.textButton}>ถัดไป</Text>
-    </TouchableOpacity>
-
 </View>
+    <View style={{height: 200,width: 353, backgroundColor: '#FFFFFF',borderRadius: 10,marginTop: 200,paddingTop: 20,marginBottom: 60,marginLeft: 45}}>
+   {this.RadioGroup(currentQuestion)}
     </View>
-
-    
-
-    
-}
  
-{currentQuestion.questionType==="2" &&
-    <View >
-         
+    <View style={{flex: 1,flexDirection: 'row' , justifyContent: 'space-between',alignItems: 'flex-end',marginBottom: 30}}>
+<TouchableOpacity style={styles.button} activeOpacity ={0.75} onPress = {() => this.previousQuestion()}>
+     <Text style={styles.textButton}>ย้อนกลับ</Text>
+</TouchableOpacity>
  
-  <View style={{flex:1,marginTop: -20,marginLeft: 30}}>
- <View style={styles.questionM}>
-      <Text style={styles.textQuestionM}> {currentQuestion.detail} Answer : {currentQuestion.answer}</Text>
+   <TouchableOpacity style={styles.button} activeOpacity ={0.75}
+      onPress = {() => this.nextQuestion()}
+   >
+     <Text style={styles.textButton}>ถัดไป</Text>
+   </TouchableOpacity>
+ 
 </View>
-</View>
- 
-    <View style={{flexDirection: 'column' ,justifyContent: 'center', alignItems: 'center'}}>
-       <View>
-       <TextInput
-       style={styles.input}
-        placeholder="บอกความในใจของเธอมาได้เลย..."
-        placeholderTextColor="#000000"
-        autoCapitalize='none'
-          
-     />
-     </View>
-  </View>
-
-  <View style={{flex: 1,flexDirection: 'row' , justifyContent: 'space-between',alignItems: 'flex-end',marginBottom: 5}}>
- <TouchableOpacity style={styles.button} activeOpacity ={0.75} onPress = {() => this.previousQuestion()}>
-      <Text style={styles.textButton}>ย้อนกลับ</Text>
- </TouchableOpacity>
-
-    <TouchableOpacity style={styles.button} activeOpacity ={0.75}
-       onPress = {() => this.nextQuestion()}
-    >
-      <Text style={styles.textButton}>ถัดไป</Text>
-    </TouchableOpacity>
-
-</View>
- 
-    </View>
-
-
- 
-}
- 
-{currentQuestion.questionType==="3" &&
-    <View >
-         
-<View style={{flexDirection: 'column' ,justifyContent: 'center', alignItems: 'center',marginTop: 300}}>
-   <View style= {styles.containerS}>
-       <Text style={styles.textS}>{currentQuestion.detail} Current : {currentQuestion.answer}</Text>
    </View>
+ 
+  
+ 
+  
+}
+{currentQuestion.questionType==="2" &&
+   <View >
+       
+ <View style={{flex:1,marginTop: -20,marginLeft: 30}}>
+<View style={styles.questionM}>
+     <Text style={styles.textQuestionM}> {currentQuestion.detail} </Text>
 </View>
-
-
-
+</View>
+   <View style={{flexDirection: 'column' ,justifyContent: 'center', alignItems: 'center'}}>
+      <View>
+      <TextInput
+      style={styles.input}
+       placeholder="บอกความในใจของเธอมาได้เลย..."
+       placeholderTextColor="#000000"
+       autoCapitalize='none'
+        
+    />
+    </View>
+ </View>
+ 
+ <View style={{flex: 1,flexDirection: 'row' , justifyContent: 'space-between',alignItems: 'flex-end',marginBottom: 5}}>
+<TouchableOpacity style={styles.button} activeOpacity ={0.75} onPress = {() => this.previousQuestion()}>
+     <Text style={styles.textButton}>ย้อนกลับ</Text>
+</TouchableOpacity>
+ 
+   <TouchableOpacity style={styles.button} activeOpacity ={0.75}
+      onPress = {() => this.nextQuestion()}
+   >
+     <Text style={styles.textButton}>ถัดไป</Text>
+   </TouchableOpacity>
+ 
+</View>
+   </View>
+ 
+ 
+}
+{currentQuestion.questionType==="3" &&
+   <View >
+       
+<View style={{flexDirection: 'column' ,justifyContent: 'center', alignItems: 'center',marginTop: 300}}>
+  <View style= {styles.containerS}>
+      <Text style={styles.textS}>{currentQuestion.detail} </Text>
+  </View>
+</View>
+ 
  
 <View style={{flex: 1,flexDirection: 'row' , justifyContent: 'space-between',alignItems: 'flex-end',marginBottom: 100,marginLeft:-10}}>
- <TouchableOpacity style={styles.button} activeOpacity ={0.75} onPress = {() => this.previousQuestion()}>
-      <Text style={styles.textButton}>ย้อนกลับ</Text>
- </TouchableOpacity>
-
+<TouchableOpacity style={styles.button} activeOpacity ={0.75} onPress = {() => this.previousQuestion()}>
+     <Text style={styles.textButton}>ย้อนกลับ</Text>
+</TouchableOpacity>
+ 
 <View style={{flex:1}}>
-      <TouchableOpacity style={styles.button_submit} activeOpacity ={0.75}
-       onPress = {() => this.submitQuestion()}>
-      <Text style={styles.textButton}>ส่งคำตอบ</Text>
-    </TouchableOpacity>
-</View>
-
+     <TouchableOpacity style={styles.button_submit} activeOpacity ={0.75}
+      onPress = {() => this.submitQuestion()}>
+     <Text style={styles.textButton}>ส่งคำตอบ</Text>
+   </TouchableOpacity>
 </View>
  
-    </View>
+</View>
+   </View>
 }
- 
 </View>
+ 
+ 
+ 
+  </SafeAreaView>
 
 
-
-   </SafeAreaView>
  
  
  
@@ -531,6 +824,22 @@ choice_List(){
           </View>   
       </View>
             }
+        </View>
+ 
+      
+      )
+    })
+
+  }
+  
+  card_List(){
+
+   return this.state.allCard.map((data) => {
+      return (
+   
+          
+         <View >
+            <Text>{data.card_name}</Text>
         </View>
  
       
@@ -752,11 +1061,14 @@ date: {
    },
  
 textS:{
-    color: 'pink',
-    fontSize: 24,
+    color: '000000',
+    fontSize: 20,
     fontFamily: 'Quark',
     fontWeight: 'bold',
     textAlign: 'center',
+    flexWrap: 'wrap',
+    paddingLeft: 20,
+    paddingRight: 20,
    
       
 },
@@ -789,6 +1101,7 @@ const mapStateToProps=(state,props)=>{
    choiceScore:state.Questions.choiceScore,
    currentCardID:state.Questions.currentCardID,
    fetchcard:state.Questions.fetchcard,
+   currentCardID:state.Questions.currentCardID,
  }
 }
 export default connect (mapStateToProps) (Choices);

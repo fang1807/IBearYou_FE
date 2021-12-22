@@ -8,6 +8,8 @@ import axios from 'axios';
 import CustomHeader from './CustomHeader';
 import {API_URL} from './config'
 import {connect} from 'react-redux';
+import {setSelectedDiaryData} from './actions/Diary'
+import {setCurrentDiaryID,setCurrentDate} from './actions/Diary'
 
 class EditDiaryScreen extends Component {
   constructor(props) {
@@ -88,7 +90,7 @@ handleSubmit = async(event) => {
 <SafeAreaView style={{ flex: 1,backgroundColor: '#EAD6A4' }}>
    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
 
-<View style={{flex: 1, marginTop : -610}}>
+<View style={{flex: 1, marginTop : -645}}>
  <View style={{flex: 1, alignItems: 'center',}}> 
       <Image source={require('./assets/images/rainy.png')}
    style={{width:392 ,height:294,marginTop: 540}} /> 
@@ -96,7 +98,7 @@ handleSubmit = async(event) => {
 
 
 
-<View style={{marginTop: -10}}>
+<View style={{marginTop: 600}}>
   <View style={styles.buttonFeel}>
     <Text style={styles.textFeel}>วันนี้เป็นยังไงบ้าง</Text>
   </View>
@@ -114,7 +116,7 @@ handleSubmit = async(event) => {
 <View >
 
 
-<View style={{flex: 1}}>
+<View style={{flex: 1,marginTop: -5}}>
 
   <View style={styles.page}></View>
 
@@ -123,7 +125,7 @@ handleSubmit = async(event) => {
 </View>
 
 
-<View style={{marginTop: 270}}>
+<View style={{marginTop: 320}}>
  <View style={{flex: 1}} >
  <Image source={require('./assets/images/line.png')}
    style={{width: 290,height:256,marginTop: 220,marginLeft: 35}}
@@ -132,7 +134,7 @@ handleSubmit = async(event) => {
 
 <View style={{marginTop: 5}}>
  <View>
-<Text style={styles.textDate}>{this.props.selectedDiaryData.create_date}</Text>
+<Text style={styles.textDate}>{this.props.selectedDiaryData.date}</Text>
  </View>
 <View style={styles.buttonEmoji}>
 <TouchableOpacity activeOpacity={0.75}>
@@ -149,7 +151,7 @@ handleSubmit = async(event) => {
 
 <View style={{flex: 1,marginTop: 10}}>
 
-<View style={{flex: 1,marginTop: -11}}>
+<View style={{flex: 1,marginTop: 20}}>
   <Text style={styles.textType}>เรื่องราวที่ดี</Text>
    <TextInput placeholder="เขียนบันทึกเรื่องราวที่ดี"
             placeholderTextColor="#707070"
@@ -161,7 +163,7 @@ handleSubmit = async(event) => {
  </View>
 
 
- <View style={{flex: 1,marginTop: 18.5}}>
+ <View style={{flex: 1,marginTop: 48}}>
   <Text style={styles.textType}>เรื่องราวที่ไม่ดี</Text>
    <TextInput placeholder="เขียนบันทึกเรื่องราวที่ไม่ดี"
             placeholderTextColor="#707070"
@@ -173,7 +175,7 @@ handleSubmit = async(event) => {
   </View>
 
 
-<View style={{flex: 1,marginTop: 20.5}}>
+<View style={{flex: 1,marginTop: 45.5}}>
   <Text style={styles.textType}>ความคาดหวัง</Text>
    <TextInput placeholder="เขียนบันทึกความคาดหวัง"
             placeholderTextColor="#707070"
@@ -190,13 +192,13 @@ handleSubmit = async(event) => {
 </View>
 </View>
 
-<View style={{flex: 1,marginTop: 135}}>
+<View style={{flex: 1,marginTop: 172}}>
  <Image source={require('./assets/images/rain-doll.png')}
    style={{width: 91,height:95.71,marginLeft: 10}}
    resizeMode='contain' />  
 </View>
  
-<View style={{flex: 1,flexDirection: 'row' , justifyContent: 'space-between',alignItems: 'flex-end',marginBottom: 30}}>
+<View style={{flex: 1,flexDirection: 'row' , justifyContent: 'space-between',alignItems: 'flex-end',marginBottom: 20}}>
   <TouchableOpacity style={styles.button} activeOpacity ={0.75}
      onPress = {() => this.props.navigation.navigate('Calendar')}
    >

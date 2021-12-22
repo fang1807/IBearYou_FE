@@ -22,6 +22,7 @@ class AlarmScreen extends Component {
       todoListData: [],
       complete: true,
       checked: 0,
+      selectedEditData: {},
       
       
     };
@@ -30,6 +31,7 @@ class AlarmScreen extends Component {
 
     componentDidMount(){
     console.log("componentDidmount AlarmScreen this.props.userdata : ",this.props.userdata);
+    
     //this.loadHeal_Sentence();
     this.loadAllTodoList();
     //this.loadTodoList_ID();
@@ -75,17 +77,21 @@ loadTodoList_ID=async(selectedTodoList)=>{
     const clientData =  {"user_id": this.props.userdata.user_id,"to_do_list_id": selectedTodoList};
     const endpoint = `${API_URL}/api/get-one_to_do_list`;
     console.log('endpoint : ',endpoint)
-    const res = await axios.get(endpoint,{params:clientData}) 
-       if(res.data.message==="Success"&& data.title){
+    const res = await axios.get(endpoint,{params:clientData})
+    const {data,message}=res.data // Destructuring
+    console.log("res.data ",data)
+    console.log("message ",message)
+       if(message==="Success"&& data.title){
           console.log("data.title: ",data.title)
           console.log("Success")
-          console.log("user_data: ",res.data.data)
-         this.setState({"todoListData":res.data.data})
-          console.log("this.state.todoListData ",this.state.todoListData) 
+         this.setState({"selectedEditData":data})
+          console.log("this.state.selectedEditData ",this.state.selectedEditData) 
 
           this.props.dispatch(setTodoListID(data))
+
+          this.props.navigation.navigate('EditTodoList') 
         }
-        else  if(res.data.message==="Fail") {
+        else  if(message==="Fail") {
           console.log("Fail")
         } 
 
@@ -111,7 +117,7 @@ loadTodoList_ID=async(selectedTodoList)=>{
 
 
   render() {
-const {userdata}= this.props
+const {userdata,todolistID,priorityID}= this.props
 
 const editAlarm = this.state.edit
 
@@ -156,11 +162,12 @@ const editAlarm = this.state.edit
 <View style={{flex:1,marginTop:-20,paddingTop:-80}}>
     {this.AlltodoList()}
 </View>
- </ScrollView>   
+</ScrollView>    
 
       </View>
+     
 </View>
-
+ 
 
 
      </SafeAreaView>
@@ -180,7 +187,7 @@ const editAlarm = this.state.edit
        
         <View style={{flex: 1,justifyContent: 'center',marginTop:80 }}>
         <View style={styles.buttonAlarm}>
-        <TouchableOpacity onPress={() => this.selectEditTodoList(data.to_do_list_id)} activeOpacity={0.75}>
+        <TouchableOpacity onPress={() => this.loadTodoList_ID(data.to_do_list_id)} activeOpacity={0.75}>
             <View style={{marginLeft:60,marginTop:5,marginLeft:20}}>
               <Text style={styles.textTime}>{data.title}</Text>
               <Text style={styles.textTask}>{data.description}</Text>
@@ -376,6 +383,8 @@ const mapStateToProps=(state,props)=>{
   return{
  
    userdata:state.Questions.userdata, 
+   todolistID:state.Questions.todolistID, 
+   priorityID:state.Questions.priorityID, 
  }
 }
 

@@ -11,6 +11,9 @@ import {connect} from 'react-redux';
 import SwitchToggle from "react-native-switch-toggle";
 import DateTimePickerModel from "react-native-modal-datetime-picker";
 
+import {setCurrentPriorityID} from './actions/TodoList'
+import {setFinishDate} from './actions/TodoList'
+
 
 class editTodoList extends Component {
   constructor(props) {
@@ -23,11 +26,14 @@ class editTodoList extends Component {
       isVisible: false,
       choseTime: '',
       choseDateTime: '',
+      choosefinishdate: '',
       listPriority: [],
       title : this.props.todolistID.title,
       description : this.props.todolistID.description,
       finish_date : this.props.todolistID.finish_date,
       priority : this.props.todolistID.priority_id,
+      user_id : this.props.userdata.user_id,
+      to_do_list_id : this.props.todolistID.to_do_list_id,
     };
   }
 
@@ -66,7 +72,7 @@ handleSubmit = async(event) => {
      console.log("this.state.title: ",this.state.title) 
      console.log("this.state.description: ",this.state.description) 
      console.log("this.state.finish_date: ",this.state.finish_date) 
-     console.log("this.state.priority_id: ",this.state.priority_id) 
+     console.log("this.state.priority_id: ",this.props.priorityID) 
 
     const editTodoList = {}
     editTodoList.user_id= this.props.userdata.user_id
@@ -74,7 +80,7 @@ handleSubmit = async(event) => {
     editTodoList.title =this.state.title
     editTodoList.description =this.state.description
     editTodoList.finish_date =this.state.finish_date
-    editTodoList.priority_id =this.state.priority_id
+    editTodoList.priority_id =this.props.priorityID
 
     console.log("editTodoList: ",editTodoList)
 
@@ -85,8 +91,8 @@ handleSubmit = async(event) => {
           console.log("Success")
          this.props.navigation.navigate('Alarm')
         }
-        else  if(res.data.message==="create fail") {
-          console.log("create fail")
+        else  if(res.data.message==="edit fail") {
+          console.log("edit fail")
         }
       })
   }
@@ -132,19 +138,43 @@ loadPriority=async()=>{
 
 }
 
-  switchToggle = () => {
-     this.setState({
-       toggle: !this.state.toggle 
-     })
-      console.log ('selected switch!')
+handleDelete = async(event) => {
+    //event.preventDefault();
+    console.log("handleDelete")
+    console.log("user_id: ",this.props.userdata.user_id)
+    console.log("to_do_list_id: ",this.props.todolistID.to_do_list_id)
+    
+    const deleteTodoList = {}
+    deleteTodoList.user_id= this.props.userdata.user_id
+    deleteTodoList.to_do_list_id= this.props.todolistID.to_do_list_id
+
+    console.log("deleteTodoList: ",deleteTodoList)
+
+    axios.put(API_URL+'/api/delete-to_do_list', deleteTodoList)
+      .then(res => { 
+          console.log(res.data);
+        if(res.data.message==="Success"){
+         console.log("Success")
+         this.props.navigation.navigate('Alarm') 
+         
+        }
+        else  if(res.data.message==="delete fail") {
+          console.log("delete fail")
+        }
+      })
   }
 
+
 handlePicker = (datetime) => {
-  this.setState({
+   console.log("datetime ",datetime)
+   //this.state.(feelID)
+   this.setState({
     isVisible:false,
     //choseTime: moment(time).format('LT')
     choseDateTime: moment(datetime).format('LL'),
+    
   })
+
 }
 
 showPicker = () => {
@@ -160,10 +190,31 @@ hidePicker = () => {
   })
 }
 
+   setCurrentPriorityID = async(priorityID)=>{
+   await this.props.dispatch(setCurrentPriorityID(priorityID))
+ }
+
+    selectedPriority = (priorityID) => {
+    console.log("priorityID ",priorityID)
+    this.setCurrentPriorityID(priorityID)
+    console.log ('selected priotity seccess!')
+  }
+
+   setFinishDate = async(finishdate)=>{
+   await this.props.dispatch(setFinishDate(finishdate))
+ }
+
+    selectedFinishDate = (finishdate) => {
+    //console.log("finishdate ",finishdate)
+    this.setFinishDate(finishdate)
+    console.log ('selected finish_date seccess!')
+  }
+
+
 
 
   render() {
-    const {userdata,todolistID}= this.props
+    const {userdata,todolistID,priorityID}= this.props
   return (
      <SafeAreaView style={{ flex: 1 , backgroundColor: '#EAD6A4'}}>
 
@@ -188,7 +239,7 @@ hidePicker = () => {
       <View style={styles.setting}>
 
 <View style={{marginTop:-20}}>     
-<TouchableOpacity activeOpacity={0.75}>
+<TouchableOpacity  onPress={() => this.handleDelete()} activeOpacity={0.75}>
         <View>  
        <Image source={require('./assets/images/delete-red.png')}
     style={{width:25,height:30,marginTop: -20,marginLeft:305,marginBottom:10}} />     
@@ -202,7 +253,7 @@ hidePicker = () => {
           <TextInput
             placeholder="ชื่อการแจ้งเตือน"
             placeholderTextColor="#014A5C"
-            defaultValue={this.props.todolistID.title}
+            defaultValue={this.state.title}
             onChangeText={ (title) => this.setState({title}) }
             autoCapitalize='none'
             style={styles.text}
@@ -255,8 +306,8 @@ hidePicker = () => {
        style={styles.input}
         placeholder="รายละเอียดเกี่ยวกับงาน..."
         placeholderTextColor="#000000"
-         defaultValue={this.state.user_name}
-         onChangeText={user_name=>this.setState({user_name})}
+         defaultValue={this.state.description}
+         onChangeText={description=>this.setState({description})}
          autoCapitalize='none'
      />
 </View>
@@ -294,7 +345,7 @@ hidePicker = () => {
          <View key={key}>
             {this.state.checked == key ?
             <View >
-                <TouchableOpacity activeOpacity={0.75}>
+                <TouchableOpacity onPress ={() => this.selectedPriority(data.priority_id)} activeOpacity={0.75}>
                     <Image source={require('./assets/images/circle-2.png')}
                            style={{width:13,height:13,marginTop: 5,marginLeft:20}} /> 
                     <Text style={styles.textSound}>{data.priority_name}</Text>
@@ -542,6 +593,7 @@ const mapStateToProps=(state,props)=>{
  
    userdata:state.Questions.userdata, 
    todolistID:state.Questions.todolistID, 
+   priorityID:state.Questions.priorityID, 
  }
 }
 

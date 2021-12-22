@@ -316,8 +316,11 @@ const styles = StyleSheet.create({
       fontSize: 18,
       color:'#FFFFFF',
       fontFamily: 'Quark',
-      marginLeft: 12,
       marginTop: -3,
+      flexWrap: 'wrap',
+      paddingLeft: 18,
+      paddingRight: 18,
+      marginLeft:-5
     }
 
 

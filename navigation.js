@@ -9,6 +9,7 @@ import thunk from 'redux-thunk';
 import Choices from './Choices';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 
+import Sentence from './Sentence';
 import EditTodoList from './EditTodoList';
 import CustomHeader from './CustomHeader';
 import HomeScreen from './HomeScreen';
@@ -85,6 +86,7 @@ function CheckupStack() {
       <StackCheckup.Screen name='History' component={HistoryScreen} options={navOptionHandler}/>  
       <StackCheckup.Screen name='Result' component={resultScreen} options={navOptionHandler}/>
       <StackCheckup.Screen name='Choices' component={Choices} options={navOptionHandler}/>
+      <StackCheckup.Screen name='Sentence' component={Sentence} options={navOptionHandler}/>
      </StackCheckup.Navigator>
 
   )
@@ -140,12 +142,12 @@ function TabNavigator() {
                ? require('./assets/images/quiz.png')
                : require('./assets/images/quiz-pink.png') ;
             }
-            else if (route.name === 'Bear') {
+            else if (route.name === 'Todo-List') {
               iconName = focused 
-               ? require('./assets/images/Alarm-black.png')
-               : require('./assets/images/Alarm-pink.png') ;
+               ? require('./assets/images/note-1.png')
+               : require('./assets/images/note-2.png') ;
             }
-             else if (route.name === 'Profile') {
+             else if (route.name === 'Setting') {
               iconName = focused 
                ? require('./assets/images/Signout-black.png')
                : require('./assets/images/Signout-pink.png') ;
@@ -164,8 +166,8 @@ function TabNavigator() {
         <Tab.Screen name="Home" component={HomeStack} />
         <Tab.Screen name="Diary" component={DiaryStack} />
         <Tab.Screen name="Checkup" component={CheckupStack} />
-        <Tab.Screen name="Bear" component={BearStack} />
-        <Tab.Screen name="Profile" component={ProfileStack} />
+        <Tab.Screen name="Todo-List" component={BearStack} />
+        <Tab.Screen name="Setting" component={ProfileStack} />
       </Tab.Navigator>
   )
 }

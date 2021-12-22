@@ -65,17 +65,9 @@ constructor(props) {
  </View>
 
 
-          <View style={{flex: 1, alignItems : 'flex-start',marginTop: -420}}>
- <CustomHeader title='History'  navigation={this.props.navigation}/>
- </View>
-
- 
-
-
-
  <SwitchSelector
       options={switchOption}
-      initial={0}
+      initial={1}
       onPress={() => this.props.navigation.navigate('Checkup')}
       textColor='#565656' 
       fontSize={16}

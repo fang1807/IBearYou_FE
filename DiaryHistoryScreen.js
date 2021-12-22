@@ -52,7 +52,7 @@ loadHistory_Diary=async()=>{
 </View>
 
 
-<View style={{marginTop: -10}}>
+<View style={{flex:1,marginTop: 600}}>
   <View style={styles.buttonFeel}>
     <Text style={styles.textFeel}>วันนี้เป็นยังไงบ้าง</Text>
   </View>
@@ -60,14 +60,16 @@ loadHistory_Diary=async()=>{
 
 </View>
 
-<View style={{marginTop: 320}}>
+
+
+<View style={{flex:1,marginTop: 730,marginBottom:-580}}>
  
     <TouchableOpacity style={styles.buttonVeryGood} activeOpacity={0.50}
      onPress ={() => this.selectedFeel(data.feel_id)}>
      <View>
-     <Text style={styles.textMood}></Text>
+     <Text style={styles.textMood}>{this.props.selectedDiaryData.feel_name}</Text>
       <Image source={require('./assets/images/bear-verygood.png')}
-     style={{width:57.24 ,height:57.37,marginTop: -38,marginLeft: -50}}
+     style={{width:57.24 ,height:57.37,marginTop: -40,marginLeft: -50}}
      />
      </View>
      </TouchableOpacity>
@@ -80,7 +82,7 @@ loadHistory_Diary=async()=>{
 <View >
 
 
-<View style={{flex: 1,marginTop:-40}}>
+<View style={{flex: 1,marginTop:-30}}>
 
   <View style={styles.page}></View>
 
@@ -96,9 +98,9 @@ loadHistory_Diary=async()=>{
    resizeMode='contain' />  
  </View>
 
-<View style={{marginTop: 5}}>
+<View style={{marginTop: 47}}>
  <View>
-<Text style={styles.textDate}>{this.props.selectedDiaryData.create_date}</Text>
+<Text style={styles.textDate}>{this.props.selectedDiaryData.date}</Text>
  </View>
 <View style={styles.buttonEmoji}>
 
@@ -143,7 +145,7 @@ loadHistory_Diary=async()=>{
         onPress = {() => this.props.navigation.navigate('EditDiary')}
          activeOpacity={1} activeOpacity={0.75}>
              <Image source={require('./assets/images/buttonEdit.png')}
-                    style={{width:38,height:38,marginLeft:310,marginTop: 100}} /> 
+                    style={{width:38,height:38,marginLeft:310,marginTop: 120}} /> 
         </TouchableOpacity>
     </View>
 </View>
@@ -168,7 +170,7 @@ textDate: {
      fontSize: 14,
      fontFamily: 'Quark',
      textAlign: 'center', 
-      marginLeft: -170
+      marginLeft: -190
 },
 
 textEmoji: {
@@ -281,6 +283,34 @@ button:{
       flex: 1,
       marginTop: -30,
     
+    },
+
+     textMood: {
+     color: '#000000',
+     fontSize: 18,
+     fontFamily: 'Quark',
+     fontWeight: 'bold',
+     marginLeft: 15,
+     marginTop: 12,
+    
+    },
+
+buttonVeryGood: {
+      width: 325,
+      height: 50,
+      backgroundColor: '#FFFFFF',
+      borderColor: '#70BA97',
+      borderLeftWidth: 42,
+      borderRightWidth: 3,
+      borderBottomWidth: 3,
+      shadowColor: '#000000',
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity:  0.4,
+      shadowRadius: 3,
+      elevation: 1,
+      marginTop: -60,
+      marginBottom: 20,
+      marginLeft: 20,
     },
 
     

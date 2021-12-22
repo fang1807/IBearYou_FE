@@ -8,6 +8,7 @@ import CustomHeader from './CustomHeader';
 import {API_URL} from './config'
 import {connect} from 'react-redux';
 import {setCurrentFeelID} from './actions/Diary'
+import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 
 class MoodScreen extends Component {
   constructor(props) {
@@ -129,13 +130,13 @@ class MoodScreen extends Component {
    return this.state.listFeelData.map((data,key) => {
       return (
  
-     <View key={key} style={{flex: 1,marginBottom: -110}}>
+     <View  style={{flex: 1,marginBottom: -110}}>
      {this.state.checked == key 
      ?
     <TouchableOpacity style={styles.buttonVeryGood} activeOpacity={0.5}
      onPress ={() => this.selectedFeel(data.feel_id)}>
      <View>
-     <Text style={styles.textMood}>{data.feel_name}</Text>
+     <Text style={styles.textMood} key={key}>{data.feel_name}</Text>
       <Image source={require('./assets/images/bear-verygood.png')}
      style={{width:57.24 ,height:57.37,marginTop: -38,marginLeft: -50}}
      />
@@ -147,7 +148,7 @@ class MoodScreen extends Component {
       :
     <View>
      <TouchableOpacity style={styles.buttonVeryGood} activeOpacity={1}
-     onPress ={() => this.selectedFeel(data.feel_id)}>
+     onPress ={() => this.setState({checked:key})}>
      <Text style={styles.textMood}>{data.feel_name}</Text>
       <Image source={require('./assets/images/bear-verygood.png')}
      style={{width:57.24 ,height:57.37,marginTop: -38,marginLeft: -50}}
@@ -158,8 +159,12 @@ class MoodScreen extends Component {
      </TouchableOpacity>
      </View>
 }
+
+
   
 </View>
+
+
  
 
       )

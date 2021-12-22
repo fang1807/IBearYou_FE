@@ -36,6 +36,7 @@ class setAlarmScreen extends Component {
 
      componentDidMount(){
     console.log("componentDidmount setAlarmScreen this.props.userdata : ",this.props.userdata);
+    console.log("this,props.todolistID",this.props.todolistID)
     //this.loadHeal_Sentence();
     //this.loadSound();
     this.loadPriority();
@@ -173,7 +174,7 @@ hidePicker = () => {
        description: !this.state.description
      })
       console.log ('selected seccess!')
-  }
+    }
 
    setCurrentPriorityID = async(priorityID)=>{
    await this.props.dispatch(setCurrentPriorityID(priorityID))
