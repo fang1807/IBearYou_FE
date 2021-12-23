@@ -187,9 +187,6 @@ loadHeal_Sentence=async()=>{
 
 }
 
-
-
-
 }
 const containerStyle = {
        backgroundColor: '#4C6FAF',

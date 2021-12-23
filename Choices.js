@@ -160,7 +160,7 @@ fetchCards=async(fetchcard)=>{
  
  nextQuestion=async()=>{
 
-   const currentIndex= this.props.questions.findIndex(e=>e.questionId==parseInt(this.props.questionId))  
+   const currentIndex= this.props.questions.findIndex(e=>e.questionId==parseFloat(this.props.questionId))  
 
    if (currentIndex >= this.props.questions.length-1) return;
    const nextIndex =currentIndex+1;
@@ -172,7 +172,7 @@ if(question.answer!=0){
    score=0;
  }
 
- var newscoreint=parseInt(question.choices[question.answer-1].choice_score,10);
+ var newscoreint=parseFloat(question.choices[question.answer-1].choice_score,10);
 
 
  await this.props.dispatch(setChoiceScore(newscoreint+score))
@@ -244,280 +244,280 @@ await this.props.dispatch(setQuestionId(this.props.questions[index].questionId))
    if(this.props.choiceScore>=11&&this.props.choiceScore<=13.2){
     //ดึงการ์ด id 1
     const card = this.props.fetchcard;
-    const card_result = card[1];
+    const card_result = card[0];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result)); 
    }
    else if(this.props.choiceScore>=13.3&&this.props.choiceScore<=15.5){
      //ดึงการ์ด id 2
     const card = this.props.fetchcard;
-    const card_result = card[2];
+    const card_result = card[1];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result)); 
    }
    if(this.props.choiceScore>=20.2&&this.props.choiceScore<=22.4){
      //ดึงการ์ด id 3
     const card = this.props.fetchcard;
-    const card_result = card[3];
+    const card_result = card[2];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result));  
    }
    else if(this.props.choiceScore>=22.5&&this.props.choiceScore<=24.7){
      //ดึงการ์ด id 4
     const card = this.props.fetchcard;
-    const card_result = card[4];
+    const card_result = card[3];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result));  
    }
    if(this.props.choiceScore>=24.8&&this.props.choiceScore<=27){
      //ดึงการ์ด id 5
     const card = this.props.fetchcard;
-    const card_result = card[5];
+    const card_result = card[4];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result)); 
    }
    else if(this.props.choiceScore>=15.6&&this.props.choiceScore<=17.8){
     //ดึงการ์ด id 6
     const card = this.props.fetchcard;
-    const card_result = card[6];
+    const card_result = card[5];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result)); 
    }
    if(this.props.choiceScore>=31.7&&this.props.choiceScore<=33.9){
      //ดึงการ์ด id 7
     const card = this.props.fetchcard;
-    const card_result = card[7];
+    const card_result = card[6];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result));  
    }
    else if(this.props.choiceScore>=27.1&&this.props.choiceScore<=29.3){
      //ดึงการ์ด id 8
     const card = this.props.fetchcard;
-    const card_result = card[8];
+    const card_result = card[7];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result));  
    }
    if(this.props.choiceScore>=29.4&&this.props.choiceScore<=31.6){
      //ดึงการ์ด id 9
     const card = this.props.fetchcard;
-    const card_result = card[9];
+    const card_result = card[8];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result)); 
    }
    else if(this.props.choiceScore>=17.9&&this.props.choiceScore<=20.1){
      //ดึงการ์ด id 10
     const card = this.props.fetchcard;
-    const card_result = card[10];
+    const card_result = card[9];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result));  
    }
    if(this.props.choiceScore>=34&&this.props.choiceScore<=35){
      //ดึงการ์ด id 11
     const card = this.props.fetchcard;
-    const card_result = card[11];
+    const card_result = card[10];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result)); 
    }
    else if(this.props.choiceScore>=50&&this.props.choiceScore<=51.8){
      //ดึงการ์ด id 12
     const card = this.props.fetchcard;
-    const card_result = card[12];
+    const card_result = card[11];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result)); 
    }
    if(this.props.choiceScore>=55.7&&this.props.choiceScore<=57.5){
      //ดึงการ์ด id 13
     const card = this.props.fetchcard;
-    const card_result = card[13];
+    const card_result = card[12];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result)); 
    }
    else if(this.props.choiceScore>=46.2&&this.props.choiceScore<=48){
      //ดึงการ์ด id 14
     const card = this.props.fetchcard;
-    const card_result = card[14];
+    const card_result = card[13];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result)); 
    }
    if(this.props.choiceScore>=57.6&&this.props.choiceScore<=59.4){
      //ดึงการ์ด id 15
     const card = this.props.fetchcard;
-    const card_result = card[15];
+    const card_result = card[14];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result)); 
    }
    else if(this.props.choiceScore>=42.4&&this.props.choiceScore<=44.2){
      //ดึงการ์ด id 16
     const card = this.props.fetchcard;
-    const card_result = card[16];
+    const card_result = card[15];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result));  
    }
    if(this.props.choiceScore>=53.8&&this.props.choiceScore<=55.6){
      //ดึงการ์ด id 17
     const card = this.props.fetchcard;
-    const card_result = card[17];
+    const card_result = card[16];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result)); 
    }
    else if(this.props.choiceScore>=51.9&&this.props.choiceScore<=53.7){
      //ดึงการ์ด id 18
     const card = this.props.fetchcard;
-    const card_result = card[18];
+    const card_result = card[17];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result)); 
    }
    if(this.props.choiceScore>=59.5&&this.props.choiceScore<=60.5){
      //ดึงการ์ด id 19
     const card = this.props.fetchcard;
-    const card_result = card[19];
+    const card_result = card[18];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result));  
    }
    else if(this.props.choiceScore>=48.1&&this.props.choiceScore<=49.9){
      //ดึงการ์ด id 20
     const card = this.props.fetchcard;
-    const card_result = card[20];
+    const card_result = card[19];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result));  
    }
    if(this.props.choiceScore>=44.3&&this.props.choiceScore<=46.1){
      //ดึงการ์ด id 21
     const card = this.props.fetchcard;
-    const card_result = card[21];
+    const card_result = card[20];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result)); 
    }
    else if(this.props.choiceScore>=40.5&&this.props.choiceScore<=42.3){
      //ดึงการ์ด id 22
     const card = this.props.fetchcard;
-    const card_result = card[22];
+    const card_result = card[21];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result)); 
    }
    if(this.props.choiceScore>=72.1&&this.props.choiceScore<=73.6){
      //ดึงการ์ด id 23
     const card = this.props.fetchcard;
-    const card_result = card[23];
+    const card_result = card[22];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result)); 
    }
    else if(this.props.choiceScore>=73.7&&this.props.choiceScore<=75.2){
      //ดึงการ์ด id 24
     const card = this.props.fetchcard;
-    const card_result = card[24];
+    const card_result = card[23];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result));   
    }
    if(this.props.choiceScore>=78.5&&this.props.choiceScore<=80){
      //ดึงการ์ด id 25
     const card = this.props.fetchcard;
-    const card_result = card[25];
+    const card_result = card[24];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result)); 
    }
    else if(this.props.choiceScore>=80.1&&this.props.choiceScore<=81.6){
      //ดึงการ์ด id 26
     const card = this.props.fetchcard;
-    const card_result = card[26];
+    const card_result = card[25];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result)); 
    }
    if(this.props.choiceScore>=76.9&&this.props.choiceScore<=78.4){
      //ดึงการ์ด id 27
     const card = this.props.fetchcard;
-    const card_result = card[27];
+    const card_result = card[26];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result)); 
    }
    else if(this.props.choiceScore>=81.7&&this.props.choiceScore<=83.2){
      //ดึงการ์ด id 28
     const card = this.props.fetchcard;
-    const card_result = card[28];
+    const card_result = card[27];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result));  
    }
    if(this.props.choiceScore>=83.3&&this.props.choiceScore<=84.8){
      //ดึงการ์ด id 29
     const card = this.props.fetchcard;
-    const card_result = card[29];
+    const card_result = card[28];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result)); 
    }
    else if(this.props.choiceScore>=88.1&&this.props.choiceScore<=89.6){
      //ดึงการ์ด id 30
     const card = this.props.fetchcard;
-    const card_result = card[30];
+    const card_result = card[29];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result)); 
    }
    if(this.props.choiceScore>=75.3&&this.props.choiceScore<=76.8){
      //ดึงการ์ด id 31
     const card = this.props.fetchcard;
-    const card_result = card[31];
+    const card_result = card[30];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result)); 
    }
    else if(this.props.choiceScore>=84.9&&this.props.choiceScore<=86.4){
      //ดึงการ์ด id 32
     const card = this.props.fetchcard;
-    const card_result = card[32];
+    const card_result = card[31];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result));  
    }
    if(this.props.choiceScore>=86.5&&this.props.choiceScore<=88){
      //ดึงการ์ด id 33
     const card = this.props.fetchcard;
-    const card_result = card[33];
+    const card_result = card[32];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result));  
    }
    else if(this.props.choiceScore>=89.7&&this.props.choiceScore<=91.2){
      //ดึงการ์ด id 34
     const card = this.props.fetchcard;
-    const card_result = card[34];
+    const card_result = card[33];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result)); 
    }
    if(this.props.choiceScore>=70.5&&this.props.choiceScore<=72){
      //ดึงการ์ด id 35
     const card = this.props.fetchcard;
-    const card_result = card[35];
+    const card_result = card[34];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result)); 
    }
    else if(this.props.choiceScore>=91.3&&this.props.choiceScore<=91.5){
      //ดึงการ์ด id 36
     const card = this.props.fetchcard;
-    const card_result = card[36];
+    const card_result = card[35];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result));  
    }
    if(this.props.choiceScore>=285.3&&this.props.choiceScore<=294.5){
      //ดึงการ์ด id 37
     const card = this.props.fetchcard;
-    const card_result = card[37];
+    const card_result = card[36];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result)); 
    }
    else if(this.props.choiceScore>=266.1&&this.props.choiceScore<=275.6){
      //ดึงการ์ด id 38
     const card = this.props.fetchcard;
-    const card_result = card[38];
+    const card_result = card[37];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result)); 
    }
    if(this.props.choiceScore>=256.5&&this.props.choiceScore<=266){
      //ดึงการ์ด id 39
     const card = this.props.fetchcard;
-    const card_result = card[39];
+    const card_result = card[38];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result)); 
    }
    else if(this.props.choiceScore>=275.7&&this.props.choiceScore<=285.2){
      //ดึงการ์ด id 40
     const card = this.props.fetchcard;
-    const card_result = card[40];
+    const card_result = card[39];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result)); 
      
@@ -525,28 +525,28 @@ await this.props.dispatch(setQuestionId(this.props.questions[index].questionId))
    if(this.props.choiceScore>=408&&this.props.choiceScore<=412.9){
      //ดึงการ์ด id 41
     const card = this.props.fetchcard;
-    const card_result = card[41];
+    const card_result = card[40];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result));  
    }
    else if(this.props.choiceScore>=413&&this.props.choiceScore<=417.9){
      //ดึงการ์ด id 42
     const card = this.props.fetchcard;
-    const card_result = card[42];
+    const card_result = card[41];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result));  
    }
    if(this.props.choiceScore>=418&&this.props.choiceScore<=422.9){
      //ดึงการ์ด id 43
     const card = this.props.fetchcard;
-    const card_result = card[43];
+    const card_result = card[42];
     console.log('Card Result: ', card_result)
    await this.props.dispatch(setCurrentCardData(card_result)); 
    }
    else if(this.props.choiceScore>=423&&this.props.choiceScore<=427.5){
      //ดึงการ์ด id 44
     const card = this.props.fetchcard;
-    const card_result = card[44];
+    const card_result = card[43];
     console.log('Card Result: ', card_result)
     await this.props.dispatch(setCurrentCardData(card_result)); 
    }

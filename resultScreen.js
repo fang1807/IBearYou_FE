@@ -57,13 +57,60 @@ class resultScreen extends Component {
   render() {
       const {userdata,fetchcard,currentResultID,currentCardID}= this.props
     return (
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1 ,backgroundColor: '#4C6FAF'}}>
 
-
-   <View style={{flex: 1, alignItems: 'center'}}>
-       <Image source={{uri: 'https://storage.cloud.google.com/card_ibearu/love-40.png'}}
-    style={styles.image} />
+ <View style={{flex: 1, alignItems: 'center',}}>  
+       <Image source={require('./assets/images/Bg-Blue.png')}
+    style={{width:560 ,height: 820,marginTop:-100,marginRight: 40}} />     
  </View>
+    
+<View style={{flex: 1, alignItems: 'center',}}>  
+       <Image source={require('./assets/images/star-3.png')}
+    style={{width:380, height: 134,marginTop: -10,marginRight: 0}} />     
+ </View>
+
+
+<View style={{flex: 1, alignItems: 'center',}}>  
+       <Image source={require('./assets/images/Sunflower.png')}
+    style={{width:90.18, height: 90.18, marginTop:552,marginRight: 385}} />     
+ </View>
+ <View style={{flex: 1, alignItems: 'center',}}>  
+       <Image source={require('./assets/images/Sunflower.png')}
+    style={{width:58.18, height: 58.18, marginTop: 70,marginRight: 110}} />     
+ </View>
+ <View style={{flex: 1, alignItems: 'center',}}>  
+       <Image source={require('./assets/images/Sunflower.png')}
+    style={{width:58.18, height: 58.18,marginTop: 310,marginLeft: 385}} />     
+    </View>
+
+     <View style={{flex: 1, alignItems: 'center',}}>  
+       <Image source={require('./assets/images/Star-4.png')}
+    style={{width:40.33, height: 40.33,marginTop: 400,marginRight:150}} />     
+ </View>
+     <View style={{flex: 1, alignItems: 'center',}}>  
+       <Image source={require('./assets/images/Star-5.png')}
+    style={{width:28.3, height: 28.3,marginTop: 320,marginRight: 350}} />     
+ </View>
+     <View style={{flex: 1, alignItems: 'center',}}>  
+       <Image source={require('./assets/images/Star-7.png')}
+    style={{width:18.38, height: 18.38,marginTop: 62,marginLeft: 300}} />     
+ </View>
+     <View style={{flex: 1, alignItems: 'center'}}>  
+       <Image source={require('./assets/images/Star-8.png')}
+    style={{width:34.3, height: 34.3,marginTop: -15,marginLeft: -10}} />     
+ </View>
+     <View style={{flex: 1, alignItems: 'center',}}>  
+       <Image source={require('./assets/images/Star-9.png')}
+    style={{width:21.68, height: 21.68,marginTop: -25,marginRight: 320}} />     
+ </View>
+
+<View >
+    <View style={{flex: 1, alignItems: 'center',marginTop:-5}}>
+    <Image  source={require('./assets/images/imageCard/love-40.png')} style={{ width: 200.45, height: 268.49,}}/>
+ </View>
+ </View>
+
+{this.card_image()}
 
 {this.card_description()} 
 
@@ -85,7 +132,7 @@ card_cheer_up(){
    return this.state.cardData.map((data) => {
       return (
    <View style={{flexDirection: 'row', alignItems: 'center',height: 154 ,width: 350
-    , backgroundColor: 'white',borderRadius: 10,marginTop: 20,marginLeft: 20, borderWidth: 2.5
+    , backgroundColor: 'white',borderRadius: 10,marginTop: 20,marginBottom:10,marginLeft: 20, borderWidth: 2.5
     , borderColor : '#E79995' ,shadowColor: '#000000',
        shadowOffset: { width: 0, height: 5 },
        shadowOpacity:  0.3,
@@ -109,7 +156,7 @@ card_description(){
    return this.state.cardData.map((data) => {
       return (
    <View style={{flexDirection: 'row', alignItems: 'center',height: 154 ,width: 350
-    , backgroundColor: 'white',borderRadius: 10,marginTop:300,marginLeft: 20, borderWidth: 2.5
+    , backgroundColor: 'white',borderRadius: 10,marginTop:290,marginLeft: 20, borderWidth: 2.5
     , borderColor : '#E79995' ,shadowColor: '#000000',
        shadowOffset: { width: 0, height: 5 },
        shadowOpacity:  0.3,
@@ -131,12 +178,14 @@ card_description(){
 card_image(){
 
    return this.state.cardData.map((data) => {
+
+const img = data.image_result
+
       return (
   
 <View >
     <View style={{flex: 1, alignItems: 'center'}}>
-       <Image source={{uri: 'https://storage.cloud.google.com/card_ibearu/love-40.png'}}
-    style={styles.image} />
+    <Image  source={data.image_result} style={{ width: 200.45, height: 268.49,}}/>
  </View>
  </View>
 

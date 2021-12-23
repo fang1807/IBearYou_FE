@@ -2,140 +2,197 @@ import React, {Component} from 'react';
 import { StyleSheet, View, Text, Image, SafeAreaView, Button
        , TouchableHighlight,TouchableOpacity, Dementions}
        from 'react-native';
-import SwitchSelector from "react-native-switch-selector";
 import axios from 'axios';
 import CustomHeader from './CustomHeader';
 import {API_URL} from './config'
-import moment from 'moment'; 
+import moment from 'moment';
 import {connect} from 'react-redux';
 
-
-const switchOption = [
-  {label: 'Check-up', value: 'Check-up'},
-  {label: 'History', value: 'History'},
-];
-
-
 class HistoryScreen extends Component {
-constructor(props) {
+  
+ constructor(props) {
    super(props)
    this.state = {
-     title:'',
-     checkupSwitch:'',
+          cardData: [],
+          heal_sentenceData:[],
    };
   }
+ 
 
-  componentDidMount(){
-  console.log("componentDidmount ChoiceScreen this.props.userdata : ",this.props.userdata);
-  this.loadResultHistory();
-}
+ componentDidMount(){
+   console.log("componentDidmount HistoryScreen");
+   console.log("componentDidmount HistoryScreen this.props.userdata : ",this.props.userdata);
+   console.log("final_score : ",this.props.choiceScore);
+   console.log("currentCardID : ",this.props.currentCardID);
+   console.log("currentResultID : ",this.props.currentResultID);
+   //this.loadCardData();
+   //this.loadHeal_Sentence();
 
+ }
 
-  loadResultHistory=async()=>{ 
-     console.log("load result history");
-    const data =  {"user_id": this.props.userdata.user_id};
-    const endpoint = `${API_URL}/api/list-result`; 
-    const res = await axios.get(endpoint,{params:data}) 
-       if(res.data.message==="Success"){
+ loadCardData=async()=>{
+    console.log("load Card");
+    const clientData =  {"user_id": this.props.userdata.user_id,"card_id": this.props.currentResultID.card_id};
+    const endpoint = `${API_URL}/api/get-one-card`;
+    console.log('endpoint : ',endpoint)
+    const res = await axios.get(endpoint,{params:clientData})
+    const {data,message}=res.data // Destructuring
+    console.log("res.data ",data)
+    console.log("message ",message)
+       if(message==="Success"){
           console.log("Success")
-          console.log("user_data: ",res.data.data)
-          //this.setState({"choiceData":res.data.data})
-          //console.log("this.state.choiceData ",this.state.choiceData)
-         //this.props.navigation.navigate('HomeApp') 
+          this.setState({"cardData":data})
+          console.log("this.state.cardData ",this.state.cardData) 
+
+          //this.props.dispatch(setTodoListID(data))
+
+          //this.props.navigation.navigate('EditTodoList') 
         }
-        else  if(res.data.message==="Fail") {
+        else  if(message==="Fail") {
+          console.log("Fail")
         } 
 
 }
 
-  setSwitch(checkupSwitch) {
-      this.setState({checkupSwitch:checkupSwitch});
-    }
-
-  
   render() {
-    const {userdata}= this.props
+      const {userdata,fetchcard,currentResultID,currentCardID}= this.props
     return (
-       <SafeAreaView style={[styles.container, containerStyle]}> 
- 
+      <SafeAreaView style={{ flex: 1 ,backgroundColor: '#4C6FAF'}}>
 
-<View style={{flex: 1, alignItems: 'center',}}>  
+ <View style={{flex: 1, alignItems: 'center',}}>  
        <Image source={require('./assets/images/Bg-Blue.png')}
-    style={{width:568 ,height: 580,marginTop:100,marginRight: 40}} />     
+    style={{width:560 ,height: 820,marginTop:-100,marginRight: 40}} />     
+ </View>
+    
+<View style={{flex: 1, alignItems: 'center',}}>  
+       <Image source={require('./assets/images/star-3.png')}
+    style={{width:380, height: 134,marginTop: -10,marginRight: 0}} />     
  </View>
 
 
- <SwitchSelector
-      options={switchOption}
-      initial={1}
-      onPress={() => this.props.navigation.navigate('Checkup')}
-      textColor='#565656' 
-      fontSize={16}
-      selectedColor='#FFFFFF'
-      buttonColor='#FE8150'
-      backgroundColor='#FFE0D4'
-      height = {37}
+<View style={{flex: 1, alignItems: 'center',}}>  
+       <Image source={require('./assets/images/Sunflower.png')}
+    style={{width:90.18, height: 90.18, marginTop:552,marginRight: 385}} />     
+ </View>
+ <View style={{flex: 1, alignItems: 'center',}}>  
+       <Image source={require('./assets/images/Sunflower.png')}
+    style={{width:58.18, height: 58.18, marginTop: 70,marginRight: 110}} />     
+ </View>
+ <View style={{flex: 1, alignItems: 'center',}}>  
+       <Image source={require('./assets/images/Sunflower.png')}
+    style={{width:58.18, height: 58.18,marginTop: 310,marginLeft: 385}} />     
+    </View>
 
-      style={{
-      shadowColor: '#000000',
-      shadowOffset: { width: 1, height: 4 },
-      shadowOpacity:  0.20,
-      shadowRadius:3,
-      elevation: 2,
-      width: 290,
-      marginTop: -320
-   
-}}
-    />
+     <View style={{flex: 1, alignItems: 'center',}}>  
+       <Image source={require('./assets/images/Star-4.png')}
+    style={{width:40.33, height: 40.33,marginTop: 400,marginRight:150}} />     
+ </View>
+     <View style={{flex: 1, alignItems: 'center',}}>  
+       <Image source={require('./assets/images/Star-5.png')}
+    style={{width:28.3, height: 28.3,marginTop: 320,marginRight: 350}} />     
+ </View>
+     <View style={{flex: 1, alignItems: 'center',}}>  
+       <Image source={require('./assets/images/Star-7.png')}
+    style={{width:18.38, height: 18.38,marginTop: 62,marginLeft: 300}} />     
+ </View>
+     <View style={{flex: 1, alignItems: 'center'}}>  
+       <Image source={require('./assets/images/Star-8.png')}
+    style={{width:34.3, height: 34.3,marginTop: -15,marginLeft: -10}} />     
+ </View>
+     <View style={{flex: 1, alignItems: 'center',}}>  
+       <Image source={require('./assets/images/Star-9.png')}
+    style={{width:21.68, height: 21.68,marginTop: -25,marginRight: 320}} />     
+ </View>
 
-     <View style={{flexDirection: 'row', alignItems: 'center',height: 91 ,width: 201
-    , backgroundColor: 'white',borderRadius: 10,marginTop: 20, borderWidth: 2.5
+    <View style={styles.historyBox}>
+              <Text style={{ color: '#E79995',fontSize: 30,fontWeight: "bold",marginLeft: 17,paddingLeft: 20,paddingRight: 20}}>History</Text>
+    </View>
+
+ </SafeAreaView>
+    );
+  }
+
+card_cheer_up(){
+
+   return this.state.cardData.map((data) => {
+      return (
+   <View style={{flexDirection: 'row', alignItems: 'center',height: 154 ,width: 350
+    , backgroundColor: 'white',borderRadius: 10,marginTop: 20,marginBottom:10,marginLeft: 20, borderWidth: 2.5
     , borderColor : '#E79995' ,shadowColor: '#000000',
        shadowOffset: { width: 0, height: 5 },
        shadowOpacity:  0.3,
        shadowRadius:5,
        elevation: 5,
       }}>
- <View style={{alignItems: 'center',paddingLeft: 30,paddingRight: 30}}>
-<Text style={{ color: '#E79995',fontSize: 30,fontWeight: "bold",marginLeft: 17}}>History</Text>
+   <View style={{alignItems: 'center',paddingLeft: 30,paddingRight: 30}}>
+  <Text style={{ color: '#E79995',
+      fontSize: 21,fontWeight: "bold",
+      textAlign: 'center'}}>Cheer-up</Text>
+       <Text style={styles.textContent}>{data.cheer_up}</Text>
      </View>
     </View>
+      )
+    })
 
-    <View style={{flex: 1, alignItems: 'center',}}>  
-       <Image source={require('./assets/images/Frame.png')}
-    style={styles.image} />     
- </View>
-
- <View style={{flex:1, marginTop: -370,marginLeft: -40}}> 
- <Text style={styles.textDate}>date</Text>
- <Text style={styles.textCard}>Name card</Text>
- </View>
- 
-
-      </SafeAreaView >
-    );
-  }
 }
 
-const containerStyle = {
-       backgroundColor: '#4C6FAF',
-       width: '100%',
-       height: '100%',
-       flex:1 ,
-       flexDirection: 'column' ,
-          
+card_description(){
+
+   return this.state.cardData.map((data) => {
+      return (
+   <View style={{flexDirection: 'row', alignItems: 'center',height: 154 ,width: 350
+    , backgroundColor: 'white',borderRadius: 10,marginTop:290,marginLeft: 20, borderWidth: 2.5
+    , borderColor : '#E79995' ,shadowColor: '#000000',
+       shadowOffset: { width: 0, height: 5 },
+       shadowOpacity:  0.3,
+       shadowRadius:5,
+       elevation: 5,
+      }}>
+  <View style={{alignItems: 'center',paddingLeft: 30,paddingRight: 30}}>
+  <Text style={{ color: '#E79995',
+      fontSize: 21,fontWeight: "bold",
+      textAlign: 'center'}}>{data.card_name}</Text>
+       <Text style={styles.textContent}>{data.card_description}</Text>
+     </View>
+  </View>
+      )
+    })
+
 }
- 
-const styles = StyleSheet.create({
+
+card_image(){
+
+   return this.state.cardData.map((data) => {
+
+const img = data.image_result
+
+      return (
   
-  container: {  
-     
-       alignItems: 'center',
-       justifyContent: 'center' 
-        
-  },
+<View >
+    <View style={{flex: 1, alignItems: 'center'}}>
+    <Image  source={data.image_result} style={{ width: 200.45, height: 268.49,}}/>
+ </View>
+ </View>
 
-  textContent :{
+
+      )
+    })
+
+}
+
+
+}
+
+const styles = StyleSheet.create({
+    image :{
+       width: 200.45,
+       height: 268.49,
+       resizeMode: 'center',
+       marginTop:3,
+       
+    },
+
+    textContent :{
       color: '#E79995',
       fontSize: 18,
       textAlign: 'center',
@@ -144,36 +201,64 @@ const styles = StyleSheet.create({
      
     },
 
+    textButton:{
+     color: '#FFFFFF',
+     fontSize: 20,
+     fontFamily: 'Quark',
+     fontWeight: 'bold',
+     textAlign: 'center',
+     
+        
+},
 
-    image: {
-       width: 62,
-       height: 81,
-       resizeMode: 'center',
-       marginTop: 20,
-       marginLeft: -210
-    },
+button:{
+       borderRadius: 5,
+       alignItems: 'center',
+       justifyContent: 'center',
+       backgroundColor: '#E79995',
+       height: 41,
+       width: 102,
+       shadowColor: '#000000',
+       shadowOffset: { width: 0, height: 4 },
+       shadowOpacity:  0.4,
+       shadowRadius: 3,
+       elevation: 2,
+       margin: 60,
+       marginBottom: -10,
+      alignItems: 'center',
+        
+},
 
-    textDate: {
-      color: '#AAAAAA',
-      fontSize: 14,
-      fontWeight: 'bold',
-      fontFamily: 'Quark',
-    },
-
-    textCard: {
-      color: '#E79995',
-      fontSize: 18,
-      fontWeight: 'bold',
-      fontFamily: 'Quark',
-    }
+historyBox: {
+      flexDirection: 'row', 
+      alignItems: 'center',
+      height: 65 ,
+      width: 175, 
+      backgroundColor: 'white',
+      borderRadius: 10,
+      borderBottomWidth: 3,
+      borderColor : '#E79995' ,
+      shadowColor: '#000000',
+      shadowOffset: { width: 0, height: 5 },
+      shadowOpacity:  0.3,
+      shadowRadius:5,
+      elevation: 5,
+}
 
 });
 
 const mapStateToProps=(state,props)=>{
   return{
- 
-   userdata:state.Questions.userdata, 
+   questions:state.Questions.questions,
+    questionId:state.Questions.questionId,
+    currentQuestion:state.Questions.currentQuestion,
+    userdata:state.Questions.userdata,
+    choiceScore:state.Questions.choiceScore,
+    fetchcard:state.Questions.fetchcard,
+    currentResultID:state.Questions.currentResultID,
+    currentCardID:state.Questions.currentCardID,
  }
 }
+ 
 
 export default connect(mapStateToProps)(HistoryScreen);
