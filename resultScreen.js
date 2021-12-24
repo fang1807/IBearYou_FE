@@ -13,7 +13,7 @@ class resultScreen extends Component {
  constructor(props) {
    super(props)
    this.state = {
-          cardData: [],
+          resultcardData: [],
           heal_sentenceData:[],
    };
   }
@@ -33,7 +33,7 @@ class resultScreen extends Component {
  loadCardData=async()=>{
     console.log("load Card");
     const clientData =  {"user_id": this.props.userdata.user_id,"card_id": this.props.currentResultID.card_id};
-    const endpoint = `${API_URL}/api/get-one-card`;
+    const endpoint = `${API_URL}/api/select_one_card`;
     console.log('endpoint : ',endpoint)
     const res = await axios.get(endpoint,{params:clientData})
     const {data,message}=res.data // Destructuring
@@ -41,8 +41,8 @@ class resultScreen extends Component {
     console.log("message ",message)
        if(message==="Success"){
           console.log("Success")
-          this.setState({"cardData":data})
-          console.log("this.state.cardData ",this.state.cardData) 
+          this.setState({"resultcardData":data})
+          console.log("this.state.resultcardData ",this.state.resultcardData) 
 
           //this.props.dispatch(setTodoListID(data))
 
@@ -110,11 +110,37 @@ class resultScreen extends Component {
  </View>
  </View>
 
-{this.card_image()}
+ <View style={{flexDirection: 'row', alignItems: 'center',height: 210 ,width: 350
+    , backgroundColor: 'white',borderRadius: 10,marginTop:270,marginLeft: 20, borderWidth: 2.5
+    , borderColor : '#E79995' ,shadowColor: '#000000',
+       shadowOffset: { width: 0, height: 5 },
+       shadowOpacity:  0.3,
+       shadowRadius:5,
+       elevation: 5,
+      }}>
+  <View style={{alignItems: 'center',paddingLeft: 30,paddingRight: 30}}>
+  <Text style={{ color: '#E79995',
+      fontSize: 21,fontWeight: "bold",
+      textAlign: 'center'}}>{this.props.currentCardID.card_name}</Text>
+       <Text style={styles.textContent}>{this.props.currentCardID.card_description}</Text>
+     </View>
+  </View>
 
-{this.card_description()} 
-
-{this.card_cheer_up()}
+   <View style={{flexDirection: 'row', alignItems: 'center',height: 154 ,width: 350
+    , backgroundColor: 'white',borderRadius: 10,marginTop: 10,marginBottom:10,marginLeft: 20, borderWidth: 2.5
+    , borderColor : '#E79995' ,shadowColor: '#000000',
+       shadowOffset: { width: 0, height: 5 },
+       shadowOpacity:  0.3,
+       shadowRadius:5,
+       elevation: 5,
+      }}>
+   <View style={{alignItems: 'center',paddingLeft: 30,paddingRight: 30}}>
+  <Text style={{ color: '#E79995',
+      fontSize: 21,fontWeight: "bold",
+      textAlign: 'center'}}>Cheer-up</Text>
+       <Text style={styles.textContent}>{this.props.currentCardID.cheer_up}</Text>
+     </View>
+    </View>
 
 <View style={{flex:1}}>
      <TouchableOpacity style={styles.button} activeOpacity ={0.75}
@@ -129,7 +155,7 @@ class resultScreen extends Component {
 
 card_cheer_up(){
 
-   return this.state.cardData.map((data) => {
+   return this.state.resultcardData.map((data) => {
       return (
    <View style={{flexDirection: 'row', alignItems: 'center',height: 154 ,width: 350
     , backgroundColor: 'white',borderRadius: 10,marginTop: 10,marginBottom:10,marginLeft: 20, borderWidth: 2.5
@@ -153,7 +179,7 @@ card_cheer_up(){
 
 card_description(){
 
-   return this.state.cardData.map((data) => {
+   return this.state.resultcardData.map((data) => {
       return (
    <View style={{flexDirection: 'row', alignItems: 'center',height: 210 ,width: 350
     , backgroundColor: 'white',borderRadius: 10,marginTop:270,marginLeft: 20, borderWidth: 2.5
@@ -177,7 +203,7 @@ card_description(){
 
 card_image(){
 
-   return this.state.cardData.map((data) => {
+   return this.state.resultcardData.map((data) => {
 
 const img = data.image_result
 
@@ -261,3 +287,4 @@ const mapStateToProps=(state,props)=>{
  
 
 export default connect(mapStateToProps)(resultScreen);
+

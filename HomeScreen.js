@@ -37,7 +37,7 @@ componentDidMount(){
       
        <Text style={styles.banner_sentence}>หากรู้สึกแย่จนทนไม่ไหว สายด่วนสุขภาพจิตพร้อมรับฟังเธอเสมอ</Text> 
         <View style={{flex: 1,marginRight: 180,marginTop: 10}}>
-        <TouchableOpacity  activeOpacity={0.75} onPress={()=>{Linking.openURL('tel:1323');} }>
+       <TouchableOpacity  activeOpacity={0.75} onPress={()=>{Linking.openURL('tel:1323');} }>
         <Text style={styles.banner_tel}>1323</Text>
             <View style={{flex: 1, alignItems: 'center',}}>  
             <Image source={require('./assets/images/call_white.png')}

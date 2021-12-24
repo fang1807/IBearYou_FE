@@ -319,10 +319,7 @@ onDayPress={(day) => this.selectCalendar(day.dateString) }
    style={{width:50.91,height:41.96,marginTop:-20,marginRight:-320}} />    
 </View>
  
-  <View style={{flex: 1, alignItems: 'center',}}> 
-      <Image source={require('./assets/images/umbrella-blue.png')}
-   style={{width:135.42 ,height:111,marginTop: -235,marginRight: -180}} />    
-</View>
+
  
 <View style={{flex: 1, alignItems: 'center',}}> 
       <Image source={require('./assets/images/raincoat.png')}
