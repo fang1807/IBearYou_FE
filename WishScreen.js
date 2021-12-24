@@ -74,9 +74,9 @@ loadHeal_Sentence=async()=>{
     style={{width:552.17 ,height: 323.61,marginTop: -150}} /> 
 
     <View style={styles.date}>
-    <Text style={styles.day}>จ.</Text>
-    <Text style={styles.number}>29</Text>
-    <Text style={styles.month}>พ.ค</Text>
+  <Text style={styles.day}>ศ.</Text>
+  <Text style={styles.number}>24</Text>
+  <Text style={styles.month}>ธ.ค.</Text>
     </View> 
 
     <View style={{marginLeft: 101,marginTop: -85}}>

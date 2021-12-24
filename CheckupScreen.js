@@ -125,8 +125,8 @@ class CheckupScreen extends Component {
   //fetchQuestions(2)
    //incrementAction(2) 
   const questionForUser=   Questions.map((q,i)=>{
-    
-     return {...q,"answer":"","score":[0]}
+  const array = []  
+     return {...q,"answer":"","score":array }
 
   }
 

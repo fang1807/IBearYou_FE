@@ -9,6 +9,8 @@ import thunk from 'redux-thunk';
 import Choices from './Choices';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 
+
+import resultHistory from './resultHistoryScreen';
 import Sentence from './Sentence';
 import EditTodoList from './EditTodoList';
 import CustomHeader from './CustomHeader';
@@ -87,6 +89,7 @@ function CheckupStack() {
       <StackCheckup.Screen name='Result' component={resultScreen} options={navOptionHandler}/>
       <StackCheckup.Screen name='Choices' component={Choices} options={navOptionHandler}/>
       <StackCheckup.Screen name='Sentence' component={Sentence} options={navOptionHandler}/>
+      <StackCheckup.Screen name='resultHistory' component={resultHistory} options={navOptionHandler}/>
      </StackCheckup.Navigator>
 
   )

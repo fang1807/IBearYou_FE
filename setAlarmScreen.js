@@ -321,13 +321,13 @@ hidePicker = () => {
                 <TouchableOpacity  onPress ={() => this.selectedPriority(data.priority_id)} activeOpacity={0.75}>
                     <Image source={require('./assets/images/circle-2.png')}
                            style={{width:13,height:13,marginTop: 5,marginLeft:20}} /> 
-                    <Text style={styles.textSound}>{data.priority_name}</Text>
+                    <Text style={styles.textSound} key={key}>{data.priority_name}</Text>
                 </TouchableOpacity>
                
               </View>
                 :
                 <View>
-                <TouchableOpacity onPress ={() => this.selectedPriority(data.priority_id)} activeOpacity={1}>
+                <TouchableOpacity onPress ={() => this.setState({checked:key})} activeOpacity={1}>
                     <Image source={require('./assets/images/circle-1.png')}
                            style={{width:13,height:13,marginTop: 5,marginLeft:20}} /> 
                     <Text style={styles.textSound}>{data.priority_name}</Text>

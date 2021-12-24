@@ -169,7 +169,7 @@ markedDates={{
     selectedTextColor: '#00000',
   },
 
-  '2021-11-29': {selected: true,selectedColor: '#CB6863',selectedTextColor: '#FFFFFF'},
+  '2021-12-24': {selected: true,selectedColor: '#CB6863',selectedTextColor: '#FFFFFF'},
 }}
 onDayPress={(day) => this.selectCalendar(day.dateString) }
 

@@ -27,9 +27,11 @@ class Choices extends Component {
   }
 
   componentDidMount(){
-  console.log("componentDidmount ChoiceScreen this.props.userdata : ",this.props.userdata);
-    console.log("this.props.fetchcard: ",this.props.fetchcard );
-    console.log("currentCardID : ",this.props.currentCardID);
+    console.log("score:", this.props.choiceScore)
+this.props.dispatch(setChoiceScore(0))
+  // console.log("componentDidmount ChoiceScreen this.props.userdata : ",this.props.userdata);
+  //   console.log("this.props.fetchcard: ",this.props.fetchcard );
+  //   console.log("currentCardID : ",this.props.currentCardID);
   //this.loadHeal_Sentence();
   //this.loadChoices();
   //this.loadQuestionType();
@@ -84,7 +86,7 @@ loadQuestions=async()=>{
     //console.log("res.data",res.data)
        if(res.data.message==="Success"){
           console.log("Success")
-          console.log("user_data: ",res.data.data)
+          //console.log("user_data: ",res.data.data)
           //this.setState({"choiceData":res.data.data})
           //console.log("this.state.choiceData ",this.state.choiceData)
          //this.props.navigation.navigate('HomeApp') 
@@ -144,7 +146,7 @@ loadAllCard=async()=>{
           console.log("Success")
           
        this.setState({allCard:data})
-       console.log("this.state.allCard ",this.state.allCard) 
+       //console.log("this.state.allCard ",this.state.allCard) 
 
        this.props.dispatch(fetchCards(data))
          //this.props.navigation.navigate('HomeApp') 
@@ -165,12 +167,29 @@ fetchCards=async(fetchcard)=>{
    if (currentIndex >= this.props.questions.length-1) return;
    const nextIndex =currentIndex+1;
 
-   const question=this.props.questions[nextIndex-1]
+
+   const question=this.props.questions[nextIndex-1];
+
+   //const score_arr = this.props.questions.score
+   //console.log("score arr:  ",score_arr)
+
+  if(question.answer!=0){
+  var score=this.props.choiceScore;
+
+  if(isNaN(score)){
+     score=0;
+   //console.log("aaaaaaaaaaaaaaaaaaa :",score)
+ }
+
+/*
+    const question = this.props.questions[nextIndex-1] 
+    const score_arr = this.props.questions.score
 if(question.answer!=0){
- var score=this.props.choiceScore;
+ var score = this.props.choiceScore;
  if(isNaN(score)){
    score=0;
  }
+ */
 
  var newscoreint=parseFloat(question.choices[question.answer-1].choice_score,10);
 
@@ -593,7 +612,7 @@ await this.props.dispatch(setQuestionId(this.props.questions[index].questionId))
      let mQuestions =this.props.questions
      mQuestions[currentIndex]=currentQ
      await this.props.dispatch(fetchQuestions(mQuestions));
-     console.log("this.props.questions ",this.props.questions)
+     //console.log("this.props.questions ",this.props.questions)
  
  }
 
@@ -663,9 +682,9 @@ const choice_props =  currentQuestion.questionType==="1"? currentQuestion.choice
      <Image source={require('./assets/images/Vector-Pink.png')}
   style={{width:552.17 ,height: 323.61,marginTop: -150}} />
   <View style={styles.date}>
-  <Text style={styles.day}>จ.</Text>
-  <Text style={styles.number}>27</Text>
-  <Text style={styles.month}>ก.ย.</Text>
+  <Text style={styles.day}>ศ.</Text>
+  <Text style={styles.number}>24</Text>
+  <Text style={styles.month}>ธ.ค.</Text>
   </View>
   <View style={{marginLeft: 100,marginTop: -85}}>
     <Text style={styles.topic}>ประโยคพิเศษประจำวันจากน้องหมี </Text>
@@ -692,12 +711,14 @@ const choice_props =  currentQuestion.questionType==="1"? currentQuestion.choice
      <Image source={require('./assets/images/Star-5.png')}
   style={{width:28.3, height: 28.3,marginTop: 400,marginRight: 350}} />   
 </View>
+
+
 <View style={{flexDirection: 'column' ,justifyContent: 'center', alignItems: 'center'}}>
 {currentQuestion.questionType==="1" &&
    <View >
    <View style={{flex:1,marginTop: 80,marginLeft: 45}}>
 <View style={styles.question}>
-     <Text style={styles.textQuestion} >{currentQuestion.detail} QuestionId : {currentQuestion.questionId} Answer : {currentQuestion.answer} </Text>
+     <Text style={styles.textQuestion} >{currentQuestion.detail}  </Text>
 </View>
 </View>
     <View style={{height: 200,width: 353, backgroundColor: '#FFFFFF',borderRadius: 10,marginTop: 200,paddingTop: 20,marginBottom: 60,marginLeft: 45}}>

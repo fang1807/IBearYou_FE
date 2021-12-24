@@ -8,7 +8,7 @@ import {API_URL} from './config'
 import moment from 'moment';
 import {connect} from 'react-redux';
 
-class resultScreen extends Component {
+class resultHistoryScreen extends Component {
   
  constructor(props) {
    super(props)
@@ -20,11 +20,12 @@ class resultScreen extends Component {
  
 
  componentDidMount(){
-   console.log("componentDidmount Result");
-   console.log("componentDidmount Result this.props.userdata : ",this.props.userdata);
+   console.log("componentDidmount resultHistoryScreen");
+   console.log("componentDidmount resultHistoryScreen this.props.userdata : ",this.props.userdata);
    console.log("final_score : ",this.props.choiceScore);
    console.log("currentCardID : ",this.props.currentCardID);
    console.log("currentResultID : ",this.props.currentResultID);
+   console.log("detailResult : ",this.props.detailResult);
    this.loadCardData();
    //this.loadHeal_Sentence();
 
@@ -55,7 +56,7 @@ class resultScreen extends Component {
 }
 
   render() {
-      const {userdata,fetchcard,currentResultID,currentCardID}= this.props
+      const {userdata,fetchcard,currentResultID,currentCardID,detailResult}= this.props
     return (
       <SafeAreaView style={{ flex: 1 ,backgroundColor: '#4C6FAF'}}>
 
@@ -105,16 +106,42 @@ class resultScreen extends Component {
  </View>
 
 <View >
-    <View style={{flex: 1, alignItems: 'center',marginTop:-5}}>
+    <View style={{flex: 1, alignItems: 'center',marginTop:5}}>
     <Image  source={require('./assets/images/imageCard/love-40.png')} style={{ width: 200.45, height: 268.49,}}/>
  </View>
  </View>
 
-{this.card_image()}
+   <View style={{flexDirection: 'row', alignItems: 'center',height: 210 ,width: 350
+    , backgroundColor: 'white',borderRadius: 10,marginTop:270,marginLeft: 20, borderWidth: 2.5
+    , borderColor : '#E79995' ,shadowColor: '#000000',
+       shadowOffset: { width: 0, height: 5 },
+       shadowOpacity:  0.3,
+       shadowRadius:5,
+       elevation: 5,
+      }}>
+  <View style={{alignItems: 'center',paddingLeft: 30,paddingRight: 30}}>
+  <Text style={{ color: '#E79995',
+      fontSize: 21,fontWeight: "bold",
+      textAlign: 'center'}}>{this.props.detailResult.card_name}</Text>
+       <Text style={styles.textContent}>{this.props.detailResult.card_description}</Text>
+     </View>
+  </View>
 
-{this.card_description()} 
-
-{this.card_cheer_up()}
+   <View style={{flexDirection: 'row', alignItems: 'center',height: 154 ,width: 350
+    , backgroundColor: 'white',borderRadius: 10,marginTop: 10,marginBottom:10,marginLeft: 20, borderWidth: 2.5
+    , borderColor : '#E79995' ,shadowColor: '#000000',
+       shadowOffset: { width: 0, height: 5 },
+       shadowOpacity:  0.3,
+       shadowRadius:5,
+       elevation: 5,
+      }}>
+   <View style={{alignItems: 'center',paddingLeft: 30,paddingRight: 30}}>
+  <Text style={{ color: '#E79995',
+      fontSize: 21,fontWeight: "bold",
+      textAlign: 'center'}}>Cheer-up</Text>
+       <Text style={styles.textContent}>{this.props.detailResult.cheer_up}</Text>
+     </View>
+    </View>
 
 <View style={{flex:1}}>
      <TouchableOpacity style={styles.button} activeOpacity ={0.75}
@@ -132,7 +159,7 @@ card_cheer_up(){
    return this.state.cardData.map((data) => {
       return (
    <View style={{flexDirection: 'row', alignItems: 'center',height: 154 ,width: 350
-    , backgroundColor: 'white',borderRadius: 10,marginTop: 10,marginBottom:10,marginLeft: 20, borderWidth: 2.5
+    , backgroundColor: 'white',borderRadius: 10,marginTop: 20,marginBottom:10,marginLeft: 20, borderWidth: 2.5
     , borderColor : '#E79995' ,shadowColor: '#000000',
        shadowOffset: { width: 0, height: 5 },
        shadowOpacity:  0.3,
@@ -155,8 +182,8 @@ card_description(){
 
    return this.state.cardData.map((data) => {
       return (
-   <View style={{flexDirection: 'row', alignItems: 'center',height: 210 ,width: 350
-    , backgroundColor: 'white',borderRadius: 10,marginTop:270,marginLeft: 20, borderWidth: 2.5
+   <View style={{flexDirection: 'row', alignItems: 'center',height: 154 ,width: 350
+    , backgroundColor: 'white',borderRadius: 10,marginTop:290,marginLeft: 20, borderWidth: 2.5
     , borderColor : '#E79995' ,shadowColor: '#000000',
        shadowOffset: { width: 0, height: 5 },
        shadowOpacity:  0.3,
@@ -256,8 +283,9 @@ const mapStateToProps=(state,props)=>{
     fetchcard:state.Questions.fetchcard,
     currentResultID:state.Questions.currentResultID,
     currentCardID:state.Questions.currentCardID,
+    detailResult:state.Questions.detailResult,
  }
 }
  
 
-export default connect(mapStateToProps)(resultScreen);
+export default connect(mapStateToProps)(resultHistoryScreen);

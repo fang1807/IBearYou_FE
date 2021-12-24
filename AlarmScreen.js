@@ -73,7 +73,7 @@ loadAllTodoList=async()=>{
 
 //todo-list แค่ id ที่เลือก
 loadTodoList_ID=async(selectedTodoList)=>{
-    console.log("load All Todo-List");
+    console.log("load  Todo-List ID");
     const clientData =  {"user_id": this.props.userdata.user_id,"to_do_list_id": selectedTodoList};
     const endpoint = `${API_URL}/api/get-one_to_do_list`;
     console.log('endpoint : ',endpoint)
@@ -194,27 +194,7 @@ const editAlarm = this.state.edit
             </View>
         </TouchableOpacity>
         </View>
-
-      <View key={key} style={{marginTop:-78,marginLeft:120}}> 
-      {this.state.checked == key  ?
-              <TouchableOpacity onPress={()=>{this.setState({checked: !key})}}>
-                  <View style={{flex: 1, alignItems: 'center'}}>  
-                    <Image source={require('./assets/images/Progress.png')}
-                            style={{width:100,height:52,marginLeft: 90}} />     
-                  </View>
-                 
-        </TouchableOpacity>
-        :
-                <TouchableOpacity onPress={()=>{this.setState({checked: key})}} >
-                  <View style={{flex: 1, alignItems: 'center'}}>  
-                    <Image source={require('./assets/images/Complete.png')}
-                            style={{width:41,height:56,marginLeft: 90}} />     
-                  </View>
-                  
-        </TouchableOpacity>
-       }
-
-      </View>      
+     
          </View>
 
         </View>

@@ -21,6 +21,7 @@ const initialState = {
 	finishdate:'',
 	todolistID:{},
 	currentResultID:{},
+	detailResult: {},
 	
 };
 
@@ -135,6 +136,11 @@ export default function reducers(state=initialState, action) {
 			return {
 				 ...state,   
 				currentResultID: action.payload
+			}
+		case 'SET_CURRENT_DETAIL_RESULT': 
+			return {
+				 ...state,   
+				detailResult: action.payload
 			}
 		
 
