@@ -194,6 +194,8 @@ const editAlarm = this.state.edit
             </View>
         </TouchableOpacity>
         </View>
+
+        
      
          </View>
 

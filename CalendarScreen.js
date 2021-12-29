@@ -150,7 +150,7 @@ loadCalendarScreen=async()=>{
             selectedDayBackgroudColor: '#CB6863', arrowColor: '#000000',
             selectedDayTextColor: '#000000',
             textSectionTitleColor: '#000000',  textDayHeaderFontWeight: 'bold', textDayHeaderFontFamily: 'Quark', textDayHeaderFontSize: 16,
-            textDisabledColor: '#FFFFFF',
+            textDisabledColor: 'gray',
             'stylesheet.calendar.header': {
     week: {
       marginTop: 5,
@@ -169,7 +169,7 @@ markedDates={{
     selectedTextColor: '#00000',
   },
 
-  '2021-12-24': {selected: true,selectedColor: '#CB6863',selectedTextColor: '#FFFFFF'},
+  
 }}
 onDayPress={(day) => this.selectCalendar(day.dateString) }
 

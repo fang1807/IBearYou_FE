@@ -681,11 +681,11 @@ const choice_props =  currentQuestion.questionType==="1"? currentQuestion.choice
 <View style={{flex: 1, alignItems: 'center'}}>
      <Image source={require('./assets/images/Vector-Pink.png')}
   style={{width:552.17 ,height: 323.61,marginTop: -150}} />
-  <View style={styles.date}>
-  <Text style={styles.day}>ศ.</Text>
-  <Text style={styles.number}>24</Text>
-  <Text style={styles.month}>ธ.ค.</Text>
-  </View>
+    <View style={styles.date}>
+  <Text style={styles.day}>{moment().format('ddd')}</Text>
+  <Text style={styles.number}>{moment().format('Do')}</Text>
+  <Text style={styles.month}>{moment().format('MMM')}</Text>
+    </View> 
   <View style={{marginLeft: 100,marginTop: -85}}>
     <Text style={styles.topic}>ประโยคพิเศษประจำวันจากน้องหมี </Text>
     <Text style={styles.sentence}>"มะม่วงยังสุก เราจะทุกข์ทำไม"</Text>
@@ -954,31 +954,31 @@ date: {
      marginLeft: -270,
    },
  
-   day: {
-     fontSize: 14,
-     color:'#000000',
-     fontFamily: 'Quark',
-     marginBottom: 5,
-     marginTop: 10,
-     marginLeft: 16,
-   },
- 
-   number: {
-     fontSize: 24,
-     color:'#000000',
-     fontFamily: 'Quark',
-     fontWeight: 'bold',
-     marginBottom: 5,
-     marginLeft: 6,
-     marginTop: -5,
-   },
-   month: {
-     fontSize: 18,
-     color:'#FFFFFF',
-     fontFamily: 'Quark',
-     marginLeft: 12,
-     marginTop: -5,
-   },
+      day: {
+      fontSize: 14,
+      color:'#000000',
+      fontFamily: 'Quark',
+      marginBottom: 5,
+      marginTop: 10,
+      marginLeft: 10,
+    },
+
+    number: {
+      fontSize: 18,
+      color:'#000000',
+      fontFamily: 'Quark',
+      fontWeight: 'bold',
+      marginBottom: 5,
+      marginLeft: 6,
+      marginTop: -2,
+    },
+    month: {
+      fontSize: 18,
+      color:'#FFFFFF',
+      fontFamily: 'Quark',
+      marginLeft: 8,
+      marginTop: 0,
+    },
  
      topic: {
      fontSize: 20,

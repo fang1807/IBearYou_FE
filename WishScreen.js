@@ -74,9 +74,9 @@ loadHeal_Sentence=async()=>{
     style={{width:552.17 ,height: 323.61,marginTop: -150}} /> 
 
     <View style={styles.date}>
-  <Text style={styles.day}>ศ.</Text>
-  <Text style={styles.number}>24</Text>
-  <Text style={styles.month}>ธ.ค.</Text>
+  <Text style={styles.day}>{moment().format('ddd')}</Text>
+  <Text style={styles.number}>{moment().format('Do')}</Text>
+  <Text style={styles.month}>{moment().format('MMM')}</Text>
     </View> 
 
     <View style={{marginLeft: 101,marginTop: -85}}>
@@ -262,30 +262,30 @@ const styles = StyleSheet.create({
       marginLeft: -270,
     },
 
-    day: {
+   day: {
       fontSize: 14,
       color:'#000000',
       fontFamily: 'Quark',
       marginBottom: 5,
       marginTop: 10,
-      marginLeft: 14,
+      marginLeft: 10,
     },
 
     number: {
-      fontSize: 24,
+      fontSize: 18,
       color:'#000000',
       fontFamily: 'Quark',
       fontWeight: 'bold',
       marginBottom: 5,
       marginLeft: 6,
-      marginTop: -5,
+      marginTop: -2,
     },
     month: {
       fontSize: 18,
       color:'#FFFFFF',
       fontFamily: 'Quark',
-      marginLeft: 12,
-      marginTop: -5,
+      marginLeft: 8,
+      marginTop: 0,
     },
 
       topic: {
