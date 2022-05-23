@@ -253,12 +253,7 @@ hidePicker = () => {
         
       </View>
           </TouchableOpacity>
-       <DateTimePickerModel
-        isVisible={this.state.isVisible}
-        onConfirm={this.handlePicker}
-        onCancel={this.hidePicker}
-        mode={'date'}
-       />
+       
         </View>
                 <View style={{width: 313, height: 1, backgroundColor: '#014A5C',marginTop: -167, marginLeft:20}}></View>
 </View>

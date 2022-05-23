@@ -19,55 +19,9 @@ import moment from 'moment';
 import axios from 'axios';
 import {API_URL} from './config'
 import {connect} from 'react-redux';
-/*
-const readQuestion=async()=>{
-      try {
-      const jsonString = fs.readFileSync("./Question.json");
-      const question = JSON.parse(jsonString);
-      return question;
-    } catch (err) {
-      console.log(err);
-      return {};
-    }
-} */
-/*********** Scoring 
-m.onsave(async (m) => { 
-                  const score = m.data.items.map((m,i)=>{
-                    return {"subject":i+1,"score":m.value,"max":m.max} 
-                     
-                  })
-                  //console.log("score: ",score)
-                  const fillAll = await score.every((o)=>{
-                    //console.log( ' parseInt(o.score) < parseInt(o.max)', parseInt(o.score) < parseInt(o.max))
-                    //console.log( ' isNumber(parseInt(o.score))',  isNumber(parseInt(o.score)))
-                    return  parseInt(o.score) <= parseInt(o.max) && isNumber(parseInt(o.score))
-
-                  })
-                 // console.log("fillAll : ",fillAll)
-                 if(fillAll){
-                   const scorereq = {}
-                   //console.log('this.admin.admin_id: ',this.admin.admin_id)
-                   scorereq.admin_id =this.admin.admin_id
-                   scorereq.ideal_final ="ideal"
-                   scorereq.pro_id = data.pro_id
-                   //console.log('data ',data)
-                   scorereq.score_json_ideal =JSON.stringify(score)
-                   scorereq.score_json_final =""
-                   //console.log('scorereq',scorereq)
-                   const sum = score.reduce((ret,e)=>{
-                     return ret + parseFloat(e.score)
-                   },0)
-                   scorereq.score_cal_ideal = sum
-                   scorereq.score_cal_final = 0
 
 
 
- */
-
-const switchOption = [
-  {label: 'Check-up', value: 'Check-up'},
-  {label: 'History', value: 'History'},
-];
 function   plus(val1,val2){
     return val1+val2
   }
@@ -97,10 +51,7 @@ class CheckupScreen extends Component {
  }
  async setfirstquestion(){
    	   
-   //console.log(this.props.action)
-   //console.log(Questions)
-  // await this.props.dispatch(setQuestionId("40002"));
-   //this.props.navigation.navigate('choices')
+ 
  }
    setSwitch = async()=> {
 
@@ -116,14 +67,7 @@ class CheckupScreen extends Component {
         }
         else  if(res.data.message==="Fail") {
         } 
-       // console.log("Questions: ",Questions)
-    //const no. ${i } questid ${e.questionId}`)
-     //const newDetail = "รายละเอียด "+e.detail + " ขี้เกียจทำ"
-     //return {"questionId":e.questionId,atty:"value", "newDetail":newDetail}
-   //});
-   //console.log(questionProcess)
-  //fetchQuestions(2)
-   //incrementAction(2) 
+ 
   const questionForUser=   Questions.map((q,i)=>{
   const array = []  
      return {...q,"answer":"","score":array }

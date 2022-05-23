@@ -140,96 +140,6 @@ loadCalendarScreen=async()=>{
      <SafeAreaView style={{ flex: 1,backgroundColor: '#EAD6A4' }}>
      
 
-<View>
-  <Calendar
-  
-    theme={{calendarBackground: '#E79995',
-            dayTextColor: '#000000', textDayFontFamily: 'Quark', textDayFontSize: 16,
-            todayTextColor: '#FFFFFF',
-            monthTextColor: '#000000', textMonthFontSize: 18,textMonthFontFamily: 'Quark',
-            selectedDayBackgroudColor: '#CB6863', arrowColor: '#000000',
-            selectedDayTextColor: '#000000',
-            textSectionTitleColor: '#000000',  textDayHeaderFontWeight: 'bold', textDayHeaderFontFamily: 'Quark', textDayHeaderFontSize: 16,
-            textDisabledColor: 'gray',
-            'stylesheet.calendar.header': {
-    week: {
-      marginTop: 5,
-      flexDirection: 'row',
-      justifyContent: 'space-between'
-    }
-  }
-    }}
-
- //onDayPress={(response) => console.log(response)}
-markedDates={{
-  [this.state.selected_date]: {
-    selected: true,
-    disableTouchEvent: true,
-    selectedColor: '#FFFFFF',
-    selectedTextColor: '#00000',
-  },
-
-  
-}}
-onDayPress={(day) => this.selectCalendar(day.dateString) }
-
-/*dayComponent={({date, state}) => {
-    return (
-      <View>
-        <Text style={{textAlign: 'center', color: state === 'disabled' ? '#FFFFFF' : '#000000'}}>
-          {date.day}
-        </Text>
-      </View>
-    );
-  }}*/
-
-  style={styles.calendar}
-  /*
-  markingType={'custom'}
-    markedDates={{
-    '2021-11-25': {selected: true, marked: true, selectedColor: '#CB6863'},
-    '2021-11-17': {selected: true,marked: true,},
-    '2021-11-18': {marked: true, dotColor: 'red', activeOpacity: 0},
-    '2021-11-19': {disabled: true, disableTouchEvent: true}
-  }}
-  */
-/*
-    markingType={'multi-dot'}
-  markedDates={{
-    '2021-11-25': {dots: [Feel_VeryGood], selected: true, selectedColor: '#FFFFFF'},
-    '2021-11-19': {disabled: true}
-  }}
-  */
-
-   /*markedDates={{
-    '2021-10-20': {
-      customStyles: {
-        container: {
-          backgroundColor: 'green'
-        },
-        text: {
-          color: 'black',
-          fontWeight: 'bold'
-        }
-      }
-    },
-    '2021-10-18': {
-      customStyles: {
-        container: {
-          backgroundColor: 'white',
-          elevation: 2
-        },
-        text: {
-          color: 'blue'
-        }
-      }
-    }
-  }}*/
-
-  
-  />
-
-</View>
 
 {this.username()}
   
@@ -354,7 +264,7 @@ onDayPress={(day) => this.selectCalendar(day.dateString) }
   username() {
     return this.state.user_name.map((data) => {
       return (
-         <View style={{marginTop:-20,marginBottom:-80}}>
+         <View style={{marginTop:-20,marginBottom:-100}}>
           <Text style={styles.textName}>ยินดีต้อนรับ {data.user_name}</Text>
           </View>
        )
